@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZIGNY.XL | Contacto & Portafolio Pro Gamer</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- THREE.js se mantiene para el fondo de cromo líquido -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -15,6 +16,7 @@
             overflow-x: hidden;
         }
 
+        /* Estilos para el canvas del fondo de cromo líquido */
         #liquid-chrome-canvas {
             position: fixed;
             top: 0;
@@ -31,6 +33,24 @@
             height: 100%;
         }
 
+        /* Estilos para el canvas del logo metálico */
+        #metallic-logo-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        
+        #logo-canvas-container {
+            width: 160px; /* Tamaño fijo para el logo */
+            height: 160px;
+            margin: 0 auto 2rem; /* Centrado y margen inferior */
+            /* Restauramos un shadow para mejor visibilidad, pero mantenemos la forma cuadrada. */
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.3); 
+            border-radius: 8px; /* Ligeras esquinas redondeadas */
+            overflow: hidden;
+            background-color: #000; /* Fondo negro para el logo */
+        }
+
         #content-wrapper {
             position: relative;
             z-index: 10;
@@ -38,6 +58,7 @@
             padding-top: 5rem;
         }
 
+        /* (Resto de estilos CSS de borde y texto metálico...) */
         .electric-border {
             --electric-border-color: #fff;
             --eb-border-width: 2px;
@@ -116,9 +137,11 @@
             border-bottom: 3px solid #fff;
         }
         
-        input:focus, textarea:focus {
+        /* Aseguramos que el focus sea blanco, eliminando el azul implícito */
+        input:focus, textarea:focus, select:focus {
             border-color: #fff !important;
             box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5) !important;
+            outline: none;
         }
         
         .cyan-glow-text {
@@ -168,8 +191,15 @@
 
         <section id="contacto-general" class="max-w-7xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
             <div class="text-center mb-12 w-full" id="hero">
+                
+                <!-- Contenedor del Canvas para el Logo Metálico -->
+                <div id="logo-canvas-container">
+                    <canvas id="metallic-logo-canvas"></canvas>
+                </div>
+
                 <!-- Contenedor ovalado con el título -->
-                <div class="inline-block bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-full px-16 py-8 border border-white/30 shadow-2xl shadow-white/20">
+                <!-- Fondo: BLANCO/GRIS muy claro transparente (bg-gray-100/10) -->
+                <div class="inline-block bg-gray-100/10 backdrop-blur-xl rounded-full px-16 py-8 border border-white/30 shadow-2xl shadow-white/20">
                     <h1 class="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter metallic-text whitespace-nowrap">
                         ZIGNY.XL
                     </h1>
@@ -180,27 +210,30 @@
                 </p>
             </div>
             
-            <div class="w-full max-w-xl bg-gray-900/70 backdrop-blur-md rounded-xl p-8 border border-white/30">
+            <!-- PANEL 1: Mensaje Directo -->
+            <!-- Fondo: BLANCO/GRIS muy claro transparente -->
+            <div class="w-full max-w-xl bg-gray-100/10 backdrop-blur-md rounded-xl p-8 border border-white/30">
                 <h2 class="text-3xl font-bold text-white mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
                 
                 <form action="#" method="POST" class="space-y-4">
                     <div>
                         <label for="fan-name" class="block text-sm font-medium text-gray-300">Tu Alias/Nombre</label>
+                        <!-- Fondo de inputs: BLANCO/GRIS muy claro transparente -->
                         <input type="text" id="fan-name" name="fan-name" required
                                placeholder="Ej. Ghost_Killer"
-                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
+                               class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
                     </div>
 
                     <div>
                         <label for="fan-message" class="block text-sm font-medium text-gray-300">Mensaje Rápido</label>
                         <textarea id="fan-message" name="fan-message" rows="3" required
-                                  placeholder="¡Gran clip! ¿Cuál es tu sensibilidad?"
-                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
+                                         placeholder="¡Gran clip! ¿Cuál es tu sensibilidad?"
+                                         class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
                     </div>
 
                     <button type="submit"
                             class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-white hover:bg-gray-200 text-black shadow-lg shadow-white/50 transition duration-300 transform hover:scale-[1.01]">
-                        ENVIAR MENSAJE &gt;&gt;
+                        ENVIAR MENSAJE >>
                     </button>
                 </form>
             </div>
@@ -221,17 +254,18 @@
             </div>
 
             <div id="clips-content" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
+                <!-- Fondo: BLANCO/GRIS muy claro transparente para ítems de galería -->
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fab fa-youtube text-6xl text-red-500 mb-3"></i>
                     <p class="text-gray-400">CLIP 1: Ace en el Último Segundo (Placeholder)</p>
                     <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver en YouTube</a>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fab fa-twitch text-6xl text-purple-500 mb-3"></i>
                     <p class="text-gray-400">CLIP 2: Clutch 1v3 (Placeholder)</p>
                     <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver en Twitch</a>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-trophy text-6xl text-yellow-500 mb-3"></i>
                     <p class="text-gray-400">CLIP 3: Jugada Destacada del Torneo (Placeholder)</p>
                     <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver Clip</a>
@@ -239,15 +273,16 @@
             </div>
 
             <div id="photos-content" class="tab-content hidden grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
+                <!-- Fondo: BLANCO/GRIS muy claro transparente para ítems de galería -->
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-desktop text-6xl text-gray-500 mb-3"></i>
                     <p class="text-gray-400">Foto 1: Setup de Batalla (Placeholder)</p>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-gamepad text-6xl text-gray-500 mb-3"></i>
                     <p class="text-gray-400">Foto 2: Periféricos (Placeholder)</p>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-user-astronaut text-6xl text-gray-500 mb-3"></i>
                     <p class="text-gray-400">Foto 3: Foto Promocional (Placeholder)</p>
                 </div>
@@ -255,42 +290,46 @@
         </section>
 
         <section id="hiring" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <div class="w-full bg-gray-900/70 backdrop-blur-md rounded-xl p-8 md:p-12 border border-white/30">
+            <!-- PANEL 2: Contacto Empresarial -->
+            <!-- Fondo: BLANCO/GRIS muy claro transparente -->
+            <div class="w-full bg-gray-100/10 backdrop-blur-md rounded-xl p-8 md:p-12 border border-white/30">
                 <h2 class="text-4xl font-extrabold text-white mb-6 text-center"><i class="fas fa-briefcase mr-2"></i> Contacto Empresarial (Hiring)</h2>
                 <p class="text-gray-400 mb-8 text-center">Formulario exclusivo para marcas y empresas interesadas en creación de video o patrocinios.</p>
                 
                 <form action="#" method="POST" class="space-y-6">
                     <div>
                         <label for="company-name" class="block text-sm font-medium text-gray-300">Nombre de la Empresa / Marca</label>
+                        <!-- Fondo de inputs: BLANCO/GRIS muy claro transparente -->
                         <input type="text" id="company-name" name="company-name" required
                                placeholder="Ej. Estudio Alpha"
-                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
+                               class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
                     </div>
 
                     <div>
                         <label for="company-email" class="block text-sm font-medium text-gray-300">Correo Electrónico de Contacto</label>
                         <input type="email" id="company-email" name="company-email" required
                                placeholder="contacto@empresa.com"
-                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
+                               class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
                     </div>
 
                     <div>
                         <label for="service" class="block text-sm font-medium text-gray-300">Tipo de Servicio Requerido</label>
                         <select id="service" name="service" required
-                                class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300 appearance-none">
-                            <option value="" disabled selected class="bg-gray-800">Selecciona el servicio...</option>
-                            <option value="video-creation" class="bg-gray-800">Creación de Video/Edición</option>
-                            <option value="sponsorship" class="bg-gray-800">Patrocinio de Contenido/Stream</option>
-                            <option value="tournament" class="bg-gray-800">Participación en Torneos/Eventos</option>
-                            <option value="other" class="bg-gray-800">Otro (Especificar en Mensaje)</option>
+                                class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300 appearance-none">
+                            <!-- Se añadió bg-black para asegurar que las opciones sean oscuras -->
+                            <option value="" disabled selected class="bg-black">Selecciona el servicio...</option>
+                            <option value="video-creation" class="bg-black">Creación de Video/Edición</option>
+                            <option value="sponsorship" class="bg-black">Patrocinio de Contenido/Stream</option>
+                            <option value="tournament" class="bg-black">Participación en Torneos/Eventos</option>
+                            <option value="other" class="bg-black">Otro (Especificar en Mensaje)</option>
                         </select>
                     </div>
                     
                     <div>
                         <label for="company-message" class="block text-sm font-medium text-gray-300">Detalles de la Propuesta (Menciona Presupuesto)</label>
                         <textarea id="company-message" name="company-message" rows="5" required
-                                  placeholder="Estamos buscando un paquete de 3 videos promocionales con un presupuesto de $X..."
-                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
+                                         placeholder="Estamos buscando un paquete de 3 videos promocionales con un presupuesto de $X..."
+                                         class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
                     </div>
 
                     <button type="submit"
@@ -303,7 +342,8 @@
 
     </main>
     
-    <footer class="relative z-10 text-center py-8 border-t border-gray-800 bg-gray-900/50">
+    <!-- Fondo del footer: BLANCO/GRIS muy claro transparente -->
+    <footer class="relative z-10 text-center py-8 border-t border-gray-800 bg-gray-100/10 backdrop-blur-md">
         <p class="text-sm text-gray-400 mb-4">Sígueme en la Arena:</p>
         <div class="flex justify-center space-x-6">
             <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-twitter"></i></a>
@@ -315,6 +355,9 @@
     </footer>
 
     <script>
+        // =========================================================================
+        // Logo Tab Switching (Existing Function)
+        // =========================================================================
         function showTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
@@ -329,12 +372,473 @@
             activeTabButton.classList.remove('text-gray-400', 'hover:text-white');
         }
 
-        // Liquid Chrome Background usando Three.js con el shader original
+        // =========================================================================
+        // METALLIC PAINT LOGO (Adaptación de React/WebGL a JS Puro)
+        // =========================================================================
+
+        /**
+         * IMPORTANTE: URL del logo. Se ha reemplazado el placeholder con la URL de la imagen
+         * proporcionada por el usuario para solucionar los errores de carga.
+         */
+        const LOGO_IMAGE_URL = 'https://i.ibb.co/pBf9cdKH/logo.png'; // URL pública del logo.
+
+        
+        /**
+         * Parsea una imagen (logo) y genera el ImageData requerido como máscara.
+         * Adaptado de la función `parseLogoImage` del código original.
+         */
+        function parseLogoImage(imageUrl) {
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+
+            return new Promise((resolve, reject) => {
+                if (!ctx) {
+                    reject(new Error('Invalid context'));
+                    return;
+                }
+
+                const img = new Image();
+                img.crossOrigin = 'anonymous'; 
+                
+                img.onload = function () {
+                    const MAX_SIZE = 500;
+                    let width = img.naturalWidth;
+                    let height = img.naturalHeight;
+
+                    // Escalar la imagen si es demasiado grande o pequeña para el canvas
+                    if (width > MAX_SIZE || height > MAX_SIZE || width < 100 || height < 100) {
+                        const ratio = Math.min(MAX_SIZE / width, MAX_SIZE / height);
+                        width = width * ratio;
+                        height = height * ratio;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    const shapeCanvas = document.createElement('canvas');
+                    shapeCanvas.width = width;
+                    shapeCanvas.height = height;
+                    const shapeCtx = shapeCanvas.getContext('2d');
+                    
+                    shapeCtx.drawImage(img, 0, 0, width, height);
+
+                    const shapeImageData = shapeCtx.getImageData(0, 0, width, height);
+                    const data = shapeImageData.data;
+                    const shapeMask = new Array(width * height).fill(false);
+                    
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const idx4 = (y * width + x) * 4;
+                            const a = data[idx4 + 3];
+                            // Si el alfa no es cero, es parte de la forma
+                            shapeMask[y * width + x] = a > 50; 
+                        }
+                    }
+
+                    function inside(x, y) {
+                        if (x < 0 || x >= width || y < 0 || y >= height) return false;
+                        return shapeMask[y * width + x];
+                    }
+
+                    // Calcula la máscara de contorno (boundary mask)
+                    const boundaryMask = new Array(width * height).fill(false);
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const idx = y * width + x;
+                            if (!shapeMask[idx]) continue;
+                            let isBoundary = false;
+                            for (let ny = y - 1; ny <= y + 1 && !isBoundary; ny++) {
+                                for (let nx = x - 1; nx <= x + 1 && !isBoundary; nx++) {
+                                    if (!inside(nx, ny)) {
+                                        isBoundary = true;
+                                    }
+                                }
+                            }
+                            if (isBoundary) {
+                                boundaryMask[idx] = true;
+                            }
+                        }
+                    }
+
+                    // Resuelve la ecuación de Poisson (la parte matemática del efecto)
+                    const u = new Float32Array(width * height).fill(0);
+                    const newU = new Float32Array(width * height).fill(0);
+                    const C = 0.01;
+                    const ITERATIONS = 300;
+
+                    function getU(x, y, arr) {
+                        if (x < 0 || x >= width || y < 0 || y >= height) return 0;
+                        if (!shapeMask[y * width + x]) return 0;
+                        return arr[y * width + x];
+                    }
+
+                    for (let iter = 0; iter < ITERATIONS; iter++) {
+                        for (let y = 0; y < height; y++) {
+                            for (let x = 0; x < width; x++) {
+                                const idx = y * width + x;
+                                if (!shapeMask[idx] || boundaryMask[idx]) {
+                                    newU[idx] = 0;
+                                    continue;
+                                }
+                                const sumN = getU(x + 1, y, u) + getU(x - 1, y, u) + getU(x, y + 1, u) + getU(x, y - 1, u);
+                                newU[idx] = (C + sumN) / 4;
+                            }
+                        }
+                        u.set(newU);
+                    }
+
+                    let maxVal = 0;
+                    for (let i = 0; i < width * height; i++) {
+                        if (u[i] > maxVal) maxVal = u[i];
+                    }
+                    
+                    // Genera la imagen final de ImageData con el gradiente de profundidad
+                    const alpha = 2.0;
+                    const outImg = ctx.createImageData(width, height);
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const idx = y * width + x;
+                            const px = idx * 4;
+                            
+                            // Si no es parte del logo, es blanco/transparente
+                            if (!shapeMask[idx]) {
+                                outImg.data[px] = 255;
+                                outImg.data[px + 1] = 255;
+                                outImg.data[px + 2] = 255;
+                                outImg.data[px + 3] = 0; // Alpha 0
+                            } else {
+                                const raw = u[idx] / maxVal;
+                                const remapped = Math.pow(raw, alpha);
+                                const gray = 255 * (1 - remapped);
+                                outImg.data[px] = gray;
+                                outImg.data[px + 1] = gray;
+                                outImg.data[px + 2] = gray;
+                                outImg.data[px + 3] = 255; // Alpha 255
+                            }
+                        }
+                    }
+
+                    resolve(outImg);
+                };
+
+                img.onerror = () => reject(new Error('Failed to load logo image. Check the URL/Data URI.'));
+                img.src = imageUrl;
+            });
+        }
+
+
+        /**
+         * Inicializa el shader de Metallic Paint.
+         * @param {ImageData} imageData - La ImageData procesada del logo.
+         */
+        function initMetallicPaintLogo(imageData) {
+
+            // --- CÓDIGO DE SHADERS MOVIDO AQUÍ PARA EVITAR ERRORES DE SCOPE ---
+            const vertexShaderSource = `#version 300 es
+            precision mediump float;
+            in vec2 a_position;
+            out vec2 vUv;
+            void main() {
+                vUv = .5 * (a_position + 1.);
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }`;
+
+            const liquidFragSource = `#version 300 es
+            precision mediump float;
+            in vec2 vUv;
+            out vec4 fragColor;
+
+            uniform sampler2D u_image_texture;
+            uniform float u_time;
+            uniform float u_ratio;
+            uniform float u_img_ratio;
+            uniform float u_patternScale;
+            uniform float u_refraction;
+            uniform float u_edge;
+            uniform float u_patternBlur;
+            uniform float u_liquid;
+
+            #define TWO_PI 6.28318530718
+            #define PI 3.14159265358979323846
+
+            vec3 mod289(vec3 x) { return x - floor(x * (1. / 289.)) * 289.; }
+            vec2 mod289(vec2 x) { return x - floor(x * (1. / 289.)) * 289.; }
+            vec3 permute(vec3 x) { return mod289(((x*34.)+1.)*x); }
+            float snoise(vec2 v) {
+                const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                vec2 i = floor(v + dot(v, C.yy));
+                vec2 x0 = v - i + dot(i, C.xx);
+                vec2 i1;
+                i1 = (x0.x > x0.y) ? vec2(1., 0.) : vec2(0., 1.);
+                vec4 x12 = x0.xyxy + C.xxzz;
+                x12.xy -= i1;
+                i = mod289(i);
+                vec3 p = permute(permute(i.y + vec3(0., i1.y, 1.)) + i.x + vec3(0., i1.x, 1.));
+                vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.);
+                m = m*m;
+                m = m*m;
+                vec3 x = 2. * fract(p * C.www) - 1.;
+                vec3 h = abs(x) - 0.5;
+                vec3 ox = floor(x + 0.5);
+                vec3 a0 = x - ox;
+                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                vec3 g;
+                g.x = a0.x * x0.x + h.x * x0.y;
+                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                return 130. * dot(m, g);
+            }
+
+            vec2 get_img_uv() {
+                vec2 img_uv = vUv;
+                img_uv -= .5;
+                if (u_ratio > u_img_ratio) {
+                    img_uv.x = img_uv.x * u_ratio / u_img_ratio;
+                } else {
+                    img_uv.y = img_uv.y * u_img_ratio / u_ratio;
+                }
+                float scale_factor = 1.;
+                img_uv *= scale_factor;
+                img_uv += .5;
+                img_uv.y = 1. - img_uv.y;
+                return img_uv;
+            }
+            vec2 rotate(vec2 uv, float th) {
+                return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+            }
+            float get_color_channel(float c1, float c2, float stripe_p, vec3 w, float extra_blur, float b) {
+                float ch = c2;
+                float border = 0.;
+                float blur = u_patternBlur + extra_blur;
+                ch = mix(ch, c1, smoothstep(.0, blur, stripe_p));
+                border = w[0];
+                ch = mix(ch, c2, smoothstep(border - blur, border + blur, stripe_p));
+                b = smoothstep(.2, .8, b);
+                border = w[0] + .4 * (1. - b) * w[1];
+                ch = mix(ch, c1, smoothstep(border - blur, border + blur, stripe_p));
+                border = w[0] + .5 * (1. - b) * w[1];
+                ch = mix(ch, c2, smoothstep(border - blur, border + blur, stripe_p));
+                border = w[0] + w[1];
+                ch = mix(ch, c1, smoothstep(border - blur, border + blur, stripe_p));
+                float gradient_t = (stripe_p - w[0] - w[1]) / w[2];
+                float gradient = mix(c1, c2, smoothstep(0., 1., gradient_t));
+                ch = mix(ch, gradient, smoothstep(border - blur, border + blur, stripe_p));
+                return ch;
+            }
+            float get_img_frame_alpha(vec2 uv, float img_frame_width) {
+                float img_frame_alpha = smoothstep(0., img_frame_width, uv.x) * smoothstep(1., 1. - img_frame_width, uv.x);
+                img_frame_alpha *= smoothstep(0., img_frame_width, uv.y) * smoothstep(1., 1. - img_frame_width, uv.y);
+                return img_frame_alpha;
+            }
+            void main() {
+                vec2 uv = vUv;
+                uv.y = 1. - uv.y;
+                uv.x *= u_ratio;
+                float diagonal = uv.x - uv.y;
+                float t = .001 * u_time;
+                vec2 img_uv = get_img_uv();
+                vec4 img = texture(u_image_texture, img_uv);
+                vec3 color = vec3(0.);
+                float opacity = 1.;
+                vec3 color1 = vec3(.98, 0.98, 1.);
+                vec3 color2 = vec3(.1, .1, .1 + .1 * smoothstep(.7, 1.3, uv.x + uv.y));
+                float edge = img.r;
+                vec2 grad_uv = uv;
+                grad_uv -= .5;
+                float dist = length(grad_uv + vec2(0., .2 * diagonal));
+                grad_uv = rotate(grad_uv, (.25 - .2 * diagonal) * PI);
+                float bulge = pow(1.8 * dist, 1.2);
+                bulge = 1. - bulge;
+                bulge *= pow(uv.y, .3);
+                float cycle_width = u_patternScale;
+                float thin_strip_1_ratio = .12 / cycle_width * (1. - .4 * bulge);
+                float thin_strip_2_ratio = .07 / cycle_width * (1. + .4 * bulge);
+                float wide_strip_ratio = (1. - thin_strip_1_ratio - thin_strip_2_ratio);
+                float thin_strip_1_width = cycle_width * thin_strip_1_ratio;
+                float thin_strip_2_width = cycle_width * thin_strip_2_ratio;
+                opacity = 1. - smoothstep(.9 - .5 * u_edge, 1. - .5 * u_edge, edge);
+                opacity *= get_img_frame_alpha(img_uv, 0.01);
+                float noise = snoise(uv - t);
+                edge += (1. - edge) * u_liquid * noise;
+                float refr = 0.;
+                refr += (1. - bulge);
+                refr = clamp(refr, 0., 1.);
+                float dir = grad_uv.x;
+                dir += diagonal;
+                dir -= 2. * noise * diagonal * (smoothstep(0., 1., edge) * smoothstep(1., 0., edge));
+                bulge *= clamp(pow(uv.y, .1), .3, 1.);
+                dir *= (.1 + (1.1 - edge) * bulge);
+                dir *= smoothstep(1., .7, edge);
+                dir += .18 * (smoothstep(.1, .2, uv.y) * smoothstep(.4, .2, uv.y));
+                dir += .03 * (smoothstep(.1, .2, 1. - uv.y) * smoothstep(.4, .2, 1. - uv.y));
+                dir *= (.5 + .5 * pow(uv.y, 2.));
+                dir *= cycle_width;
+                dir -= t;
+                float refr_r = refr;
+                refr_r += .03 * bulge * noise;
+                float refr_b = 1.3 * refr;
+                refr_r += 5. * (smoothstep(-.1, .2, uv.y) * smoothstep(.5, .1, uv.y)) * (smoothstep(.4, .6, bulge) * smoothstep(1., .4, bulge));
+                refr_r -= diagonal;
+                refr_b += (smoothstep(0., .4, uv.y) * smoothstep(.8, .1, uv.y)) * (smoothstep(.4, .6, bulge) * smoothstep(.8, .4, bulge));
+                refr_b -= .2 * edge;
+                refr_r *= u_refraction;
+                refr_b *= u_refraction;
+                vec3 w = vec3(thin_strip_1_width, thin_strip_2_width, wide_strip_ratio);
+                w[1] -= .02 * smoothstep(.0, 1., edge + bulge);
+                float stripe_r = mod(dir + refr_r, 1.);
+                float r = get_color_channel(color1.r, color2.r, stripe_r, w, 0.02 + .03 * u_refraction * bulge, bulge);
+                float stripe_g = mod(dir, 1.);
+                float g = get_color_channel(color1.g, color2.g, stripe_g, w, 0.01 / (1. - diagonal), bulge);
+                float stripe_b = mod(dir - refr_b, 1.);
+                float b = get_color_channel(color1.b, color2.b, stripe_b, w, .01, bulge);
+                color = vec3(r, g, b);
+                color *= opacity;
+                fragColor = vec4(color, opacity);
+            }
+            `;
+            // --- FIN CÓDIGO DE SHADERS ---
+
+            const canvasEl = document.getElementById('metallic-logo-canvas');
+            if (!canvasEl) {
+                console.error("Canvas element 'metallic-logo-canvas' not found.");
+                return;
+            }
+
+            const params = { edge: 2, patternBlur: 0.005, patternScale: 2, refraction: 0.015, speed: 0.3, liquid: 0.07 };
+
+            const gl = canvasEl.getContext('webgl2', { antialias: true, alpha: true });
+            if (!gl) {
+                console.error("WebGL 2 not supported.");
+                return;
+            }
+
+            // 1. Funciones de ayuda de WebGL
+            function createShader(gl, sourceCode, type) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, sourceCode);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error('Shader compilation error: ' + gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            // 2. Creación del programa
+            const vertexShader = createShader(gl, vertexShaderSource, gl.VERTEX_SHADER);
+            const fragmentShader = createShader(gl, liquidFragSource, gl.FRAGMENT_SHADER);
+            const program = gl.createProgram();
+            if (!program || !vertexShader || !fragmentShader) return;
+
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error('Program linkage error: ' + gl.getProgramInfoLog(program));
+                return;
+            }
+
+            gl.useProgram(program);
+
+            // 3. Buffer de vértices (Plano de pantalla completa)
+            const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+            const vertexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            const positionLocation = gl.getAttribLocation(program, 'a_position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            // 4. Uniforms
+            function getUniforms(program, gl) {
+                let uniforms = {};
+                let uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+                for (let i = 0; i < uniformCount; i++) {
+                    let uniformName = gl.getActiveUniform(program, i)?.name;
+                    if (!uniformName) continue;
+                    uniforms[uniformName] = gl.getUniformLocation(program, uniformName);
+                }
+                return uniforms;
+            }
+            const uniforms = getUniforms(program, gl);
+
+            // 5. Configuración de Textura (Logo Mask)
+            const imageTexture = gl.createTexture();
+            gl.activeTexture(gl.TEXTURE0);
+            gl.bindTexture(gl.TEXTURE_2D, imageTexture);
+
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+            gl.pixelStorei(gl.UNPACK_ALIGNMENT, 1);
+
+            try {
+                gl.texImage2D(
+                    gl.TEXTURE_2D, 0, gl.RGBA, imageData.width, imageData.height, 0,
+                    gl.RGBA, gl.UNSIGNED_BYTE, imageData.data
+                );
+                gl.uniform1i(uniforms.u_image_texture, 0);
+            } catch (e) {
+                console.error('Error uploading texture:', e);
+            }
+
+            // 6. Configuración de Uniforms Iniciales
+            gl.uniform1f(uniforms.u_edge, params.edge);
+            gl.uniform1f(uniforms.u_patternBlur, params.patternBlur);
+            gl.uniform1f(uniforms.u_patternScale, params.patternScale);
+            gl.uniform1f(uniforms.u_refraction, params.refraction);
+            gl.uniform1f(uniforms.u_liquid, params.liquid);
+            gl.uniform1f(uniforms.u_img_ratio, imageData.width / imageData.height);
+            
+            // Habilitar mezcla para transparencia
+            gl.enable(gl.BLEND);
+            gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+
+            // 7. Loop de Animación
+            let totalAnimationTime = 0;
+            let lastRenderTime = performance.now();
+
+            function render(currentTime) {
+                const deltaTime = currentTime - lastRenderTime;
+                lastRenderTime = currentTime;
+
+                // Actualiza el tiempo y renderiza
+                totalAnimationTime += deltaTime * params.speed;
+                gl.uniform1f(uniforms.u_time, totalAnimationTime);
+                
+                // Redimensionamiento y actualización de ratio
+                const side = Math.min(canvasEl.clientWidth, canvasEl.clientHeight);
+                const dpr = window.devicePixelRatio || 1;
+                
+                // Solo redimensiona el canvas si es necesario (para mejor rendimiento)
+                if (canvasEl.width !== side * dpr || canvasEl.height !== side * dpr) {
+                    canvasEl.width = side * dpr;
+                    canvasEl.height = side * dpr;
+                    gl.viewport(0, 0, canvasEl.width, canvasEl.height);
+                    gl.uniform1f(uniforms.u_ratio, 1); // El contenedor es cuadrado
+                }
+
+                gl.clearColor(0.0, 0.0, 0.0, 0.0); // Fondo transparente
+                gl.clear(gl.COLOR_BUFFER_BIT);
+                gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+
+                requestAnimationFrame(render);
+            }
+
+            requestAnimationFrame(render);
+        }
+
+        // =========================================================================
+        // FONDO DE CROMO LÍQUIDO (Código pre-existente)
+        // =========================================================================
         function initLiquidChrome() {
             const container = document.getElementById('liquid-chrome-canvas');
             if (!container) return;
 
-            // Configuración del efecto
             const baseColor = [0.1, 0.1, 0.1];
             const speed = 0.12;
             const amplitude = 0.15;
@@ -342,7 +846,6 @@
             const frequencyY = 3;
             const interactive = true;
 
-            // Crear escena, cámara y renderer
             const scene = new THREE.Scene();
             const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
             
@@ -350,10 +853,8 @@
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
 
-            // Geometría de pantalla completa
             const geometry = new THREE.PlaneGeometry(2, 2);
 
-            // Shader Material - Exactamente el mismo shader de reactbits.dev Liquid Chrome
             const material = new THREE.ShaderMaterial({
                 uniforms: {
                     uTime: { value: 0 },
@@ -386,20 +887,17 @@
                         vec2 fragCoord = uvCoord * uResolution.xy;
                         vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
 
-                        // Distorsión líquida - el corazón del efecto
                         for (float i = 1.0; i < 10.0; i++){
                             uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
                             uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
                         }
 
-                        // Efecto de ondulación con el mouse
                         vec2 diff = (uvCoord - uMouse);
                         float dist = length(diff);
                         float falloff = exp(-dist * 20.0);
                         float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
                         uv += (diff / (dist + 0.0001)) * ripple * falloff;
 
-                        // La fórmula mágica del cromo líquido
                         vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
                         return vec4(color, 1.0);
                     }
@@ -407,7 +905,6 @@
                     void main() {
                         vec4 col = vec4(0.0);
                         int samples = 0;
-                        // Anti-aliasing por muestreo
                         for (int i = -1; i <= 1; i++){
                             for (int j = -1; j <= 1; j++){
                                 vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y));
@@ -423,7 +920,6 @@
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
 
-            // Mouse tracking
             let mouseX = 0.5;
             let mouseY = 0.5;
             let targetMouseX = 0.5;
@@ -449,7 +945,6 @@
                 container.addEventListener('touchmove', handleTouchMove);
             }
 
-            // Resize handler
             function onResize() {
                 const width = window.innerWidth;
                 const height = window.innerHeight;
@@ -460,11 +955,9 @@
 
             window.addEventListener('resize', onResize);
 
-            // Animation loop
             function animate(t) {
                 requestAnimationFrame(animate);
                 
-                // Suavizar el movimiento del mouse
                 mouseX += (targetMouseX - mouseX) * 0.05;
                 mouseY += (targetMouseY - mouseY) * 0.05;
                 
@@ -477,8 +970,28 @@
             animate(0);
         }
 
-        window.addEventListener('load', () => {
+        // =========================================================================
+        // INICIO DE LA APLICACIÓN
+        // =========================================================================
+        window.addEventListener('load', async () => {
+            // 1. Iniciar el fondo de cromo líquido
             initLiquidChrome();
+            
+            // 2. Iniciar el efecto del logo metálico
+            try {
+                const imageData = await parseLogoImage(LOGO_IMAGE_URL);
+                initMetallicPaintLogo(imageData);
+            } catch (error) {
+                console.error("Error al cargar o procesar el logo metálico:", error);
+                // Mostrar un mensaje simple en el contenedor si falla
+                const logoContainer = document.getElementById('logo-canvas-container');
+                if(logoContainer) {
+                    // Placeholder simple de un microchip blanco si falla la carga.
+                    logoContainer.innerHTML = '<div class="text-white text-4xl p-10"><i class="fas fa-microchip"></i></div>';
+                }
+            }
+
+            // 3. Mostrar la pestaña por defecto
             showTab('clips');
         });
     </script>
