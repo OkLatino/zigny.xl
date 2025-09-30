@@ -39,9 +39,9 @@
         }
 
         .electric-border {
-            --electric-border-color: #0ff;
+            --electric-border-color: #fff;
             --eb-border-width: 2px;
-            --electric-light-color: #7df9ff;
+            --electric-light-color: #f0f0f0;
             position: relative;
             border-radius: 12px;
             overflow: visible;
@@ -112,42 +112,42 @@
         }
         
         .tab-button.active {
-            color: #0ff;
-            border-bottom: 3px solid #0ff;
+            color: #fff;
+            border-bottom: 3px solid #fff;
         }
         
         input:focus, textarea:focus {
-            border-color: #0ff !important;
-            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.5) !important;
+            border-color: #fff !important;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5) !important;
         }
         
         .cyan-glow-text {
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5);
         }
 
         /* Efecto metálico para el título */
         .metallic-text {
             background: linear-gradient(
                 90deg,
-                #0ff 0%,
-                #4dd0e1 10%,
-                #80deea 20%,
+                #fff 0%,
+                #e0e0e0 10%,
+                #f5f5f5 20%,
                 #fff 30%,
-                #80deea 40%,
-                #4dd0e1 50%,
-                #0ff 60%,
-                #00bcd4 70%,
-                #0097a7 80%,
-                #006064 90%,
-                #0ff 100%
+                #f5f5f5 40%,
+                #e0e0e0 50%,
+                #fff 60%,
+                #d0d0d0 70%,
+                #c0c0c0 80%,
+                #b0b0b0 90%,
+                #fff 100%
             );
             background-size: 200% 100%;
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: metallicShine 3s linear infinite;
-            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) 
-                    drop-shadow(0 0 40px rgba(0, 255, 255, 0.3));
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
         }
 
         @keyframes metallicShine {
@@ -164,56 +164,42 @@
 
     <div id="liquid-chrome-canvas"></div>
 
-    <!-- Splash Cursor Canvas -->
-    <div id="splash-cursor-container" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; width: 100%; height: 100%;">
-        <canvas id="splash-cursor-canvas" style="width: 100vw; height: 100vh; display: block;"></canvas>
-    </div>
-
-    <nav class="fixed top-0 left-0 right-0 z-20 bg-gray-900/80 backdrop-blur-md shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <a href="#hero" class="text-2xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-sky-500">ZIGNY.XL</a>
-                <div class="flex space-x-6 text-lg">
-                    <a href="#contacto-general" class="text-gray-300 hover:text-cyan-400 transition">Contacto</a>
-                    <a href="#galeria" class="text-gray-300 hover:text-cyan-400 transition">Galería</a>
-                    <a href="#hiring" class="text-gray-300 hover:text-cyan-400 transition">Empresas</a>
-                </div>
-            </div>
-        </div>
-    </nav>
-
     <main id="content-wrapper" class="p-4 md:p-8">
 
-        <section id="contacto-general" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <div class="text-center mb-12" id="hero">
-                <h1 class="text-6xl md:text-8xl font-black tracking-tighter metallic-text">
-                    ZIGNY.XL
-                </h1>
-                <p class="text-gray-300 mt-4 text-xl md:text-2xl font-light">
+        <section id="contacto-general" class="max-w-7xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
+            <div class="text-center mb-12 w-full" id="hero">
+                <!-- Contenedor ovalado con el título -->
+                <div class="inline-block bg-gradient-to-br from-gray-900/90 to-gray-800/90 backdrop-blur-xl rounded-full px-16 py-8 border border-white/30 shadow-2xl shadow-white/20">
+                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter metallic-text whitespace-nowrap">
+                        ZIGNY.XL
+                    </h1>
+                </div>
+                
+                <p class="text-gray-300 mt-8 text-xl md:text-2xl font-light max-w-3xl mx-auto">
                     Elite FPS Player. Creador de contenido. Llevando el cromo a la victoria.
                 </p>
             </div>
             
-            <div class="w-full max-w-xl bg-gray-900/70 backdrop-blur-md rounded-xl p-8 border border-cyan-500/30">
-                <h2 class="text-3xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
+            <div class="w-full max-w-xl bg-gray-900/70 backdrop-blur-md rounded-xl p-8 border border-white/30">
+                <h2 class="text-3xl font-bold text-white mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
                 
                 <form action="#" method="POST" class="space-y-4">
                     <div>
                         <label for="fan-name" class="block text-sm font-medium text-gray-300">Tu Alias/Nombre</label>
                         <input type="text" id="fan-name" name="fan-name" required
                                placeholder="Ej. Ghost_Killer"
-                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
+                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
                     </div>
 
                     <div>
                         <label for="fan-message" class="block text-sm font-medium text-gray-300">Mensaje Rápido</label>
                         <textarea id="fan-message" name="fan-message" rows="3" required
                                   placeholder="¡Gran clip! ¿Cuál es tu sensibilidad?"
-                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
+                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
                     </div>
 
                     <button type="submit"
-                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01]">
+                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-white hover:bg-gray-200 text-black shadow-lg shadow-white/50 transition duration-300 transform hover:scale-[1.01]">
                         ENVIAR MENSAJE &gt;&gt;
                     </button>
                 </form>
@@ -221,7 +207,7 @@
         </section>
 
         <section id="galeria" class="max-w-5xl mx-auto py-20">
-            <h2 class="text-5xl font-extrabold text-center mb-12 text-cyan-400 drop-shadow-md">
+            <h2 class="text-5xl font-extrabold text-center mb-12 text-white drop-shadow-md">
                 <i class="fas fa-video mr-3"></i> GALERÍA
             </h2>
 
@@ -229,39 +215,39 @@
                 <button id="clips-tab" class="tab-button active text-xl font-semibold py-3 px-6 mx-2 transition duration-300" onclick="showTab('clips')">
                     Clips de Jugadas <i class="fas fa-crosshairs ml-2"></i>
                 </button>
-                <button id="photos-tab" class="tab-button text-gray-400 hover:text-cyan-400 text-xl font-semibold py-3 px-6 mx-2 transition duration-300" onclick="showTab('photos')">
+                <button id="photos-tab" class="tab-button text-gray-400 hover:text-white text-xl font-semibold py-3 px-6 mx-2 transition duration-300" onclick="showTab('photos')">
                     Fotos & Setup <i class="fas fa-camera-retro ml-2"></i>
                 </button>
             </div>
 
             <div id="clips-content" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fab fa-youtube text-6xl text-red-500 mb-3"></i>
                     <p class="text-gray-400">CLIP 1: Ace en el Último Segundo (Placeholder)</p>
-                    <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en YouTube</a>
+                    <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver en YouTube</a>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fab fa-twitch text-6xl text-purple-500 mb-3"></i>
                     <p class="text-gray-400">CLIP 2: Clutch 1v3 (Placeholder)</p>
-                    <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en Twitch</a>
+                    <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver en Twitch</a>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-trophy text-6xl text-yellow-500 mb-3"></i>
                     <p class="text-gray-400">CLIP 3: Jugada Destacada del Torneo (Placeholder)</p>
-                    <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver Clip</a>
+                    <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver Clip</a>
                 </div>
             </div>
 
             <div id="photos-content" class="tab-content hidden grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-desktop text-6xl text-gray-500 mb-3"></i>
                     <p class="text-gray-400">Foto 1: Setup de Batalla (Placeholder)</p>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-gamepad text-6xl text-gray-500 mb-3"></i>
                     <p class="text-gray-400">Foto 2: Periféricos (Placeholder)</p>
                 </div>
-                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
                     <i class="fas fa-user-astronaut text-6xl text-gray-500 mb-3"></i>
                     <p class="text-gray-400">Foto 3: Foto Promocional (Placeholder)</p>
                 </div>
@@ -269,8 +255,8 @@
         </section>
 
         <section id="hiring" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <div class="w-full bg-gray-900/70 backdrop-blur-md rounded-xl p-8 md:p-12 border border-cyan-500/30">
-                <h2 class="text-4xl font-extrabold text-cyan-400 mb-6 text-center"><i class="fas fa-briefcase mr-2"></i> Contacto Empresarial (Hiring)</h2>
+            <div class="w-full bg-gray-900/70 backdrop-blur-md rounded-xl p-8 md:p-12 border border-white/30">
+                <h2 class="text-4xl font-extrabold text-white mb-6 text-center"><i class="fas fa-briefcase mr-2"></i> Contacto Empresarial (Hiring)</h2>
                 <p class="text-gray-400 mb-8 text-center">Formulario exclusivo para marcas y empresas interesadas en creación de video o patrocinios.</p>
                 
                 <form action="#" method="POST" class="space-y-6">
@@ -278,20 +264,20 @@
                         <label for="company-name" class="block text-sm font-medium text-gray-300">Nombre de la Empresa / Marca</label>
                         <input type="text" id="company-name" name="company-name" required
                                placeholder="Ej. Estudio Alpha"
-                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
+                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
                     </div>
 
                     <div>
                         <label for="company-email" class="block text-sm font-medium text-gray-300">Correo Electrónico de Contacto</label>
                         <input type="email" id="company-email" name="company-email" required
                                placeholder="contacto@empresa.com"
-                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
+                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
                     </div>
 
                     <div>
                         <label for="service" class="block text-sm font-medium text-gray-300">Tipo de Servicio Requerido</label>
                         <select id="service" name="service" required
-                                class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300 appearance-none">
+                                class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300 appearance-none">
                             <option value="" disabled selected class="bg-gray-800">Selecciona el servicio...</option>
                             <option value="video-creation" class="bg-gray-800">Creación de Video/Edición</option>
                             <option value="sponsorship" class="bg-gray-800">Patrocinio de Contenido/Stream</option>
@@ -304,11 +290,11 @@
                         <label for="company-message" class="block text-sm font-medium text-gray-300">Detalles de la Propuesta (Menciona Presupuesto)</label>
                         <textarea id="company-message" name="company-message" rows="5" required
                                   placeholder="Estamos buscando un paquete de 3 videos promocionales con un presupuesto de $X..."
-                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
+                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
                     </div>
 
                     <button type="submit"
-                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-cyan-400/80">
+                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-white hover:bg-gray-200 text-black shadow-lg shadow-white/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-white/80">
                         ENVIAR PROPUESTA PROFESIONAL <i class="fas fa-angle-double-right ml-2"></i>
                     </button>
                 </form>
@@ -320,10 +306,10 @@
     <footer class="relative z-10 text-center py-8 border-t border-gray-800 bg-gray-900/50">
         <p class="text-sm text-gray-400 mb-4">Sígueme en la Arena:</p>
         <div class="flex justify-center space-x-6">
-            <a href="#" class="text-gray-400 hover:text-cyan-400 text-2xl transition"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-gray-400 hover:text-cyan-400 text-2xl transition"><i class="fab fa-twitch"></i></a>
-            <a href="#" class="text-gray-400 hover:text-cyan-400 text-2xl transition"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="text-gray-400 hover:text-cyan-400 text-2xl transition"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-twitch"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-instagram"></i></a>
         </div>
         <p class="text-xs text-gray-600 mt-4">ZIGNY.XL &copy; 2024 | Powered by Liquid Chrome</p>
     </footer>
@@ -335,123 +321,48 @@
             });
             document.querySelectorAll('.tab-button').forEach(button => {
                 button.classList.remove('active');
-                button.classList.add('text-gray-400', 'hover:text-cyan-400');
+                button.classList.add('text-gray-400', 'hover:text-white');
             });
             document.getElementById(tabName + '-content').classList.remove('hidden');
             const activeTabButton = document.getElementById(tabName + '-tab');
             activeTabButton.classList.add('active');
-            activeTabButton.classList.remove('text-gray-400', 'hover:text-cyan-400');
+            activeTabButton.classList.remove('text-gray-400', 'hover:text-white');
         }
 
-        function updateElectricBorders() {
-            const containers = document.querySelectorAll('.electric-border');
-            
-            containers.forEach((host) => {
-                const stroke = host.querySelector('.eb-stroke');
-                const svg = document.querySelector('.eb-svg');
-                const filterId = 'electric-border-filter';
-
-                if (!stroke || !svg) return;
-
-                stroke.style.filter = `url(#${filterId})`;
-                
-                const width = Math.max(1, Math.round(host.clientWidth));
-                const height = Math.max(1, Math.round(host.clientHeight));
-
-                const dyAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dy"]'));
-                if (dyAnims.length >= 2) {
-                    dyAnims[0].setAttribute('values', `${height}; 0`);
-                    dyAnims[1].setAttribute('values', `0; -${height}`);
-                }
-
-                const dxAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dx"]'));
-                if (dxAnims.length >= 2) {
-                    dxAnims[0].setAttribute('values', `${width}; 0`);
-                    dxAnims[1].setAttribute('values', `0; -${width}`);
-                }
-                
-                dyAnims.concat(dxAnims).forEach(a => {
-                    try {
-                        a.beginElement();
-                    } catch (e) {}
-                });
-            });
-        }
-
-        // Galaxy Background optimizado para mejor rendimiento
-        function initGalaxy() {
+        // Liquid Chrome Background usando Three.js con el shader original
+        function initLiquidChrome() {
             const container = document.getElementById('liquid-chrome-canvas');
             if (!container) return;
 
-            // Configuración optimizada (valores más bajos = mejor rendimiento)
-            const focal = [0.5, 0.5];
-            const rotation = [1.0, 0.0];
-            const starSpeed = 0.5;
-            const density = 0.8; // Reducido de 1 a 0.8 para mejor rendimiento
-            const hueShift = 140;
-            const speed = 1.0;
-            const mouseInteraction = true;
-            const glowIntensity = 0.25; // Reducido de 0.3 a 0.25
-            const saturation = 0.0;
-            const mouseRepulsion = true;
-            const repulsionStrength = 2;
-            const twinkleIntensity = 0.3;
-            const rotationSpeed = 0.05; // Reducido de 0.1 para menos cálculos
-            const autoCenterRepulsion = 0;
-            
-            // Factor de escala para renderizar a menor resolución
-            const renderScale = 0.75; // 75% de resolución = mejor rendimiento
+            // Configuración del efecto
+            const baseColor = [0.1, 0.1, 0.1];
+            const speed = 0.12;
+            const amplitude = 0.15;
+            const frequencyX = 3;
+            const frequencyY = 3;
+            const interactive = true;
 
             // Crear escena, cámara y renderer
             const scene = new THREE.Scene();
             const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
             
-            const renderer = new THREE.WebGLRenderer({ 
-                antialias: false, // Desactivar para mejor rendimiento
-                alpha: false,
-                powerPreference: "high-performance" // Usar GPU de alto rendimiento
-            });
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.5)); // Limitar pixel ratio
-            renderer.setSize(window.innerWidth * renderScale, window.innerHeight * renderScale);
-            renderer.setClearColor(0x000000, 1);
-            
-            // Escalar el canvas al tamaño completo
-            renderer.domElement.style.width = '100%';
-            renderer.domElement.style.height = '100%';
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
 
+            // Geometría de pantalla completa
             const geometry = new THREE.PlaneGeometry(2, 2);
 
-            // Variables de mouse
-            const targetMousePos = { x: 0.5, y: 0.5 };
-            const smoothMousePos = { x: 0.5, y: 0.5 };
-            let targetMouseActive = 0.0;
-            let smoothMouseActive = 0.0;
-            
-            // Throttle para mouse move (actualizar menos frecuentemente)
-            let lastMouseUpdate = 0;
-            const mouseUpdateInterval = 16; // ~60fps
-
-            // Shader optimizado
+            // Shader Material - Exactamente el mismo shader de reactbits.dev Liquid Chrome
             const material = new THREE.ShaderMaterial({
                 uniforms: {
                     uTime: { value: 0 },
-                    uResolution: { value: new THREE.Vector3(window.innerWidth * renderScale, window.innerHeight * renderScale, (window.innerWidth * renderScale) / (window.innerHeight * renderScale)) },
-                    uFocal: { value: new THREE.Vector2(...focal) },
-                    uRotation: { value: new THREE.Vector2(...rotation) },
-                    uStarSpeed: { value: starSpeed },
-                    uDensity: { value: density },
-                    uHueShift: { value: hueShift },
-                    uSpeed: { value: speed },
-                    uMouse: { value: new THREE.Vector2(smoothMousePos.x, smoothMousePos.y) },
-                    uGlowIntensity: { value: glowIntensity },
-                    uSaturation: { value: saturation },
-                    uMouseRepulsion: { value: mouseRepulsion },
-                    uTwinkleIntensity: { value: twinkleIntensity },
-                    uRotationSpeed: { value: rotationSpeed },
-                    uRepulsionStrength: { value: repulsionStrength },
-                    uMouseActiveFactor: { value: 0.0 },
-                    uAutoCenterRepulsion: { value: autoCenterRepulsion }
+                    uResolution: { value: new THREE.Vector3(window.innerWidth, window.innerHeight, window.innerWidth / window.innerHeight) },
+                    uBaseColor: { value: new THREE.Vector3(...baseColor) },
+                    uAmplitude: { value: amplitude },
+                    uFrequencyX: { value: frequencyX },
+                    uFrequencyY: { value: frequencyY },
+                    uMouse: { value: new THREE.Vector2(0.5, 0.5) }
                 },
                 vertexShader: `
                     varying vec2 vUv;
@@ -461,146 +372,50 @@
                     }
                 `,
                 fragmentShader: `
-                    precision mediump float; // Cambiar de highp a mediump para mejor rendimiento
-
+                    precision highp float;
                     uniform float uTime;
                     uniform vec3 uResolution;
-                    uniform vec2 uFocal;
-                    uniform vec2 uRotation;
-                    uniform float uStarSpeed;
-                    uniform float uDensity;
-                    uniform float uHueShift;
-                    uniform float uSpeed;
+                    uniform vec3 uBaseColor;
+                    uniform float uAmplitude;
+                    uniform float uFrequencyX;
+                    uniform float uFrequencyY;
                     uniform vec2 uMouse;
-                    uniform float uGlowIntensity;
-                    uniform float uSaturation;
-                    uniform bool uMouseRepulsion;
-                    uniform float uTwinkleIntensity;
-                    uniform float uRotationSpeed;
-                    uniform float uRepulsionStrength;
-                    uniform float uMouseActiveFactor;
-                    uniform float uAutoCenterRepulsion;
-
                     varying vec2 vUv;
 
-                    #define NUM_LAYER 3.0 // Reducido de 4.0 a 3.0
-                    #define STAR_COLOR_CUTOFF 0.2
-                    #define MAT45 mat2(0.7071, -0.7071, 0.7071, 0.7071)
-                    #define PERIOD 3.0
+                    vec4 renderImage(vec2 uvCoord) {
+                        vec2 fragCoord = uvCoord * uResolution.xy;
+                        vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
 
-                    float Hash21(vec2 p) {
-                        p = fract(p * vec2(123.34, 456.21));
-                        p += dot(p, p + 45.32);
-                        return fract(p.x * p.y);
-                    }
-
-                    float tri(float x) {
-                        return abs(fract(x) * 2.0 - 1.0);
-                    }
-
-                    float tris(float x) {
-                        float t = fract(x);
-                        return 1.0 - smoothstep(0.0, 1.0, abs(2.0 * t - 1.0));
-                    }
-
-                    float trisn(float x) {
-                        float t = fract(x);
-                        return 2.0 * (1.0 - smoothstep(0.0, 1.0, abs(2.0 * t - 1.0))) - 1.0;
-                    }
-
-                    vec3 hsv2rgb(vec3 c) {
-                        vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
-                        vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
-                        return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
-                    }
-
-                    float Star(vec2 uv, float flare) {
-                        float d = length(uv);
-                        float m = (0.05 * uGlowIntensity) / d;
-                        float rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));
-                        m += rays * flare * uGlowIntensity;
-                        uv *= MAT45;
-                        rays = smoothstep(0.0, 1.0, 1.0 - abs(uv.x * uv.y * 1000.0));
-                        m += rays * 0.3 * flare * uGlowIntensity;
-                        m *= smoothstep(1.0, 0.2, d);
-                        return m;
-                    }
-
-                    vec3 StarLayer(vec2 uv) {
-                        vec3 col = vec3(0.0);
-                        vec2 gv = fract(uv) - 0.5;
-                        vec2 id = floor(uv);
-
-                        // Reducir loop de 3x3 a células vecinas esenciales
-                        for (int y = -1; y <= 1; y++) {
-                            for (int x = -1; x <= 1; x++) {
-                                vec2 offset = vec2(float(x), float(y));
-                                vec2 si = id + offset;
-                                float seed = Hash21(si);
-                                float size = fract(seed * 345.32);
-                                
-                                // Simplificar cálculo de brillo
-                                float glossLocal = tri(uStarSpeed / (PERIOD * seed + 1.0));
-                                float flareSize = smoothstep(0.9, 1.0, size) * glossLocal;
-
-                                // Simplificar color
-                                float red = smoothstep(STAR_COLOR_CUTOFF, 1.0, Hash21(si + 1.0)) + STAR_COLOR_CUTOFF;
-                                float blu = smoothstep(STAR_COLOR_CUTOFF, 1.0, Hash21(si + 3.0)) + STAR_COLOR_CUTOFF;
-                                float grn = min(red, blu) * seed;
-                                vec3 base = vec3(red, grn, blu);
-                                
-                                // Simplificar conversión HSV
-                                float hue = atan(base.g - base.r, base.b - base.r) * 0.1591 + 0.5; // Pre-calcular 1/(2*PI)
-                                hue = fract(hue + uHueShift * 0.002778); // Pre-calcular 1/360
-                                base = hsv2rgb(vec3(hue, uSaturation, max(max(base.r, base.g), base.b)));
-
-                                vec2 pad = vec2(tris(seed * 34.0 + uTime * uSpeed * 0.1), tris(seed * 38.0 + uTime * uSpeed * 0.0333)) - 0.5;
-
-                                float star = Star(gv - offset - pad, flareSize);
-
-                                // Simplificar twinkle
-                                float twinkle = trisn(uTime * uSpeed + seed * 6.2831) * 0.5 + 1.0;
-                                twinkle = mix(1.0, twinkle, uTwinkleIntensity);
-                                star *= twinkle;
-                                
-                                col += star * size * base;
-                            }
+                        // Distorsión líquida - el corazón del efecto
+                        for (float i = 1.0; i < 10.0; i++){
+                            uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
+                            uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
                         }
 
-                        return col;
+                        // Efecto de ondulación con el mouse
+                        vec2 diff = (uvCoord - uMouse);
+                        float dist = length(diff);
+                        float falloff = exp(-dist * 20.0);
+                        float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
+                        uv += (diff / (dist + 0.0001)) * ripple * falloff;
+
+                        // La fórmula mágica del cromo líquido
+                        vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
+                        return vec4(color, 1.0);
                     }
 
                     void main() {
-                        vec2 focalPx = uFocal * uResolution.xy;
-                        vec2 uv = (vUv * uResolution.xy - focalPx) / uResolution.y;
-
-                        // Simplificar repulsión del mouse
-                        if (uMouseRepulsion) {
-                            vec2 mousePosUV = (uMouse * uResolution.xy - focalPx) / uResolution.y;
-                            float mouseDist = length(uv - mousePosUV);
-                            vec2 repulsion = normalize(uv - mousePosUV) * (uRepulsionStrength / (mouseDist + 0.1));
-                            uv += repulsion * 0.05 * uMouseActiveFactor;
+                        vec4 col = vec4(0.0);
+                        int samples = 0;
+                        // Anti-aliasing por muestreo
+                        for (int i = -1; i <= 1; i++){
+                            for (int j = -1; j <= 1; j++){
+                                vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y));
+                                col += renderImage(vUv + offset);
+                                samples++;
+                            }
                         }
-
-                        // Rotación automática
-                        float autoRotAngle = uTime * uRotationSpeed;
-                        float c = cos(autoRotAngle);
-                        float s = sin(autoRotAngle);
-                        uv = mat2(c, -s, s, c) * uv;
-
-                        uv = mat2(uRotation.x, -uRotation.y, uRotation.y, uRotation.x) * uv;
-
-                        vec3 col = vec3(0.0);
-
-                        // Menos capas = mejor rendimiento
-                        for (float i = 0.0; i < 1.0; i += 1.0 / NUM_LAYER) {
-                            float depth = fract(i + uStarSpeed * uSpeed);
-                            float scale = mix(20.0 * uDensity, 0.5 * uDensity, depth);
-                            float fade = depth * smoothstep(1.0, 0.9, depth);
-                            col += StarLayer(uv * scale + i * 453.32) * fade;
-                        }
-
-                        gl_FragColor = vec4(col, 1.0);
+                        gl_FragColor = col / float(samples);
                     }
                 `
             });
@@ -608,70 +423,53 @@
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
 
-            // Mouse tracking optimizado con throttling
+            // Mouse tracking
+            let mouseX = 0.5;
+            let mouseY = 0.5;
+            let targetMouseX = 0.5;
+            let targetMouseY = 0.5;
+
             function handleMouseMove(event) {
-                if (!mouseInteraction) return;
-                
-                const now = Date.now();
-                if (now - lastMouseUpdate < mouseUpdateInterval) return;
-                lastMouseUpdate = now;
-                
+                if (!interactive) return;
                 const rect = container.getBoundingClientRect();
-                targetMousePos.x = (event.clientX - rect.left) / rect.width;
-                targetMousePos.y = 1.0 - ((event.clientY - rect.top) / rect.height);
-                targetMouseActive = 1.0;
+                targetMouseX = (event.clientX - rect.left) / rect.width;
+                targetMouseY = 1.0 - ((event.clientY - rect.top) / rect.height);
             }
 
-            function handleMouseLeave() {
-                targetMouseActive = 0.0;
+            function handleTouchMove(event) {
+                if (!interactive || event.touches.length === 0) return;
+                const touch = event.touches[0];
+                const rect = container.getBoundingClientRect();
+                targetMouseX = (touch.clientX - rect.left) / rect.width;
+                targetMouseY = 1.0 - ((touch.clientY - rect.top) / rect.height);
             }
 
-            if (mouseInteraction) {
-                container.addEventListener('mousemove', handleMouseMove, { passive: true });
-                container.addEventListener('mouseleave', handleMouseLeave);
+            if (interactive) {
+                container.addEventListener('mousemove', handleMouseMove);
+                container.addEventListener('touchmove', handleTouchMove);
             }
 
-            // Resize optimizado con debounce
-            let resizeTimeout;
+            // Resize handler
             function onResize() {
-                clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(() => {
-                    const width = window.innerWidth * renderScale;
-                    const height = window.innerHeight * renderScale;
-                    
-                    renderer.setSize(width, height);
-                    material.uniforms.uResolution.value.set(width, height, width / height);
-                    updateElectricBorders();
-                }, 150);
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                
+                renderer.setSize(width, height);
+                material.uniforms.uResolution.value.set(width, height, width / height);
             }
 
-            window.addEventListener('resize', onResize, { passive: true });
+            window.addEventListener('resize', onResize);
 
-            // Animation loop optimizado
-            let lastTime = 0;
-            const targetFPS = 60;
-            const frameTime = 1000 / targetFPS;
-            
+            // Animation loop
             function animate(t) {
                 requestAnimationFrame(animate);
                 
-                // Limitar frame rate si es necesario
-                const deltaTime = t - lastTime;
-                if (deltaTime < frameTime) return;
-                lastTime = t;
+                // Suavizar el movimiento del mouse
+                mouseX += (targetMouseX - mouseX) * 0.05;
+                mouseY += (targetMouseY - mouseY) * 0.05;
                 
-                // Actualizar tiempo
-                material.uniforms.uTime.value = t * 0.001;
-                material.uniforms.uStarSpeed.value = (t * 0.001 * starSpeed) / 10.0;
-
-                // Suavizar movimiento del mouse (interpolación más rápida = menos cálculos)
-                const lerpFactor = 0.08; // Aumentado de 0.05 para respuesta más rápida
-                smoothMousePos.x += (targetMousePos.x - smoothMousePos.x) * lerpFactor;
-                smoothMousePos.y += (targetMousePos.y - smoothMousePos.y) * lerpFactor;
-                smoothMouseActive += (targetMouseActive - smoothMouseActive) * lerpFactor;
-
-                material.uniforms.uMouse.value.set(smoothMousePos.x, smoothMousePos.y);
-                material.uniforms.uMouseActiveFactor.value = smoothMouseActive;
+                material.uniforms.uTime.value = t * 0.001 * speed;
+                material.uniforms.uMouse.value.set(mouseX, mouseY);
                 
                 renderer.render(scene, camera);
             }
@@ -679,347 +477,9 @@
             animate(0);
         }
 
-        // Splash Cursor Effect - Fluid simulation optimizado
-        function initSplashCursor() {
-            const canvas = document.getElementById('splash-cursor-canvas');
-            if (!canvas) return;
-
-            const config = {
-                SIM_RESOLUTION: 128,
-                DYE_RESOLUTION: 800,
-                DENSITY_DISSIPATION: 0.97,
-                VELOCITY_DISSIPATION: 0.98,
-                PRESSURE: 0.8,
-                PRESSURE_ITERATIONS: 20,
-                CURL: 30,
-                SPLAT_RADIUS: 0.25,
-                SPLAT_FORCE: 6000,
-                SHADING: true,
-                TRANSPARENT: true
-            };
-
-            const params = { alpha: true, depth: false, stencil: false, antialias: false };
-            const gl = canvas.getContext('webgl2', params) || canvas.getContext('webgl', params);
-            if (!gl) return;
-
-            const isWebGL2 = !!canvas.getContext('webgl2', params);
-            let halfFloat, supportLinearFiltering;
-            
-            if (isWebGL2) {
-                gl.getExtension('EXT_color_buffer_float');
-                supportLinearFiltering = gl.getExtension('OES_texture_float_linear');
-            } else {
-                halfFloat = gl.getExtension('OES_texture_half_float');
-                supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
-            }
-
-            gl.clearColor(0, 0, 0, 0);
-
-            const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : halfFloat.HALF_FLOAT_OES;
-            let formatRGBA, formatRG, formatR;
-
-            if (isWebGL2) {
-                formatRGBA = { internalFormat: gl.RGBA16F, format: gl.RGBA };
-                formatRG = { internalFormat: gl.RG16F, format: gl.RG };
-                formatR = { internalFormat: gl.R16F, format: gl.RED };
-            } else {
-                formatRGBA = { internalFormat: gl.RGBA, format: gl.RGBA };
-                formatRG = { internalFormat: gl.RGBA, format: gl.RGBA };
-                formatR = { internalFormat: gl.RGBA, format: gl.RGBA };
-            }
-
-            const baseVertexShader = compileShader(gl, gl.VERTEX_SHADER, `
-                precision highp float;
-                attribute vec2 aPosition;
-                varying vec2 vUv;
-                varying vec2 vL, vR, vT, vB;
-                uniform vec2 texelSize;
-                void main() {
-                    vUv = aPosition * 0.5 + 0.5;
-                    vL = vUv - vec2(texelSize.x, 0.0);
-                    vR = vUv + vec2(texelSize.x, 0.0);
-                    vT = vUv + vec2(0.0, texelSize.y);
-                    vB = vUv - vec2(0.0, texelSize.y);
-                    gl_Position = vec4(aPosition, 0.0, 1.0);
-                }
-            `);
-
-            const splatShader = compileShader(gl, gl.FRAGMENT_SHADER, `
-                precision highp float;
-                varying vec2 vUv;
-                uniform sampler2D uTarget;
-                uniform float aspectRatio;
-                uniform vec3 color;
-                uniform vec2 point;
-                uniform float radius;
-                void main() {
-                    vec2 p = vUv - point;
-                    p.x *= aspectRatio;
-                    vec3 splat = exp(-dot(p, p) / radius) * color;
-                    vec3 base = texture2D(uTarget, vUv).xyz;
-                    gl_FragColor = vec4(base + splat, 1.0);
-                }
-            `);
-
-            const advectionShader = compileShader(gl, gl.FRAGMENT_SHADER, `
-                precision highp float;
-                varying vec2 vUv;
-                uniform sampler2D uVelocity, uSource;
-                uniform vec2 texelSize;
-                uniform float dt, dissipation;
-                void main() {
-                    vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
-                    gl_FragColor = texture2D(uSource, coord) / (1.0 + dissipation * dt);
-                }
-            `);
-
-            const displayShader = compileShader(gl, gl.FRAGMENT_SHADER, `
-                precision highp float;
-                varying vec2 vUv;
-                uniform sampler2D uTexture;
-                void main() {
-                    vec3 c = texture2D(uTexture, vUv).rgb;
-                    float a = max(c.r, max(c.g, c.b));
-                    gl_FragColor = vec4(c, a);
-                }
-            `);
-
-            const splatProgram = createProgram(gl, baseVertexShader, splatShader);
-            const advectionProgram = createProgram(gl, baseVertexShader, advectionShader);
-            const displayProgram = createProgram(gl, baseVertexShader, displayShader);
-
-            let dye, velocity;
-
-            function initBuffers() {
-                const simRes = getResolution(gl, config.SIM_RESOLUTION);
-                const dyeRes = getResolution(gl, config.DYE_RESOLUTION);
-                const texType = halfFloatTexType;
-                const filtering = supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
-
-                dye = createDoubleFBO(gl, dyeRes.width, dyeRes.height, formatRGBA.internalFormat, formatRGBA.format, texType, filtering);
-                velocity = createDoubleFBO(gl, simRes.width, simRes.height, formatRG.internalFormat, formatRG.format, texType, filtering);
-            }
-
-            gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
-            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
-            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
-            gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-            gl.enableVertexAttribArray(0);
-
-            const blit = (target) => {
-                if (!target) {
-                    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-                    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-                } else {
-                    gl.viewport(0, 0, target.width, target.height);
-                    gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
-                }
-                gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
-            };
-
-            initBuffers();
-
-            const pointer = { x: 0.5, y: 0.5, px: 0.5, py: 0.5, dx: 0, dy: 0, down: false };
-
-            function resizeCanvas() {
-                const dpr = window.devicePixelRatio || 1;
-                canvas.width = canvas.clientWidth * dpr;
-                canvas.height = canvas.clientHeight * dpr;
-                initBuffers();
-            }
-
-            function generateCyanColor() {
-                // Colores cyan gaming
-                const h = 0.5 + Math.random() * 0.1; // Cyan range
-                return HSVtoRGB(h, 0.9, 1.0);
-            }
-
-            function HSVtoRGB(h, s, v) {
-                const i = Math.floor(h * 6);
-                const f = h * 6 - i;
-                const p = v * (1 - s);
-                const q = v * (1 - f * s);
-                const t = v * (1 - (1 - f) * s);
-                let r, g, b;
-                switch (i % 6) {
-                    case 0: r = v; g = t; b = p; break;
-                    case 1: r = q; g = v; b = p; break;
-                    case 2: r = p; g = v; b = t; break;
-                    case 3: r = p; g = q; b = v; break;
-                    case 4: r = t; g = p; b = v; break;
-                    case 5: r = v; g = p; b = q; break;
-                }
-                return { r: r * 0.3, g: g * 0.3, b: b * 0.3 };
-            }
-
-            function splat(x, y, dx, dy, color) {
-                gl.useProgram(splatProgram.program);
-                gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
-                gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
-                gl.uniform2f(splatProgram.uniforms.point, x, y);
-                gl.uniform3f(splatProgram.uniforms.color, dx, dy, 0);
-                gl.uniform1f(splatProgram.uniforms.radius, config.SPLAT_RADIUS / 100);
-                blit(velocity.write);
-                velocity.swap();
-
-                gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
-                gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
-                blit(dye.write);
-                dye.swap();
-            }
-
-            function update(dt) {
-                gl.disable(gl.BLEND);
-                
-                gl.useProgram(advectionProgram.program);
-                gl.uniform2f(advectionProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
-                gl.uniform1i(advectionProgram.uniforms.uVelocity, velocity.read.attach(0));
-                gl.uniform1i(advectionProgram.uniforms.uSource, velocity.read.attach(0));
-                gl.uniform1f(advectionProgram.uniforms.dt, dt);
-                gl.uniform1f(advectionProgram.uniforms.dissipation, config.VELOCITY_DISSIPATION);
-                blit(velocity.write);
-                velocity.swap();
-
-                gl.uniform1i(advectionProgram.uniforms.uVelocity, velocity.read.attach(0));
-                gl.uniform1i(advectionProgram.uniforms.uSource, dye.read.attach(1));
-                gl.uniform1f(advectionProgram.uniforms.dissipation, config.DENSITY_DISSIPATION);
-                blit(dye.write);
-                dye.swap();
-            }
-
-            function render() {
-                gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-                gl.enable(gl.BLEND);
-                gl.useProgram(displayProgram.program);
-                gl.uniform1i(displayProgram.uniforms.uTexture, dye.read.attach(0));
-                blit(null);
-            }
-
-            let lastTime = Date.now();
-            function animate() {
-                const now = Date.now();
-                const dt = Math.min((now - lastTime) / 1000, 0.016666);
-                lastTime = now;
-
-                if (pointer.down && (Math.abs(pointer.dx) > 0 || Math.abs(pointer.dy) > 0)) {
-                    const color = generateCyanColor();
-                    splat(pointer.x, pointer.y, pointer.dx * config.SPLAT_FORCE, pointer.dy * config.SPLAT_FORCE, color);
-                }
-
-                update(dt);
-                render();
-                requestAnimationFrame(animate);
-            }
-
-            document.addEventListener('mousemove', (e) => {
-                const rect = canvas.getBoundingClientRect();
-                pointer.px = pointer.x;
-                pointer.py = pointer.y;
-                pointer.x = e.clientX / rect.width;
-                pointer.y = 1 - (e.clientY / rect.height);
-                pointer.dx = (pointer.x - pointer.px) * 10;
-                pointer.dy = (pointer.y - pointer.py) * 10;
-                pointer.down = true;
-            });
-
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-            animate();
-        }
-
-        // Helper functions para Splash Cursor
-        function compileShader(gl, type, source) {
-            const shader = gl.createShader(type);
-            gl.shaderSource(shader, source);
-            gl.compileShader(shader);
-            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                console.error('Shader compile error:', gl.getShaderInfoLog(shader));
-            }
-            return shader;
-        }
-
-        function createProgram(gl, vertexShader, fragmentShader) {
-            const program = gl.createProgram();
-            gl.attachShader(program, vertexShader);
-            gl.attachShader(program, fragmentShader);
-            gl.linkProgram(program);
-            
-            const uniforms = {};
-            const count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
-            for (let i = 0; i < count; i++) {
-                const name = gl.getActiveUniform(program, i).name;
-                uniforms[name] = gl.getUniformLocation(program, name);
-            }
-            
-            return { program, uniforms };
-        }
-
-        function createFBO(gl, w, h, internalFormat, format, type, param) {
-            gl.activeTexture(gl.TEXTURE0);
-            const texture = gl.createTexture();
-            gl.bindTexture(gl.TEXTURE_2D, texture);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, w, h, 0, format, type, null);
-
-            const fbo = gl.createFramebuffer();
-            gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
-            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
-            gl.viewport(0, 0, w, h);
-            gl.clear(gl.COLOR_BUFFER_BIT);
-
-            return {
-                texture,
-                fbo,
-                width: w,
-                height: h,
-                texelSizeX: 1 / w,
-                texelSizeY: 1 / h,
-                attach(id) {
-                    gl.activeTexture(gl.TEXTURE0 + id);
-                    gl.bindTexture(gl.TEXTURE_2D, texture);
-                    return id;
-                }
-            };
-        }
-
-        function createDoubleFBO(gl, w, h, internalFormat, format, type, param) {
-            let fbo1 = createFBO(gl, w, h, internalFormat, format, type, param);
-            let fbo2 = createFBO(gl, w, h, internalFormat, format, type, param);
-            
-            return {
-                width: w,
-                height: h,
-                texelSizeX: fbo1.texelSizeX,
-                texelSizeY: fbo1.texelSizeY,
-                get read() { return fbo1; },
-                get write() { return fbo2; },
-                swap() {
-                    const temp = fbo1;
-                    fbo1 = fbo2;
-                    fbo2 = temp;
-                }
-            };
-        }
-
-        function getResolution(gl, resolution) {
-            let aspectRatio = gl.drawingBufferWidth / gl.drawingBufferHeight;
-            if (aspectRatio < 1) aspectRatio = 1 / aspectRatio;
-            const min = Math.round(resolution);
-            const max = Math.round(resolution * aspectRatio);
-            return gl.drawingBufferWidth > gl.drawingBufferHeight 
-                ? { width: max, height: min } 
-                : { width: min, height: max };
-        }
-
         window.addEventListener('load', () => {
-            initGalaxy();
-            initSplashCursor();
+            initLiquidChrome();
             showTab('clips');
-            setTimeout(updateElectricBorders, 100);
         });
     </script>
 </body>
