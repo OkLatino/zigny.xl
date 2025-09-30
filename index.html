@@ -4,53 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZIGNY.XL | Contacto & Portafolio Pro Gamer</title>
-    <!-- Carga de Tailwind CSS para el estilo responsivo y moderno -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Carga de Three.js para el fondo 3D con WebGL -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <!-- Carga de Font Awesome para iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* Estilos generales y la fuente "Inter" (Tailwind default) */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0d0d0d;
+            margin: 0;
+            overflow-x: hidden;
         }
 
-        /* Contenedor del canvas para el fondo 3D - FIJO */
         #liquid-chrome-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1; 
-            opacity: 0.9; 
+            z-index: 1;
         }
 
-        /* Contenido de la página - Scrollable sobre el fondo fijo */
+        #liquid-chrome-canvas canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
         #content-wrapper {
             position: relative;
-            z-index: 10; 
+            z-index: 10;
             min-height: 100vh;
-            padding-top: 5rem; 
+            padding-top: 5rem;
         }
 
-        /* ---------------------------------------------------- */
-        /* EFECTO BORDE ELÉCTRICO (ADAPTACIÓN CSS) */
-        /* ---------------------------------------------------- */
         .electric-border {
-            --electric-border-color: #0ff; /* Cian Brillante */
+            --electric-border-color: #0ff;
             --eb-border-width: 2px;
-            --electric-light-color: #7df9ff; /* Cian muy claro */
+            --electric-light-color: #7df9ff;
             position: relative;
             border-radius: 12px;
-            overflow: hidden; /* Esto es para que el fondo semitransparente funcione bien */
+            overflow: hidden;
             backdrop-filter: blur(8px);
             background-color: rgba(10, 10, 10, 0.7);
-            /* Importante para que el SVG de fondo no sea afectado por el overflow */
-            isolation: isolate; 
-            border: none; /* Quitamos el borde sólido ya que lo manejan las capas del SVG */
+            isolation: isolate;
+            border: none;
         }
         
         .eb-layers {
@@ -61,7 +58,6 @@
             z-index: 2;
         }
 
-        /* Estilo de las capas de resplandor (glow) */
         .eb-stroke,
         .eb-glow-1,
         .eb-glow-2,
@@ -73,12 +69,10 @@
             box-sizing: border-box;
         }
 
-        /* La capa principal que recibe el filtro SVG de distorsión */
         .eb-stroke {
             border: var(--eb-border-width) solid var(--electric-border-color);
         }
 
-        /* Capas de Glow para el efecto de resplandor */
         .eb-glow-1 {
             border: var(--eb-border-width) solid var(--electric-light-color);
             opacity: 0.5;
@@ -102,10 +96,10 @@
         .eb-content {
             position: relative;
             border-radius: inherit;
-            z-index: 3; /* Asegura que el contenido del formulario esté encima de los efectos */
+            z-index: 3;
+            padding: 2rem;
         }
 
-        /* SVG para la animación de ruido: oculto */
         .eb-svg {
             position: fixed;
             left: -10000px;
@@ -116,19 +110,16 @@
             pointer-events: none;
         }
         
-        /* Estilo para las pestañas de la galería */
         .tab-button.active {
-            color: #0ff; 
+            color: #0ff;
             border-bottom: 3px solid #0ff;
         }
         
-        /* Efecto al pasar el mouse por los campos de texto/botones */
         input:focus, textarea:focus {
-            border-color: #0ff !important; 
+            border-color: #0ff !important;
             box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.5) !important;
         }
         
-        /* Título con resplandor cian */
         .cyan-glow-text {
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
         }
@@ -136,54 +127,35 @@
 </head>
 <body class="text-white">
 
-    <!-- 1. Canvas para el Fondo de Cromo Líquido (WebGL) -->
-    <canvas id="liquid-chrome-canvas"></canvas>
+    <div id="liquid-chrome-canvas"></div>
 
-    <!-- MOTOR DE ANIMACIÓN SVG (El filtro de distorsión) -->
     <svg class="eb-svg" aria-hidden="true" focusable="false">
         <defs>
-             <!-- Definimos el filtro con un ID único que usaremos en CSS -->
             <filter id="electric-border-filter" colorInterpolationFilters="sRGB" x="-200%" y="-200%" width="500%" height="500%">
-                <!-- Animaciones de ruido vertical -->
                 <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
                 <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-                    <animate attributeName="dy" values="700; 0" dur="1s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
                 </feOffset>
-
                 <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
                 <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-                    <animate attributeName="dy" values="0; -700" dur="1s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
                 </feOffset>
-
-                <!-- Animaciones de ruido horizontal -->
                 <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise3" seed="2" />
                 <feOffset in="noise3" dx="0" dy="0" result="offsetNoise3">
-                    <animate attributeName="dx" values="490; 0" dur="1s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
                 </feOffset>
-
                 <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise4" seed="2" />
                 <feOffset in="noise4" dx="0" dy="0" result="offsetNoise4">
-                    <animate attributeName="dx" values="0; -490" dur="1s" repeatCount="indefinite" calcMode="linear" />
+                    <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
                 </feOffset>
-
-                <!-- Composición y mezcla del ruido -->
                 <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
                 <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
                 <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
-                
-                <!-- Aplicación de la distorsión al borde -->
-                <feDisplacementMap
-                    in="SourceGraphic"
-                    in2="combinedNoise"
-                    scale="30"
-                    xChannelSelector="R"
-                    yChannelSelector="B"
-                />
+                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R" yChannelSelector="B" />
             </filter>
         </defs>
     </svg>
 
-    <!-- Barra de Navegación Fija -->
     <nav class="fixed top-0 left-0 right-0 z-20 bg-gray-900/80 backdrop-blur-md shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
@@ -197,11 +169,8 @@
         </div>
     </nav>
 
-
-    <!-- 2. Contenido Principal Scrollable -->
     <main id="content-wrapper" class="p-4 md:p-8">
 
-        <!-- SECCIÓN 1: CONTACTO GENERAL (HEADER + FORMULARIO RÁPIDO) -->
         <section id="contacto-general" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
             <div class="text-center mb-12" id="hero">
                 <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-cyan-400 cyan-glow-text">
@@ -212,7 +181,6 @@
                 </p>
             </div>
             
-            <!-- CONTENEDOR CON EL BORDE ELÉCTRICO -->
             <div class="electric-border w-full max-w-xl transition duration-500">
                 <div class="eb-layers">
                     <div class="eb-stroke"></div>
@@ -224,7 +192,6 @@
                     <h2 class="text-3xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
                     
                     <form action="#" method="POST" class="space-y-4">
-                        <!-- Campo Nombre -->
                         <div>
                             <label for="fan-name" class="block text-sm font-medium text-gray-300">Tu Alias/Nombre</label>
                             <input type="text" id="fan-name" name="fan-name" required
@@ -232,7 +199,6 @@
                                    class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
                         </div>
 
-                        <!-- Campo Mensaje -->
                         <div>
                             <label for="fan-message" class="block text-sm font-medium text-gray-300">Mensaje Rápido</label>
                             <textarea id="fan-message" name="fan-message" rows="3" required
@@ -240,11 +206,8 @@
                                       class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
                         </div>
 
-                        <!-- Botón de Envío -->
                         <button type="submit"
-                                class="w-full py-3 mt-4 text-lg font-bold rounded-lg
-                                       bg-cyan-600 hover:bg-cyan-700 text-black
-                                       shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01]">
+                                class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01]">
                             ENVIAR MENSAJE &gt;&gt;
                         </button>
                     </form>
@@ -252,13 +215,11 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 2: GALERÍA Y CLIPS -->
         <section id="galeria" class="max-w-5xl mx-auto py-20">
             <h2 class="text-5xl font-extrabold text-center mb-12 text-cyan-400 drop-shadow-md">
                 <i class="fas fa-video mr-3"></i> GALERÍA CROMADA
             </h2>
 
-            <!-- Pestañas de Navegación de Galería -->
             <div class="flex justify-center border-b-2 border-gray-700 mb-8">
                 <button id="clips-tab" class="tab-button active text-xl font-semibold py-3 px-6 mx-2 transition duration-300" onclick="showTab('clips')">
                     Clips de Jugadas <i class="fas fa-crosshairs ml-2"></i>
@@ -268,12 +229,10 @@
                 </button>
             </div>
 
-            <!-- Contenido de las Pestañas -->
             <div id="clips-content" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Los placeholders ahora también usan el borde eléctrico -->
                 <div class="electric-border p-4 text-center aspect-video flex flex-col justify-center items-center">
                     <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50">
+                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
                         <i class="fab fa-youtube text-6xl text-red-500 mb-3"></i>
                         <p class="text-gray-400">CLIP 1: Ace en el Último Segundo (Placeholder)</p>
                         <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en YouTube</a>
@@ -281,7 +240,7 @@
                 </div>
                 <div class="electric-border p-4 text-center aspect-video flex flex-col justify-center items-center">
                     <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50">
+                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
                         <i class="fab fa-twitch text-6xl text-purple-500 mb-3"></i>
                         <p class="text-gray-400">CLIP 2: Clutch 1v3 (Placeholder)</p>
                         <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en Twitch</a>
@@ -289,7 +248,7 @@
                 </div>
                 <div class="electric-border p-4 text-center aspect-video flex flex-col justify-center items-center">
                     <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50">
+                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
                         <i class="fas fa-trophy text-6xl text-yellow-500 mb-3"></i>
                         <p class="text-gray-400">CLIP 3: Jugada Destacada del Torneo (Placeholder)</p>
                         <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver Clip</a>
@@ -298,24 +257,23 @@
             </div>
 
             <div id="photos-content" class="tab-content hidden grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Placeholder para Fotos (Imágenes cuadradas) -->
                 <div class="electric-border p-4 text-center aspect-square flex flex-col justify-center items-center">
                     <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50">
+                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
                         <i class="fas fa-desktop text-6xl text-gray-500 mb-3"></i>
                         <p class="text-gray-400">Foto 1: Setup de Batalla (Placeholder)</p>
                     </div>
                 </div>
                 <div class="electric-border p-4 text-center aspect-square flex flex-col justify-center items-center">
                     <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50">
+                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
                         <i class="fas fa-gamepad text-6xl text-gray-500 mb-3"></i>
                         <p class="text-gray-400">Foto 2: Periféricos (Placeholder)</p>
                     </div>
                 </div>
                 <div class="electric-border p-4 text-center aspect-square flex flex-col justify-center items-center">
                     <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50">
+                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
                         <i class="fas fa-user-astronaut text-6xl text-gray-500 mb-3"></i>
                         <p class="text-gray-400">Foto 3: Foto Promocional (Placeholder)</p>
                     </div>
@@ -323,9 +281,7 @@
             </div>
         </section>
 
-        <!-- SECCIÓN 3: CONTRATACIÓN EMPRESARIAL (HIRING) -->
         <section id="hiring" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <!-- CONTENEDOR CON EL BORDE ELÉCTRICO -->
             <div class="electric-border w-full transition duration-500">
                 <div class="eb-layers">
                     <div class="eb-stroke"></div>
@@ -338,7 +294,6 @@
                     <p class="text-gray-400 mb-8 text-center">Formulario exclusivo para marcas y empresas interesadas en creación de video o patrocinios.</p>
                     
                     <form action="#" method="POST" class="space-y-6">
-                        <!-- Campo Nombre de la Empresa -->
                         <div>
                             <label for="company-name" class="block text-sm font-medium text-gray-300">Nombre de la Empresa / Marca</label>
                             <input type="text" id="company-name" name="company-name" required
@@ -346,7 +301,6 @@
                                    class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
                         </div>
 
-                        <!-- Campo Email Profesional -->
                         <div>
                             <label for="company-email" class="block text-sm font-medium text-gray-300">Correo Electrónico de Contacto</label>
                             <input type="email" id="company-email" name="company-email" required
@@ -354,7 +308,6 @@
                                    class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
                         </div>
 
-                        <!-- Tipo de Servicio -->
                         <div>
                             <label for="service" class="block text-sm font-medium text-gray-300">Tipo de Servicio Requerido</label>
                             <select id="service" name="service" required
@@ -367,7 +320,6 @@
                             </select>
                         </div>
                         
-                        <!-- Campo Mensaje Detallado -->
                         <div>
                             <label for="company-message" class="block text-sm font-medium text-gray-300">Detalles de la Propuesta (Menciona Presupuesto)</label>
                             <textarea id="company-message" name="company-message" rows="5" required
@@ -375,11 +327,8 @@
                                       class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
                         </div>
 
-                        <!-- Botón de Envío -->
                         <button type="submit"
-                                class="w-full py-3 mt-4 text-lg font-bold rounded-lg
-                                       bg-cyan-600 hover:bg-cyan-700 text-black
-                                       shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-cyan-400/80">
+                                class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-cyan-400/80">
                             ENVIAR PROPUESTA PROFESIONAL <i class="fas fa-angle-double-right ml-2"></i>
                         </button>
                     </form>
@@ -389,7 +338,6 @@
 
     </main>
     
-    <!-- Footer con Redes Sociales -->
     <footer class="relative z-10 text-center py-8 border-t border-gray-800 bg-gray-900/50">
         <p class="text-sm text-gray-400 mb-4">Sígueme en la Arena:</p>
         <div class="flex justify-center space-x-6">
@@ -401,9 +349,7 @@
         <p class="text-xs text-gray-600 mt-4">ZIGNY.XL &copy; 2024 | Powered by Liquid Chrome</p>
     </footer>
 
-    <!-- 3. Lógica JavaScript para el Efecto 3D (WebGL/Three.js) y Tabs/SVG -->
     <script>
-        // Lógica para el manejo de pestañas (Clips vs. Fotos)
         function showTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(content => {
                 content.classList.add('hidden');
@@ -418,152 +364,195 @@
             activeTabButton.classList.remove('text-gray-400', 'hover:text-cyan-400');
         }
 
-        /**
-         * Lógica del Borde Eléctrico
-         * Aplica el filtro SVG a los bordes y ajusta las animaciones al tamaño del contenedor.
-         */
         function updateElectricBorders() {
             const containers = document.querySelectorAll('.electric-border');
             
-            // Aplicar el filtro a las capas de borde y ajustar los valores de animación
-            containers.forEach((host, index) => {
+            containers.forEach((host) => {
                 const stroke = host.querySelector('.eb-stroke');
                 const svg = document.querySelector('.eb-svg');
-                const filterId = 'electric-border-filter'; 
+                const filterId = 'electric-border-filter';
 
                 if (!stroke || !svg) return;
 
-                // 1. Aplicar el filtro SVG a la capa de borde
                 stroke.style.filter = `url(#${filterId})`;
                 
-                // 2. Ajustar los valores de animación (simulando lo que hace el componente React)
-                // Esto es crucial para que la distorsión se mueva a lo largo de todo el borde
                 const width = Math.max(1, Math.round(host.clientWidth));
                 const height = Math.max(1, Math.round(host.clientHeight));
 
                 const dyAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dy"]'));
                 if (dyAnims.length >= 2) {
-                    // Animación vertical 1 (de abajo hacia arriba)
-                    dyAnims[0].setAttribute('values', `${height}; 0`); 
-                    // Animación vertical 2 (de arriba hacia abajo)
+                    dyAnims[0].setAttribute('values', `${height}; 0`);
                     dyAnims[1].setAttribute('values', `0; -${height}`);
                 }
 
                 const dxAnims = Array.from(svg.querySelectorAll('feOffset > animate[attributeName="dx"]'));
                 if (dxAnims.length >= 2) {
-                    // Animación horizontal 1 (de derecha a izquierda)
-                    dxAnims[0].setAttribute('values', `${width}; 0`); 
-                    // Animación horizontal 2 (de izquierda a derecha)
+                    dxAnims[0].setAttribute('values', `${width}; 0`);
                     dxAnims[1].setAttribute('values', `0; -${width}`);
                 }
                 
-                // Reiniciar las animaciones (necesario en algunos navegadores)
                 dyAnims.concat(dxAnims).forEach(a => {
                     try {
-                        // Intentar reiniciar la animación para que se ajuste al nuevo tamaño
                         a.beginElement();
-                    } catch (e) {
-                        // console.warn("beginElement falló. Ignorando.", e);
-                    }
+                    } catch (e) {}
                 });
             });
         }
-        
-        // Función de utilidad para el fondo Liquid Chrome
-        function initLiquidChrome(canvas, renderer, scene, camera, uniforms) {
-            let width = window.innerWidth;
-            let height = window.innerHeight;
 
-            const vertexShader = `void main() { gl_Position = vec4(position, 1.0); }`;
-            const fragmentShader = `
-                precision highp float;
-                uniform vec2 u_resolution;
-                uniform float u_time;
-                uniform vec2 u_mouse;
-                float hash(vec2 p) {
-                    return fract(sin(dot(p, vec2(12.9898, 78.233))) * 43758.5453);
-                }
-                float noise(vec2 p) {
-                    vec2 i = floor(p);
-                    vec2 f = fract(p);
-                    vec2 u = f*f*(3.0-2.0*f);
-                    return mix(mix(hash(i + vec2(0.0, 0.0)), hash(i + vec2(1.0, 0.0)), u.x),
-                               mix(hash(i + vec2(0.0, 1.0)), hash(i + vec2(1.0, 1.0)), u.x), u.y);
-                }
-                float liquid_field(vec2 uv) {
-                    float distortion = 0.0;
-                    distortion += noise(uv * 1.5 + u_time * 0.1);
-                    distortion += noise(uv * 3.0 + u_time * 0.2) * 0.5;
-                    distortion += noise(uv * 6.0 - u_time * 0.05) * 0.25;
-                    vec2 mouse_uv = u_mouse / u_resolution;
-                    float dist_to_mouse = length(uv - mouse_uv) * 10.0;
-                    distortion += sin(dist_to_mouse * 5.0 - u_time * 2.0) / (dist_to_mouse * 1.0 + 1.0) * 0.08;
-                    return distortion;
-                }
-                void main() {
-                    vec2 uv = gl_FragCoord.xy / u_resolution.xy;
-                    vec2 disturbed_uv = uv + liquid_field(uv * 5.0) * 0.1;
-                    vec3 base_color = vec3(0.1, 0.1, 0.1); 
-                    vec3 chrome_color = vec3(1.0, 1.0, 1.0); 
-                    float reflectivity = sin(disturbed_uv.x * 10.0 + u_time * 0.5) * cos(disturbed_uv.y * 10.0 + u_time * 0.5);
-                    reflectivity = clamp(reflectivity + 0.5, 0.0, 1.0);
-                    vec3 final_color = mix(base_color, chrome_color, reflectivity);
-                    float glow = 0.5 + 0.5 * sin(u_time * 0.3 + (disturbed_uv.x + disturbed_uv.y) * 2.0);
-                    final_color *= (1.0 + glow * 0.2);
-                    gl_FragColor = vec4(pow(final_color, vec3(1.5)), 1.0);
-                }
-            `;
+        // Liquid Chrome Background usando Three.js (mismo shader que reactbits.dev)
+        function initLiquidChrome() {
+            const container = document.getElementById('liquid-chrome-canvas');
+            if (!container) return;
 
-            uniforms.u_resolution.value.set(width, height);
+            // Configuración del efecto (mismos valores que reactbits.dev)
+            const baseColor = [0.1, 0.1, 0.1];
+            const speed = 1.0;
+            const amplitude = 0.6;
+            const frequencyX = 3;
+            const frequencyY = 3;
+            const interactive = true;
 
-            const material = new THREE.ShaderMaterial({ uniforms: uniforms, vertexShader: vertexShader, fragmentShader: fragmentShader });
+            // Crear escena, cámara y renderer
+            const scene = new THREE.Scene();
+            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+            
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Geometría de pantalla completa
             const geometry = new THREE.PlaneGeometry(2, 2);
+
+            // Shader Material - Exactamente el mismo shader de reactbits.dev
+            const material = new THREE.ShaderMaterial({
+                uniforms: {
+                    uTime: { value: 0 },
+                    uResolution: { value: new THREE.Vector3(window.innerWidth, window.innerHeight, window.innerWidth / window.innerHeight) },
+                    uBaseColor: { value: new THREE.Vector3(...baseColor) },
+                    uAmplitude: { value: amplitude },
+                    uFrequencyX: { value: frequencyX },
+                    uFrequencyY: { value: frequencyY },
+                    uMouse: { value: new THREE.Vector2(0.5, 0.5) }
+                },
+                vertexShader: `
+                    varying vec2 vUv;
+                    void main() {
+                        vUv = uv;
+                        gl_Position = vec4(position, 1.0);
+                    }
+                `,
+                fragmentShader: `
+                    precision highp float;
+                    uniform float uTime;
+                    uniform vec3 uResolution;
+                    uniform vec3 uBaseColor;
+                    uniform float uAmplitude;
+                    uniform float uFrequencyX;
+                    uniform float uFrequencyY;
+                    uniform vec2 uMouse;
+                    varying vec2 vUv;
+
+                    vec4 renderImage(vec2 uvCoord) {
+                        vec2 fragCoord = uvCoord * uResolution.xy;
+                        vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
+
+                        // Distorsión líquida - el corazón del efecto
+                        for (float i = 1.0; i < 10.0; i++){
+                            uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
+                            uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
+                        }
+
+                        // Efecto de ondulación con el mouse
+                        vec2 diff = (uvCoord - uMouse);
+                        float dist = length(diff);
+                        float falloff = exp(-dist * 20.0);
+                        float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
+                        uv += (diff / (dist + 0.0001)) * ripple * falloff;
+
+                        // La fórmula mágica del cromo líquido
+                        vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
+                        return vec4(color, 1.0);
+                    }
+
+                    void main() {
+                        vec4 col = vec4(0.0);
+                        int samples = 0;
+                        // Anti-aliasing por muestreo
+                        for (int i = -1; i <= 1; i++){
+                            for (int j = -1; j <= 1; j++){
+                                vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y));
+                                col += renderImage(vUv + offset);
+                                samples++;
+                            }
+                        }
+                        gl_FragColor = col / float(samples);
+                    }
+                `
+            });
+
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
-            
-            function onWindowResize() {
-                width = window.innerWidth;
-                height = window.innerHeight;
-                renderer.setSize(width, height);
-                uniforms.u_resolution.value.set(width, height);
-                updateElectricBorders(); // Llamamos aquí para ajustar SVG al redimensionar
-            }
-            window.addEventListener('resize', onWindowResize, false);
-            
-            window.addEventListener('mousemove', (event) => {
-                uniforms.u_mouse.value.x = event.clientX;
-                uniforms.u_mouse.value.y = height - event.clientY;
-            }, false);
 
-            let startTime = performance.now();
+            // Mouse tracking
+            let mouseX = 0.5;
+            let mouseY = 0.5;
+            let targetMouseX = 0.5;
+            let targetMouseY = 0.5;
+
+            function handleMouseMove(event) {
+                if (!interactive) return;
+                const rect = container.getBoundingClientRect();
+                targetMouseX = (event.clientX - rect.left) / rect.width;
+                targetMouseY = 1.0 - ((event.clientY - rect.top) / rect.height);
+            }
+
+            function handleTouchMove(event) {
+                if (!interactive || event.touches.length === 0) return;
+                const touch = event.touches[0];
+                const rect = container.getBoundingClientRect();
+                targetMouseX = (touch.clientX - rect.left) / rect.width;
+                targetMouseY = 1.0 - ((touch.clientY - rect.top) / rect.height);
+            }
+
+            if (interactive) {
+                container.addEventListener('mousemove', handleMouseMove);
+                container.addEventListener('touchmove', handleTouchMove);
+            }
+
+            // Resize handler
+            function onResize() {
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                
+                renderer.setSize(width, height);
+                material.uniforms.uResolution.value.set(width, height, width / height);
+                updateElectricBorders();
+            }
+
+            window.addEventListener('resize', onResize);
+
+            // Animation loop
             function animate() {
                 requestAnimationFrame(animate);
-                const elapsed = (performance.now() - startTime) / 1000;
-                uniforms.u_time.value = elapsed;
+                
+                // Suavizar el movimiento del mouse
+                mouseX += (targetMouseX - mouseX) * 0.05;
+                mouseY += (targetMouseY - mouseY) * 0.05;
+                
+                material.uniforms.uTime.value += 0.016 * speed;
+                material.uniforms.uMouse.value.set(mouseX, mouseY);
+                
                 renderer.render(scene, camera);
             }
+
             animate();
         }
 
-        window.onload = function () {
-            // Inicializar Liquid Chrome
-            const canvas = document.getElementById('liquid-chrome-canvas');
-            const renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
-            const scene = new THREE.Scene();
-            const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
-            const uniforms = {
-                u_time: { value: 0.0 },
-                u_resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
-                u_mouse: { value: new THREE.Vector2(window.innerWidth / 2, window.innerHeight / 2) }
-            };
-
-            initLiquidChrome(canvas, renderer, scene, camera, uniforms);
-            
-            // Inicializar pestañas y bordes
+        window.addEventListener('load', () => {
+            initLiquidChrome();
             showTab('clips');
-            // Necesitamos esperar un momento para que el DOM termine de renderizar los tamaños correctos
-            setTimeout(updateElectricBorders, 100); 
-        };
+            setTimeout(updateElectricBorders, 100);
+        });
     </script>
 </body>
 </html>
