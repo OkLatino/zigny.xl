@@ -44,7 +44,7 @@
             --electric-light-color: #7df9ff;
             position: relative;
             border-radius: 12px;
-            overflow: hidden;
+            overflow: visible;
             backdrop-filter: blur(8px);
             background-color: rgba(10, 10, 10, 0.7);
             isolation: isolate;
@@ -76,7 +76,7 @@
 
         .eb-glow-1 {
             border: var(--eb-border-width) solid var(--electric-light-color);
-            opacity: 0.5;
+            opacity: 0.6;
             filter: blur(calc(0.5px + (var(--eb-border-width) * 0.25)));
         }
 
@@ -164,32 +164,10 @@
 
     <div id="liquid-chrome-canvas"></div>
 
-    <svg class="eb-svg" aria-hidden="true" focusable="false">
-        <defs>
-            <filter id="electric-border-filter" colorInterpolationFilters="sRGB" x="-200%" y="-200%" width="500%" height="500%">
-                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise1" seed="1" />
-                <feOffset in="noise1" dx="0" dy="0" result="offsetNoise1">
-                    <animate attributeName="dy" values="700; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise2" seed="1" />
-                <feOffset in="noise2" dx="0" dy="0" result="offsetNoise2">
-                    <animate attributeName="dy" values="0; -700" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise3" seed="2" />
-                <feOffset in="noise3" dx="0" dy="0" result="offsetNoise3">
-                    <animate attributeName="dx" values="490; 0" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feTurbulence type="turbulence" baseFrequency="0.02" numOctaves="10" result="noise4" seed="2" />
-                <feOffset in="noise4" dx="0" dy="0" result="offsetNoise4">
-                    <animate attributeName="dx" values="0; -490" dur="6s" repeatCount="indefinite" calcMode="linear" />
-                </feOffset>
-                <feComposite in="offsetNoise1" in2="offsetNoise2" result="part1" />
-                <feComposite in="offsetNoise3" in2="offsetNoise4" result="part2" />
-                <feBlend in="part1" in2="part2" mode="color-dodge" result="combinedNoise" />
-                <feDisplacementMap in="SourceGraphic" in2="combinedNoise" scale="30" xChannelSelector="R" yChannelSelector="B" />
-            </filter>
-        </defs>
-    </svg>
+    <!-- Splash Cursor Canvas -->
+    <div id="splash-cursor-container" style="position: fixed; top: 0; left: 0; z-index: 9999; pointer-events: none; width: 100%; height: 100%;">
+        <canvas id="splash-cursor-canvas" style="width: 100vw; height: 100vh; display: block;"></canvas>
+    </div>
 
     <nav class="fixed top-0 left-0 right-0 z-20 bg-gray-900/80 backdrop-blur-md shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -216,43 +194,35 @@
                 </p>
             </div>
             
-            <div class="electric-border w-full max-w-xl transition duration-500">
-                <div class="eb-layers">
-                    <div class="eb-stroke"></div>
-                    <div class="eb-glow-1"></div>
-                    <div class="eb-glow-2"></div>
-                    <div class="eb-background-glow"></div>
-                </div>
-                <div class="eb-content p-8">
-                    <h2 class="text-3xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
-                    
-                    <form action="#" method="POST" class="space-y-4">
-                        <div>
-                            <label for="fan-name" class="block text-sm font-medium text-gray-300">Tu Alias/Nombre</label>
-                            <input type="text" id="fan-name" name="fan-name" required
-                                   placeholder="Ej. Ghost_Killer"
-                                   class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
-                        </div>
+            <div class="w-full max-w-xl bg-gray-900/70 backdrop-blur-md rounded-xl p-8 border border-cyan-500/30">
+                <h2 class="text-3xl font-bold text-cyan-400 mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
+                
+                <form action="#" method="POST" class="space-y-4">
+                    <div>
+                        <label for="fan-name" class="block text-sm font-medium text-gray-300">Tu Alias/Nombre</label>
+                        <input type="text" id="fan-name" name="fan-name" required
+                               placeholder="Ej. Ghost_Killer"
+                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
+                    </div>
 
-                        <div>
-                            <label for="fan-message" class="block text-sm font-medium text-gray-300">Mensaje Rápido</label>
-                            <textarea id="fan-message" name="fan-message" rows="3" required
-                                      placeholder="¡Gran clip! ¿Cuál es tu sensibilidad?"
-                                      class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
-                        </div>
+                    <div>
+                        <label for="fan-message" class="block text-sm font-medium text-gray-300">Mensaje Rápido</label>
+                        <textarea id="fan-message" name="fan-message" rows="3" required
+                                  placeholder="¡Gran clip! ¿Cuál es tu sensibilidad?"
+                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
+                    </div>
 
-                        <button type="submit"
-                                class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01]">
-                            ENVIAR MENSAJE &gt;&gt;
-                        </button>
-                    </form>
-                </div>
+                    <button type="submit"
+                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01]">
+                        ENVIAR MENSAJE &gt;&gt;
+                    </button>
+                </form>
             </div>
         </section>
 
         <section id="galeria" class="max-w-5xl mx-auto py-20">
             <h2 class="text-5xl font-extrabold text-center mb-12 text-cyan-400 drop-shadow-md">
-                <i class="fas fa-video mr-3"></i> GALERÍA CROMADA
+                <i class="fas fa-video mr-3"></i> GALERÍA
             </h2>
 
             <div class="flex justify-center border-b-2 border-gray-700 mb-8">
@@ -265,109 +235,83 @@
             </div>
 
             <div id="clips-content" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="electric-border p-4 text-center aspect-video flex flex-col justify-center items-center">
-                    <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
-                        <i class="fab fa-youtube text-6xl text-red-500 mb-3"></i>
-                        <p class="text-gray-400">CLIP 1: Ace en el Último Segundo (Placeholder)</p>
-                        <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en YouTube</a>
-                    </div>
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                    <i class="fab fa-youtube text-6xl text-red-500 mb-3"></i>
+                    <p class="text-gray-400">CLIP 1: Ace en el Último Segundo (Placeholder)</p>
+                    <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en YouTube</a>
                 </div>
-                <div class="electric-border p-4 text-center aspect-video flex flex-col justify-center items-center">
-                    <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
-                        <i class="fab fa-twitch text-6xl text-purple-500 mb-3"></i>
-                        <p class="text-gray-400">CLIP 2: Clutch 1v3 (Placeholder)</p>
-                        <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en Twitch</a>
-                    </div>
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                    <i class="fab fa-twitch text-6xl text-purple-500 mb-3"></i>
+                    <p class="text-gray-400">CLIP 2: Clutch 1v3 (Placeholder)</p>
+                    <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver en Twitch</a>
                 </div>
-                <div class="electric-border p-4 text-center aspect-video flex flex-col justify-center items-center">
-                    <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
-                        <i class="fas fa-trophy text-6xl text-yellow-500 mb-3"></i>
-                        <p class="text-gray-400">CLIP 3: Jugada Destacada del Torneo (Placeholder)</p>
-                        <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver Clip</a>
-                    </div>
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                    <i class="fas fa-trophy text-6xl text-yellow-500 mb-3"></i>
+                    <p class="text-gray-400">CLIP 3: Jugada Destacada del Torneo (Placeholder)</p>
+                    <a href="#" class="text-cyan-400 hover:text-cyan-300 mt-2 font-medium">Ver Clip</a>
                 </div>
             </div>
 
             <div id="photos-content" class="tab-content hidden grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="electric-border p-4 text-center aspect-square flex flex-col justify-center items-center">
-                    <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
-                        <i class="fas fa-desktop text-6xl text-gray-500 mb-3"></i>
-                        <p class="text-gray-400">Foto 1: Setup de Batalla (Placeholder)</p>
-                    </div>
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                    <i class="fas fa-desktop text-6xl text-gray-500 mb-3"></i>
+                    <p class="text-gray-400">Foto 1: Setup de Batalla (Placeholder)</p>
                 </div>
-                <div class="electric-border p-4 text-center aspect-square flex flex-col justify-center items-center">
-                    <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
-                        <i class="fas fa-gamepad text-6xl text-gray-500 mb-3"></i>
-                        <p class="text-gray-400">Foto 2: Periféricos (Placeholder)</p>
-                    </div>
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                    <i class="fas fa-gamepad text-6xl text-gray-500 mb-3"></i>
+                    <p class="text-gray-400">Foto 2: Periféricos (Placeholder)</p>
                 </div>
-                <div class="electric-border p-4 text-center aspect-square flex flex-col justify-center items-center">
-                    <div class="eb-layers"><div class="eb-stroke"></div><div class="eb-glow-1"></div><div class="eb-glow-2"></div><div class="eb-background-glow"></div></div>
-                    <div class="eb-content w-full h-full flex flex-col justify-center items-center bg-gray-900/50 p-4">
-                        <i class="fas fa-user-astronaut text-6xl text-gray-500 mb-3"></i>
-                        <p class="text-gray-400">Foto 3: Foto Promocional (Placeholder)</p>
-                    </div>
+                <div class="bg-gray-900/70 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-cyan-500/50 transition">
+                    <i class="fas fa-user-astronaut text-6xl text-gray-500 mb-3"></i>
+                    <p class="text-gray-400">Foto 3: Foto Promocional (Placeholder)</p>
                 </div>
             </div>
         </section>
 
         <section id="hiring" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <div class="electric-border w-full transition duration-500">
-                <div class="eb-layers">
-                    <div class="eb-stroke"></div>
-                    <div class="eb-glow-1"></div>
-                    <div class="eb-glow-2"></div>
-                    <div class="eb-background-glow"></div>
-                </div>
-                <div class="eb-content p-8 md:p-12">
-                    <h2 class="text-4xl font-extrabold text-cyan-400 mb-6 text-center"><i class="fas fa-briefcase mr-2"></i> Contacto Empresarial (Hiring)</h2>
-                    <p class="text-gray-400 mb-8 text-center">Formulario exclusivo para marcas y empresas interesadas en creación de video o patrocinios.</p>
+            <div class="w-full bg-gray-900/70 backdrop-blur-md rounded-xl p-8 md:p-12 border border-cyan-500/30">
+                <h2 class="text-4xl font-extrabold text-cyan-400 mb-6 text-center"><i class="fas fa-briefcase mr-2"></i> Contacto Empresarial (Hiring)</h2>
+                <p class="text-gray-400 mb-8 text-center">Formulario exclusivo para marcas y empresas interesadas en creación de video o patrocinios.</p>
+                
+                <form action="#" method="POST" class="space-y-6">
+                    <div>
+                        <label for="company-name" class="block text-sm font-medium text-gray-300">Nombre de la Empresa / Marca</label>
+                        <input type="text" id="company-name" name="company-name" required
+                               placeholder="Ej. Estudio Alpha"
+                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
+                    </div>
+
+                    <div>
+                        <label for="company-email" class="block text-sm font-medium text-gray-300">Correo Electrónico de Contacto</label>
+                        <input type="email" id="company-email" name="company-email" required
+                               placeholder="contacto@empresa.com"
+                               class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
+                    </div>
+
+                    <div>
+                        <label for="service" class="block text-sm font-medium text-gray-300">Tipo de Servicio Requerido</label>
+                        <select id="service" name="service" required
+                                class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300 appearance-none">
+                            <option value="" disabled selected class="bg-gray-800">Selecciona el servicio...</option>
+                            <option value="video-creation" class="bg-gray-800">Creación de Video/Edición</option>
+                            <option value="sponsorship" class="bg-gray-800">Patrocinio de Contenido/Stream</option>
+                            <option value="tournament" class="bg-gray-800">Participación en Torneos/Eventos</option>
+                            <option value="other" class="bg-gray-800">Otro (Especificar en Mensaje)</option>
+                        </select>
+                    </div>
                     
-                    <form action="#" method="POST" class="space-y-6">
-                        <div>
-                            <label for="company-name" class="block text-sm font-medium text-gray-300">Nombre de la Empresa / Marca</label>
-                            <input type="text" id="company-name" name="company-name" required
-                                   placeholder="Ej. Estudio Alpha"
-                                   class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
-                        </div>
+                    <div>
+                        <label for="company-message" class="block text-sm font-medium text-gray-300">Detalles de la Propuesta (Menciona Presupuesto)</label>
+                        <textarea id="company-message" name="company-message" rows="5" required
+                                  placeholder="Estamos buscando un paquete de 3 videos promocionales con un presupuesto de $X..."
+                                  class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
+                    </div>
 
-                        <div>
-                            <label for="company-email" class="block text-sm font-medium text-gray-300">Correo Electrónico de Contacto</label>
-                            <input type="email" id="company-email" name="company-email" required
-                                   placeholder="contacto@empresa.com"
-                                   class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300">
-                        </div>
-
-                        <div>
-                            <label for="service" class="block text-sm font-medium text-gray-300">Tipo de Servicio Requerido</label>
-                            <select id="service" name="service" required
-                                    class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300 appearance-none">
-                                <option value="" disabled selected class="bg-gray-800">Selecciona el servicio...</option>
-                                <option value="video-creation" class="bg-gray-800">Creación de Video/Edición</option>
-                                <option value="sponsorship" class="bg-gray-800">Patrocinio de Contenido/Stream</option>
-                                <option value="tournament" class="bg-gray-800">Participación en Torneos/Eventos</option>
-                                <option value="other" class="bg-gray-800">Otro (Especificar en Mensaje)</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label for="company-message" class="block text-sm font-medium text-gray-300">Detalles de la Propuesta (Menciona Presupuesto)</label>
-                            <textarea id="company-message" name="company-message" rows="5" required
-                                      placeholder="Estamos buscando un paquete de 3 videos promocionales con un presupuesto de $X..."
-                                      class="mt-1 w-full p-3 bg-gray-900/50 border border-gray-700 rounded-lg text-white focus:ring-cyan-500 focus:border-cyan-500 transition duration-300"></textarea>
-                        </div>
-
-                        <button type="submit"
-                                class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-cyan-400/80">
-                            ENVIAR PROPUESTA PROFESIONAL <i class="fas fa-angle-double-right ml-2"></i>
-                        </button>
-                    </form>
-                </div>
+                    <button type="submit"
+                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-cyan-600 hover:bg-cyan-700 text-black shadow-lg shadow-cyan-500/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-cyan-400/80">
+                        ENVIAR PROPUESTA PROFESIONAL <i class="fas fa-angle-double-right ml-2"></i>
+                    </button>
+                </form>
             </div>
         </section>
 
@@ -735,8 +679,345 @@
             animate(0);
         }
 
+        // Splash Cursor Effect - Fluid simulation optimizado
+        function initSplashCursor() {
+            const canvas = document.getElementById('splash-cursor-canvas');
+            if (!canvas) return;
+
+            const config = {
+                SIM_RESOLUTION: 128,
+                DYE_RESOLUTION: 800,
+                DENSITY_DISSIPATION: 0.97,
+                VELOCITY_DISSIPATION: 0.98,
+                PRESSURE: 0.8,
+                PRESSURE_ITERATIONS: 20,
+                CURL: 30,
+                SPLAT_RADIUS: 0.25,
+                SPLAT_FORCE: 6000,
+                SHADING: true,
+                TRANSPARENT: true
+            };
+
+            const params = { alpha: true, depth: false, stencil: false, antialias: false };
+            const gl = canvas.getContext('webgl2', params) || canvas.getContext('webgl', params);
+            if (!gl) return;
+
+            const isWebGL2 = !!canvas.getContext('webgl2', params);
+            let halfFloat, supportLinearFiltering;
+            
+            if (isWebGL2) {
+                gl.getExtension('EXT_color_buffer_float');
+                supportLinearFiltering = gl.getExtension('OES_texture_float_linear');
+            } else {
+                halfFloat = gl.getExtension('OES_texture_half_float');
+                supportLinearFiltering = gl.getExtension('OES_texture_half_float_linear');
+            }
+
+            gl.clearColor(0, 0, 0, 0);
+
+            const halfFloatTexType = isWebGL2 ? gl.HALF_FLOAT : halfFloat.HALF_FLOAT_OES;
+            let formatRGBA, formatRG, formatR;
+
+            if (isWebGL2) {
+                formatRGBA = { internalFormat: gl.RGBA16F, format: gl.RGBA };
+                formatRG = { internalFormat: gl.RG16F, format: gl.RG };
+                formatR = { internalFormat: gl.R16F, format: gl.RED };
+            } else {
+                formatRGBA = { internalFormat: gl.RGBA, format: gl.RGBA };
+                formatRG = { internalFormat: gl.RGBA, format: gl.RGBA };
+                formatR = { internalFormat: gl.RGBA, format: gl.RGBA };
+            }
+
+            const baseVertexShader = compileShader(gl, gl.VERTEX_SHADER, `
+                precision highp float;
+                attribute vec2 aPosition;
+                varying vec2 vUv;
+                varying vec2 vL, vR, vT, vB;
+                uniform vec2 texelSize;
+                void main() {
+                    vUv = aPosition * 0.5 + 0.5;
+                    vL = vUv - vec2(texelSize.x, 0.0);
+                    vR = vUv + vec2(texelSize.x, 0.0);
+                    vT = vUv + vec2(0.0, texelSize.y);
+                    vB = vUv - vec2(0.0, texelSize.y);
+                    gl_Position = vec4(aPosition, 0.0, 1.0);
+                }
+            `);
+
+            const splatShader = compileShader(gl, gl.FRAGMENT_SHADER, `
+                precision highp float;
+                varying vec2 vUv;
+                uniform sampler2D uTarget;
+                uniform float aspectRatio;
+                uniform vec3 color;
+                uniform vec2 point;
+                uniform float radius;
+                void main() {
+                    vec2 p = vUv - point;
+                    p.x *= aspectRatio;
+                    vec3 splat = exp(-dot(p, p) / radius) * color;
+                    vec3 base = texture2D(uTarget, vUv).xyz;
+                    gl_FragColor = vec4(base + splat, 1.0);
+                }
+            `);
+
+            const advectionShader = compileShader(gl, gl.FRAGMENT_SHADER, `
+                precision highp float;
+                varying vec2 vUv;
+                uniform sampler2D uVelocity, uSource;
+                uniform vec2 texelSize;
+                uniform float dt, dissipation;
+                void main() {
+                    vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
+                    gl_FragColor = texture2D(uSource, coord) / (1.0 + dissipation * dt);
+                }
+            `);
+
+            const displayShader = compileShader(gl, gl.FRAGMENT_SHADER, `
+                precision highp float;
+                varying vec2 vUv;
+                uniform sampler2D uTexture;
+                void main() {
+                    vec3 c = texture2D(uTexture, vUv).rgb;
+                    float a = max(c.r, max(c.g, c.b));
+                    gl_FragColor = vec4(c, a);
+                }
+            `);
+
+            const splatProgram = createProgram(gl, baseVertexShader, splatShader);
+            const advectionProgram = createProgram(gl, baseVertexShader, advectionShader);
+            const displayProgram = createProgram(gl, baseVertexShader, displayShader);
+
+            let dye, velocity;
+
+            function initBuffers() {
+                const simRes = getResolution(gl, config.SIM_RESOLUTION);
+                const dyeRes = getResolution(gl, config.DYE_RESOLUTION);
+                const texType = halfFloatTexType;
+                const filtering = supportLinearFiltering ? gl.LINEAR : gl.NEAREST;
+
+                dye = createDoubleFBO(gl, dyeRes.width, dyeRes.height, formatRGBA.internalFormat, formatRGBA.format, texType, filtering);
+                velocity = createDoubleFBO(gl, simRes.width, simRes.height, formatRG.internalFormat, formatRG.format, texType, filtering);
+            }
+
+            gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
+            gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+            gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, gl.createBuffer());
+            gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
+            gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+            gl.enableVertexAttribArray(0);
+
+            const blit = (target) => {
+                if (!target) {
+                    gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+                    gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+                } else {
+                    gl.viewport(0, 0, target.width, target.height);
+                    gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+                }
+                gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+            };
+
+            initBuffers();
+
+            const pointer = { x: 0.5, y: 0.5, px: 0.5, py: 0.5, dx: 0, dy: 0, down: false };
+
+            function resizeCanvas() {
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = canvas.clientWidth * dpr;
+                canvas.height = canvas.clientHeight * dpr;
+                initBuffers();
+            }
+
+            function generateCyanColor() {
+                // Colores cyan gaming
+                const h = 0.5 + Math.random() * 0.1; // Cyan range
+                return HSVtoRGB(h, 0.9, 1.0);
+            }
+
+            function HSVtoRGB(h, s, v) {
+                const i = Math.floor(h * 6);
+                const f = h * 6 - i;
+                const p = v * (1 - s);
+                const q = v * (1 - f * s);
+                const t = v * (1 - (1 - f) * s);
+                let r, g, b;
+                switch (i % 6) {
+                    case 0: r = v; g = t; b = p; break;
+                    case 1: r = q; g = v; b = p; break;
+                    case 2: r = p; g = v; b = t; break;
+                    case 3: r = p; g = q; b = v; break;
+                    case 4: r = t; g = p; b = v; break;
+                    case 5: r = v; g = p; b = q; break;
+                }
+                return { r: r * 0.3, g: g * 0.3, b: b * 0.3 };
+            }
+
+            function splat(x, y, dx, dy, color) {
+                gl.useProgram(splatProgram.program);
+                gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+                gl.uniform1f(splatProgram.uniforms.aspectRatio, canvas.width / canvas.height);
+                gl.uniform2f(splatProgram.uniforms.point, x, y);
+                gl.uniform3f(splatProgram.uniforms.color, dx, dy, 0);
+                gl.uniform1f(splatProgram.uniforms.radius, config.SPLAT_RADIUS / 100);
+                blit(velocity.write);
+                velocity.swap();
+
+                gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
+                gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
+                blit(dye.write);
+                dye.swap();
+            }
+
+            function update(dt) {
+                gl.disable(gl.BLEND);
+                
+                gl.useProgram(advectionProgram.program);
+                gl.uniform2f(advectionProgram.uniforms.texelSize, velocity.texelSizeX, velocity.texelSizeY);
+                gl.uniform1i(advectionProgram.uniforms.uVelocity, velocity.read.attach(0));
+                gl.uniform1i(advectionProgram.uniforms.uSource, velocity.read.attach(0));
+                gl.uniform1f(advectionProgram.uniforms.dt, dt);
+                gl.uniform1f(advectionProgram.uniforms.dissipation, config.VELOCITY_DISSIPATION);
+                blit(velocity.write);
+                velocity.swap();
+
+                gl.uniform1i(advectionProgram.uniforms.uVelocity, velocity.read.attach(0));
+                gl.uniform1i(advectionProgram.uniforms.uSource, dye.read.attach(1));
+                gl.uniform1f(advectionProgram.uniforms.dissipation, config.DENSITY_DISSIPATION);
+                blit(dye.write);
+                dye.swap();
+            }
+
+            function render() {
+                gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
+                gl.enable(gl.BLEND);
+                gl.useProgram(displayProgram.program);
+                gl.uniform1i(displayProgram.uniforms.uTexture, dye.read.attach(0));
+                blit(null);
+            }
+
+            let lastTime = Date.now();
+            function animate() {
+                const now = Date.now();
+                const dt = Math.min((now - lastTime) / 1000, 0.016666);
+                lastTime = now;
+
+                if (pointer.down && (Math.abs(pointer.dx) > 0 || Math.abs(pointer.dy) > 0)) {
+                    const color = generateCyanColor();
+                    splat(pointer.x, pointer.y, pointer.dx * config.SPLAT_FORCE, pointer.dy * config.SPLAT_FORCE, color);
+                }
+
+                update(dt);
+                render();
+                requestAnimationFrame(animate);
+            }
+
+            document.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                pointer.px = pointer.x;
+                pointer.py = pointer.y;
+                pointer.x = e.clientX / rect.width;
+                pointer.y = 1 - (e.clientY / rect.height);
+                pointer.dx = (pointer.x - pointer.px) * 10;
+                pointer.dy = (pointer.y - pointer.py) * 10;
+                pointer.down = true;
+            });
+
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+            animate();
+        }
+
+        // Helper functions para Splash Cursor
+        function compileShader(gl, type, source) {
+            const shader = gl.createShader(type);
+            gl.shaderSource(shader, source);
+            gl.compileShader(shader);
+            if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                console.error('Shader compile error:', gl.getShaderInfoLog(shader));
+            }
+            return shader;
+        }
+
+        function createProgram(gl, vertexShader, fragmentShader) {
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+            
+            const uniforms = {};
+            const count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+            for (let i = 0; i < count; i++) {
+                const name = gl.getActiveUniform(program, i).name;
+                uniforms[name] = gl.getUniformLocation(program, name);
+            }
+            
+            return { program, uniforms };
+        }
+
+        function createFBO(gl, w, h, internalFormat, format, type, param) {
+            gl.activeTexture(gl.TEXTURE0);
+            const texture = gl.createTexture();
+            gl.bindTexture(gl.TEXTURE_2D, texture);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, param);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, param);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+            gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, w, h, 0, format, type, null);
+
+            const fbo = gl.createFramebuffer();
+            gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+            gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+            gl.viewport(0, 0, w, h);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            return {
+                texture,
+                fbo,
+                width: w,
+                height: h,
+                texelSizeX: 1 / w,
+                texelSizeY: 1 / h,
+                attach(id) {
+                    gl.activeTexture(gl.TEXTURE0 + id);
+                    gl.bindTexture(gl.TEXTURE_2D, texture);
+                    return id;
+                }
+            };
+        }
+
+        function createDoubleFBO(gl, w, h, internalFormat, format, type, param) {
+            let fbo1 = createFBO(gl, w, h, internalFormat, format, type, param);
+            let fbo2 = createFBO(gl, w, h, internalFormat, format, type, param);
+            
+            return {
+                width: w,
+                height: h,
+                texelSizeX: fbo1.texelSizeX,
+                texelSizeY: fbo1.texelSizeY,
+                get read() { return fbo1; },
+                get write() { return fbo2; },
+                swap() {
+                    const temp = fbo1;
+                    fbo1 = fbo2;
+                    fbo2 = temp;
+                }
+            };
+        }
+
+        function getResolution(gl, resolution) {
+            let aspectRatio = gl.drawingBufferWidth / gl.drawingBufferHeight;
+            if (aspectRatio < 1) aspectRatio = 1 / aspectRatio;
+            const min = Math.round(resolution);
+            const max = Math.round(resolution * aspectRatio);
+            return gl.drawingBufferWidth > gl.drawingBufferHeight 
+                ? { width: max, height: min } 
+                : { width: min, height: max };
+        }
+
         window.addEventListener('load', () => {
             initGalaxy();
+            initSplashCursor();
             showTab('clips');
             setTimeout(updateElectricBorders, 100);
         });
