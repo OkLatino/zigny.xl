@@ -124,6 +124,40 @@
         .cyan-glow-text {
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5);
         }
+
+        /* Efecto metálico para el título */
+        .metallic-text {
+            background: linear-gradient(
+                90deg,
+                #0ff 0%,
+                #4dd0e1 10%,
+                #80deea 20%,
+                #fff 30%,
+                #80deea 40%,
+                #4dd0e1 50%,
+                #0ff 60%,
+                #00bcd4 70%,
+                #0097a7 80%,
+                #006064 90%,
+                #0ff 100%
+            );
+            background-size: 200% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: metallicShine 3s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.6)) 
+                    drop-shadow(0 0 40px rgba(0, 255, 255, 0.3));
+        }
+
+        @keyframes metallicShine {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
     </style>
 </head>
 <body class="text-white">
@@ -174,7 +208,7 @@
 
         <section id="contacto-general" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
             <div class="text-center mb-12" id="hero">
-                <h1 class="text-6xl md:text-8xl font-black tracking-tighter text-cyan-400 cyan-glow-text">
+                <h1 class="text-6xl md:text-8xl font-black tracking-tighter metallic-text">
                     ZIGNY.XL
                 </h1>
                 <p class="text-gray-300 mt-4 text-xl md:text-2xl font-light">
