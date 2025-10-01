@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ZIGNY.XL | Contacto & Portafolio Pro Gamer</title>
+    <title>ZIGNY.XL | Perfil y Contacto</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- THREE.js se mantiene solo para el fondo de cromo líquido -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -16,7 +15,6 @@
             overflow-x: hidden;
         }
 
-        /* Estilos para el canvas del fondo de cromo líquido */
         #liquid-chrome-canvas {
             position: fixed;
             top: 0;
@@ -33,129 +31,27 @@
             height: 100%;
         }
 
-        /* Contenedor del logo 2D */
-        #logo-container-2d {
-            width: 160px; /* Tamaño del logo */
-            height: 160px;
-            margin: 0 auto 1.5rem; /* Centrado y margen inferior */
-            position: relative;
-            z-index: 10; 
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        /* Nuevo estilo para la imagen del logo con efecto metálico */
-        #actual-logo-image {
-            width: 100%;
-            height: auto;
-            /* Aplicar un filtro de brillo/sombra que simula el metal y el resplandor */
-            filter: grayscale(100%) brightness(150%) drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
-            transition: filter 0.3s ease;
-        }
-
-        #actual-logo-image:hover {
-            filter: grayscale(0%) brightness(180%) drop-shadow(0 0 15px rgba(255, 255, 255, 1)) drop-shadow(0 0 30px rgba(255, 255, 255, 0.7));
-        }
-
         #content-wrapper {
             position: relative;
             z-index: 10;
             min-height: 100vh;
-            padding-top: 5rem;
+            padding: 3rem 1rem;
         }
 
-        /* (Resto de estilos CSS de borde y texto metálico...) */
-        .electric-border {
-            --electric-border-color: #fff;
-            --eb-border-width: 2px;
-            --electric-light-color: #f0f0f0;
+        #metallic-logo-container {
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 1.5rem;
             position: relative;
-            border-radius: 12px;
-            overflow: visible;
-            backdrop-filter: blur(8px);
-            background-color: rgba(10, 10, 10, 0.7);
-            isolation: isolate;
-            border: none;
+            z-index: 10;
         }
         
-        .eb-layers {
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            pointer-events: none;
-            z-index: 2;
+        #metallic-logo-canvas {
+            width: 100%;
+            height: 100%;
+            display: block;
         }
 
-        .eb-stroke,
-        .eb-glow-1,
-        .eb-glow-2,
-        .eb-background-glow {
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            pointer-events: none;
-            box-sizing: border-box;
-        }
-
-        .eb-stroke {
-            border: var(--eb-border-width) solid var(--electric-border-color);
-        }
-
-        .eb-glow-1 {
-            border: var(--eb-border-width) solid var(--electric-light-color);
-            opacity: 0.6;
-            filter: blur(calc(0.5px + (var(--eb-border-width) * 0.25)));
-        }
-
-        .eb-glow-2 {
-            border: var(--eb-border-width) solid var(--electric-light-color);
-            opacity: 0.5;
-            filter: blur(calc(2px + (var(--eb-border-width) * 0.5)));
-        }
-
-        .eb-background-glow {
-            z-index: -1;
-            transform: scale(1.08);
-            filter: blur(32px);
-            opacity: 0.3;
-            background: linear-gradient(-30deg, var(--electric-light-color), transparent, var(--electric-border-color));
-        }
-
-        .eb-content {
-            position: relative;
-            border-radius: inherit;
-            z-index: 3;
-            padding: 2rem;
-        }
-
-        .eb-svg {
-            position: fixed;
-            left: -10000px;
-            top: -10000px;
-            width: 10px;
-            height: 10px;
-            opacity: 0.001;
-            pointer-events: none;
-        }
-        
-        .tab-button.active {
-            color: #fff;
-            border-bottom: 3px solid #fff;
-        }
-        
-        /* Aseguramos que el focus sea blanco, eliminando el azul implícito */
-        input:focus, textarea:focus, select:focus {
-            border-color: #fff !important;
-            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5) !important;
-            outline: none;
-        }
-        
-        .cyan-glow-text {
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.5);
-        }
-
-        /* Efecto metálico para el título */
         .metallic-text {
             background: linear-gradient(
                 90deg,
@@ -181,12 +77,57 @@
         }
 
         @keyframes metallicShine {
-            0% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 200% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+
+        .social-icon {
+            filter: 
+                grayscale(100%) 
+                brightness(200%) 
+                contrast(150%)
+                drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            filter: 
+                grayscale(100%) 
+                brightness(250%) 
+                contrast(170%)
+                drop-shadow(0 0 25px rgba(255, 255, 255, 1))
+                drop-shadow(0 0 50px rgba(255, 255, 255, 0.6));
+            transform: scale(1.1);
+        }
+
+        .link-button {
+            background: rgba(255, 255, 255, 0.95);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .link-button:hover {
+            background: rgba(255, 255, 255, 1);
+            border-color: rgba(255, 255, 255, 0.8);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.3);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: #fff !important;
+            box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5) !important;
+            outline: none;
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 1rem;
+            object-fit: cover;
         }
     </style>
 </head>
@@ -194,198 +135,181 @@
 
     <div id="liquid-chrome-canvas"></div>
 
-    <main id="content-wrapper" class="p-4 md:p-8">
-
-        <section id="contacto-general" class="max-w-7xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <div class="text-center mb-12 w-full" id="hero">
-                
-                <!-- Contenedor del Logo 2D (Reemplaza el canvas 3D) -->
-                <div id="logo-container-2d">
-                    <img id="actual-logo-image" 
-                         src="https://i.ibb.co/pBf9cdKH/logo.png" 
-                         alt="ZIGNY.XL Logo Metálico" 
-                         onerror="this.onerror=null; this.src='https://placehold.co/160x160/000/FFF?text=ZIGNY';" 
-                         class="w-full h-auto"/>
-                </div>
-
-                <!-- Contenedor ovalado con el título -->
-                <!-- Fondo: BLANCO/GRIS muy claro transparente (bg-gray-100/10) -->
-                <div class="inline-block bg-gray-100/10 backdrop-blur-xl rounded-full px-16 py-8 border border-white/30 shadow-2xl shadow-white/20">
-                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-black tracking-tighter metallic-text whitespace-nowrap">
-                        ZIGNY.XL
-                    </h1>
-                </div>
-                
-                <p class="text-gray-300 mt-8 text-xl md:text-2xl font-light max-w-3xl mx-auto">
-                    Elite FPS Player. Creador de contenido. Llevando el cromo a la victoria.
-                </p>
-            </div>
+    <main id="content-wrapper">
+        <div class="max-w-2xl mx-auto">
             
-            <!-- PANEL 1: Mensaje Directo -->
-            <!-- Fondo: BLANCO/GRIS muy claro transparente -->
-            <div class="w-full max-w-xl bg-gray-100/10 backdrop-blur-md rounded-xl p-8 border border-white/30">
-                <h2 class="text-3xl font-bold text-white mb-4 text-center"><i class="fas fa-headset mr-2"></i> Mensaje Directo (Fans/General)</h2>
+            <!-- Logo Metálico -->
+            <div id="metallic-logo-container">
+                <canvas id="metallic-logo-canvas"></canvas>
+            </div>
+
+            <!-- Perfil -->
+            <div class="text-center mb-8">
+                <!-- Título en óvalo transparente -->
+                <div class="inline-block bg-gray-100/10 backdrop-blur-xl rounded-full px-16 py-6 border border-white/30 shadow-2xl shadow-white/20 mb-4">
+                    <h1 class="text-4xl md:text-5xl font-black metallic-text">ZIGNY.XL</h1>
+                </div>
                 
-                <form action="#" method="POST" class="space-y-4">
-                    <div>
-                        <label for="fan-name" class="block text-sm font-medium text-gray-300">Tu Alias/Nombre</label>
-                        <!-- Fondo de inputs: BLANCO/GRIS muy claro transparente -->
-                        <input type="text" id="fan-name" name="fan-name" required
-                              placeholder="Ej. Ghost_Killer"
-                              class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
-                    </div>
-
-                    <div>
-                        <label for="fan-message" class="block text-sm font-medium text-gray-300">Mensaje Rápido</label>
-                        <textarea id="fan-message" name="fan-message" rows="3" required
-                                             placeholder="¡Gran clip! ¿Cuál es tu sensibilidad?"
-                                             class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
-                    </div>
-
-                    <button type="submit"
-                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-white hover:bg-gray-200 text-black shadow-lg shadow-white/50 transition duration-300 transform hover:scale-[1.01]">
-                        ENVIAR MENSAJE >>
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <section id="galeria" class="max-w-5xl mx-auto py-20">
-            <h2 class="text-5xl font-extrabold text-center mb-12 text-white drop-shadow-md">
-                <i class="fas fa-video mr-3"></i> GALERÍA
-            </h2>
-
-            <div class="flex justify-center border-b-2 border-gray-700 mb-8">
-                <button id="clips-tab" class="tab-button active text-xl font-semibold py-3 px-6 mx-2 transition duration-300" onclick="showTab('clips')">
-                    Clips de Jugadas <i class="fas fa-crosshairs ml-2"></i>
-                </button>
-                <button id="photos-tab" class="tab-button text-gray-400 hover:text-white text-xl font-semibold py-3 px-6 mx-2 transition duration-300" onclick="showTab('photos')">
-                    Fotos & Setup <i class="fas fa-camera-retro ml-2"></i>
-                </button>
-            </div>
-
-            <div id="clips-content" class="tab-content grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Fondo: BLANCO/GRIS muy claro transparente para ítems de galería -->
-                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
-                    <i class="fab fa-youtube text-6xl text-red-500 mb-3"></i>
-                    <p class="text-gray-400">CLIP 1: Ace en el Último Segundo (Placeholder)</p>
-                    <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver en YouTube</a>
-                </div>
-                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
-                    <i class="fab fa-twitch text-6xl text-purple-500 mb-3"></i>
-                    <p class="text-gray-400">CLIP 2: Clutch 1v3 (Placeholder)</p>
-                    <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver en Twitch</a>
-                </div>
-                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-video flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
-                    <i class="fas fa-trophy text-6xl text-yellow-500 mb-3"></i>
-                    <p class="text-gray-400">CLIP 3: Jugada Destacada del Torneo (Placeholder)</p>
-                    <a href="#" class="text-white hover:text-gray-300 mt-2 font-medium">Ver Clip</a>
-                </div>
-            </div>
-
-            <div id="photos-content" class="tab-content hidden grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <!-- Fondo: BLANCO/GRIS muy claro transparente para ítems de galería -->
-                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
-                    <i class="fas fa-desktop text-6xl text-gray-500 mb-3"></i>
-                    <p class="text-gray-400">Foto 1: Setup de Batalla (Placeholder)</p>
-                </div>
-                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
-                    <i class="fas fa-gamepad text-6xl text-gray-500 mb-3"></i>
-                    <p class="text-gray-400">Foto 2: Periféricos (Placeholder)</p>
-                </div>
-                <div class="bg-gray-100/10 backdrop-blur-md rounded-xl p-4 text-center aspect-square flex flex-col justify-center items-center border border-gray-700/50 hover:border-white/50 transition">
-                    <i class="fas fa-user-astronaut text-6xl text-gray-500 mb-3"></i>
-                    <p class="text-gray-400">Foto 3: Foto Promocional (Placeholder)</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="hiring" class="max-w-3xl mx-auto py-20 min-h-screen flex flex-col justify-center items-center">
-            <!-- PANEL 2: Contacto Empresarial -->
-            <!-- Fondo: BLANCO/GRIS muy claro transparente -->
-            <div class="w-full bg-gray-100/10 backdrop-blur-md rounded-xl p-8 md:p-12 border border-white/30">
-                <h2 class="text-4xl font-extrabold text-white mb-6 text-center"><i class="fas fa-briefcase mr-2"></i> Contacto Empresarial (Hiring)</h2>
-                <p class="text-gray-400 mb-8 text-center">Formulario exclusivo para marcas y empresas interesadas en creación de video o patrocinios.</p>
+                <p class="text-gray-300 text-base md:text-lg mb-2">🎮 Creador de contenido de CoDM 🦾 24 años | 📍</p>
+                <p class="text-gray-300 text-base md:text-lg mb-4">Guerrero, México 🇲🇽 Contact: zignybussines@gmail.com</p>
                 
-                <form action="#" method="POST" class="space-y-6">
-                    <div>
-                        <label for="company-name" class="block text-sm font-medium text-gray-300">Nombre de la Empresa / Marca</label>
-                        <!-- Fondo de inputs: BLANCO/GRIS muy claro transparente -->
-                        <input type="text" id="company-name" name="company-name" required
-                              placeholder="Ej. Estudio Alpha"
-                              class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
-                    </div>
+                <!-- Iconos Sociales Principales -->
+                <div class="flex justify-center space-x-6 mb-8">
+                    <a href="https://www.instagram.com/ZIGNY.XL" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-instagram text-4xl"></i>
+                    </a>
+                    <a href="https://www.youtube.com/@ZIGNY" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-youtube text-4xl"></i>
+                    </a>
+                    <a href="https://www.tiktok.com/@zigny" target="_blank" rel="noopener noreferrer" class="social-icon">
+                        <i class="fab fa-tiktok text-4xl"></i>
+                    </a>
+                </div>
+            </div>
 
-                    <div>
-                        <label for="company-email" class="block text-sm font-medium text-gray-300">Correo Electrónico de Contacto</label>
-                        <input type="email" id="company-email" name="company-email" required
-                              placeholder="contacto@empresa.com"
-                              class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
-                    </div>
-
-                    <div>
-                        <label for="service" class="block text-sm font-medium text-gray-300">Tipo de Servicio Requerido</label>
-                        <select id="service" name="service" required
-                                 class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300 appearance-none">
-                            <!-- Se añadió bg-black para asegurar que las opciones sean oscuras -->
-                            <option value="" disabled selected class="bg-black">Selecciona el servicio...</option>
-                            <option value="video-creation" class="bg-black">Creación de Video/Edición</option>
-                            <option value="sponsorship" class="bg-black">Patrocinio de Contenido/Stream</option>
-                            <option value="tournament" class="bg-black">Participación en Torneos/Eventos</option>
-                            <option value="other" class="bg-black">Otro (Especificar en Mensaje)</option>
-                        </select>
+            <!-- RELOJES KINGS -->
+            <section class="mb-8">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/30">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-6 metallic-text">
+                        RELOJES KINGS
+                    </h2>
+                    
+                    <!-- Imagen de relojes -->
+                    <div class="mb-6 rounded-xl overflow-hidden">
+                        <img src="./assets/relojes-kings.webp" 
+                             alt="Relojes Kings League" 
+                             class="w-full h-auto object-cover"
+                             onerror="this.style.display='none'">
                     </div>
                     
-                    <div>
-                        <label for="company-message" class="block text-sm font-medium text-gray-300">Detalles de la Propuesta (Menciona Presupuesto)</label>
-                        <textarea id="company-message" name="company-message" rows="5" required
-                                             placeholder="Estamos buscando un paquete de 3 videos promocionales con un presupuesto de $X..."
-                                             class="mt-1 w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
+                    <a href="https://kingsleaguerelojes.com/products/kingssmart-smartwatch-44mm" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="link-button block w-full py-4 px-6 rounded-2xl text-center text-black font-bold text-lg">
+                        KINGS LEAGUE KINGS SMARTWATCH
+                    </a>
+                </div>
+            </section>
+
+            <!-- REDES SOCIALES -->
+            <section class="mb-8">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/30">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-6 metallic-text">
+                        REDES SOCIALES
+                    </h2>
+                    <div class="space-y-4">
+                        <a href="https://www.instagram.com/ZIGNY.XL" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="link-button block w-full py-4 px-6 rounded-2xl text-center text-black font-bold text-lg flex items-center justify-center">
+                            <i class="fab fa-instagram mr-3 text-xl"></i>
+                            Instagram
+                        </a>
+                        <a href="https://www.tiktok.com/@zigny" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="link-button block w-full py-4 px-6 rounded-2xl text-center text-black font-bold text-lg flex items-center justify-center">
+                            <i class="fab fa-tiktok mr-3 text-xl"></i>
+                            Tiktok
+                        </a>
+                        <a href="https://www.youtube.com/@ZIGNY" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="link-button block w-full py-4 px-6 rounded-2xl text-center text-black font-bold text-lg flex items-center justify-center">
+                            <i class="fab fa-youtube mr-3 text-xl"></i>
+                            Youtube
+                        </a>
                     </div>
+                </div>
+            </section>
 
-                    <button type="submit"
-                            class="w-full py-3 mt-4 text-lg font-bold rounded-lg bg-white hover:bg-gray-200 text-black shadow-lg shadow-white/50 transition duration-300 transform hover:scale-[1.01] hover:shadow-white/80">
-                        ENVIAR PROPUESTA PROFESIONAL <i class="fas fa-angle-double-right ml-2"></i>
-                    </button>
-                </form>
-            </div>
-        </section>
+            <!-- TIENDA DE CP'S -->
+            <section class="mb-8">
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/30">
+                    <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-6 metallic-text">
+                        TIENDA DE CP'S
+                    </h2>
+                    <a href="https://store.callofdutymobile.com/es-mx/codm" 
+                       target="_blank" 
+                       rel="noopener noreferrer"
+                       class="link-button block w-full py-4 px-6 rounded-2xl text-center text-black font-bold text-lg">
+                        CODM | Tienda oficial COD:M Mexico
+                    </a>
+                </div>
+            </section>
 
+            <!-- FORMULARIO DE CONTACTO -->
+            <section class="mb-12">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-center mb-6 metallic-text">
+                    CONTACTO
+                </h2>
+                <div class="bg-gray-100/10 backdrop-blur-md rounded-2xl p-6 md:p-8 border border-white/30">
+                    <h3 class="text-2xl font-bold text-white mb-4 text-center">
+                        <i class="fas fa-envelope mr-2"></i> Mensaje Directo
+                    </h3>
+                    
+                    <form action="#" method="POST" class="space-y-4">
+                        <div>
+                            <label for="contact-name" class="block text-sm font-medium text-gray-300 mb-1">Tu Nombre</label>
+                            <input type="text" 
+                                   id="contact-name" 
+                                   name="contact-name" 
+                                   required
+                                   placeholder="Ej. Juan Pérez"
+                                   class="w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
+                        </div>
+
+                        <div>
+                            <label for="contact-email" class="block text-sm font-medium text-gray-300 mb-1">Correo Electrónico</label>
+                            <input type="email" 
+                                   id="contact-email" 
+                                   name="contact-email" 
+                                   required
+                                   placeholder="tu@email.com"
+                                   class="w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300">
+                        </div>
+
+                        <div>
+                            <label for="contact-subject" class="block text-sm font-medium text-gray-300 mb-1">Asunto</label>
+                            <select id="contact-subject" 
+                                    name="contact-subject" 
+                                    required
+                                    class="w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300 appearance-none">
+                                <option value="" disabled selected class="bg-black">Selecciona un asunto...</option>
+                                <option value="colaboracion" class="bg-black">Colaboración</option>
+                                <option value="patrocinio" class="bg-black">Patrocinio</option>
+                                <option value="consulta-general" class="bg-black">Consulta General</option>
+                                <option value="otro" class="bg-black">Otro</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label for="contact-message" class="block text-sm font-medium text-gray-300 mb-1">Mensaje</label>
+                            <textarea id="contact-message" 
+                                      name="contact-message" 
+                                      rows="4" 
+                                      required
+                                      placeholder="Escribe tu mensaje aquí..."
+                                      class="w-full p-3 bg-gray-100/10 border border-gray-700 rounded-lg text-white focus:ring-white focus:border-white transition duration-300"></textarea>
+                        </div>
+
+                        <button type="submit"
+                                class="w-full py-3 text-lg font-bold rounded-lg bg-white hover:bg-gray-200 text-black shadow-lg shadow-white/50 transition duration-300 transform hover:scale-[1.01]">
+                            ENVIAR MENSAJE <i class="fas fa-paper-plane ml-2"></i>
+                        </button>
+                    </form>
+                </div>
+            </section>
+
+        </div>
     </main>
     
-    <!-- Fondo del footer: BLANCO/GRIS muy claro transparente -->
-    <footer class="relative z-10 text-center py-8 border-t border-gray-800 bg-gray-100/10 backdrop-blur-md">
-        <p class="text-sm text-gray-400 mb-4">Sígueme en la Arena:</p>
-        <div class="flex justify-center space-x-6">
-            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-twitter"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-twitch"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-youtube"></i></a>
-            <a href="#" class="text-gray-400 hover:text-white text-2xl transition"><i class="fab fa-instagram"></i></a>
-        </div>
-        <p class="text-xs text-gray-600 mt-4">ZIGNY.XL &copy; 2024 | Powered by Liquid Chrome</p>
+    <footer class="relative z-10 text-center py-6 border-t border-gray-800 bg-gray-100/10 backdrop-blur-md">
+        <p class="text-xs text-gray-600">ZIGNY.XL © 2024 | Powered by Liquid Chrome</p>
     </footer>
 
     <script>
-        // =========================================================================
-        // Logo Tab Switching (Existing Function)
-        // =========================================================================
-        function showTab(tabName) {
-            document.querySelectorAll('.tab-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            document.querySelectorAll('.tab-button').forEach(button => {
-                button.classList.remove('active');
-                button.classList.add('text-gray-400', 'hover:text-white');
-            });
-            document.getElementById(tabName + '-content').classList.remove('hidden');
-            const activeTabButton = document.getElementById(tabName + '-tab');
-            activeTabButton.classList.add('active');
-            activeTabButton.classList.remove('text-gray-400', 'hover:text-white');
-        }
-
-        // =========================================================================
-        // FONDO DE CROMO LÍQUIDO (Código THREE.js)
-        // =========================================================================
+        // Fondo de cromo líquido
         function initLiquidChrome() {
             const container = document.getElementById('liquid-chrome-canvas');
             if (!container) return;
@@ -435,43 +359,35 @@
                     varying vec2 vUv;
 
                     vec4 renderImage(vec2 uvCoord) {
-                        // Remapear uvCoord a coordenadas normalizadas [-1, 1] manteniendo aspecto
                         vec2 fragCoord = uvCoord * uResolution.xy;
                         vec2 uv = (2.0 * fragCoord - uResolution.xy) / min(uResolution.x, uResolution.y);
 
-                        // Olas de cromo líquido
                         for (float i = 1.0; i < 10.0; i++){
                             uv.x += uAmplitude / i * cos(i * uFrequencyX * uv.y + uTime + uMouse.x * 3.14159);
                             uv.y += uAmplitude / i * cos(i * uFrequencyY * uv.x + uTime + uMouse.y * 3.14159);
                         }
 
-                        // Efecto de ondulación (ripple) al pasar el ratón
                         vec2 diff = (uvCoord - uMouse);
-                        float dist = length(diff) * uResolution.z; // Ajuste por ratio
-                        float falloff = exp(-dist * 5.0); // 5.0 es una constante de caída
-                        float ripple = sin(10.0 * dist - uTime * 2.0) * 0.005; // 0.005 es la amplitud del ripple
-                        
-                        // Aplicar ripple de forma suave
-                        uv += (diff / (dist + 0.0001)) * ripple * falloff * 0.1;
+                        float dist = length(diff);
+                        float falloff = exp(-dist * 20.0);
+                        float ripple = sin(10.0 * dist - uTime * 2.0) * 0.03;
+                        uv += (diff / (dist + 0.0001)) * ripple * falloff;
 
-                        // Efecto de color de cromo: reflejos en las curvas
                         vec3 color = uBaseColor / abs(sin(uTime - uv.y - uv.x));
                         return vec4(color, 1.0);
                     }
 
                     void main() {
-                        // Anti-aliasing por muestreo (fast blur)
                         vec4 col = vec4(0.0);
                         int samples = 0;
                         for (int i = -1; i <= 1; i++){
                             for (int j = -1; j <= 1; j++){
-                                vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y)) * 0.5;
+                                vec2 offset = vec2(float(i), float(j)) * (1.0 / min(uResolution.x, uResolution.y));
                                 col += renderImage(vUv + offset);
                                 samples++;
                             }
                         }
                         gl_FragColor = col / float(samples);
-                        gl_FragColor.rgb *= 0.5; // Oscurecer el fondo para que el texto resalte
                     }
                 `
             });
@@ -479,38 +395,22 @@
             const mesh = new THREE.Mesh(geometry, material);
             scene.add(mesh);
 
-            let mouseX = 0.5;
-            let mouseY = 0.5;
-            let targetMouseX = 0.5;
-            let targetMouseY = 0.5;
-
-            function updateMouse(clientX, clientY) {
-                const rect = container.getBoundingClientRect();
-                targetMouseX = (clientX - rect.left) / rect.width;
-                targetMouseY = 1.0 - ((clientY - rect.top) / rect.height);
-            }
+            let mouseX = 0.5, mouseY = 0.5, targetMouseX = 0.5, targetMouseY = 0.5;
 
             function handleMouseMove(event) {
                 if (!interactive) return;
-                updateMouse(event.clientX, event.clientY);
-            }
-
-            function handleTouchMove(event) {
-                if (!interactive || event.touches.length === 0) return;
-                event.preventDefault(); // Prevenir scroll al mover el dedo sobre el canvas
-                const touch = event.touches[0];
-                updateMouse(touch.clientX, touch.clientY);
+                const rect = container.getBoundingClientRect();
+                targetMouseX = (event.clientX - rect.left) / rect.width;
+                targetMouseY = 1.0 - ((event.clientY - rect.top) / rect.height);
             }
 
             if (interactive) {
                 container.addEventListener('mousemove', handleMouseMove);
-                container.addEventListener('touchmove', handleTouchMove, { passive: false });
             }
 
             function onResize() {
                 const width = window.innerWidth;
                 const height = window.innerHeight;
-                
                 renderer.setSize(width, height);
                 material.uniforms.uResolution.value.set(width, height, width / height);
             }
@@ -519,32 +419,366 @@
 
             function animate(t) {
                 requestAnimationFrame(animate);
-                
-                // Suavizado del movimiento del ratón
                 mouseX += (targetMouseX - mouseX) * 0.05;
                 mouseY += (targetMouseY - mouseY) * 0.05;
-                
                 material.uniforms.uTime.value = t * 0.001 * speed;
                 material.uniforms.uMouse.value.set(mouseX, mouseY);
-                
                 renderer.render(scene, camera);
             }
 
             animate(0);
         }
 
-        // =========================================================================
-        // INICIO DE LA APLICACIÓN
-        // =========================================================================
-        window.addEventListener('load', async () => {
-            // 1. Iniciar el fondo de cromo líquido
-            initLiquidChrome();
-            
-            // 2. Quitamos la función initMetallicLogo3D que ya no es necesaria
-            // initMetallicLogo3D();
+        // Preprocesamiento de imagen para Metallic Paint
+        async function parseLogoImage(imageSrc) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+                
+                img.onload = function() {
+                    const MAX_SIZE = 1000;
+                    const MIN_SIZE = 500;
+                    let width = img.naturalWidth;
+                    let height = img.naturalHeight;
 
-            // 3. Mostrar la pestaña por defecto
-            showTab('clips');
+                    if (width > MAX_SIZE || height > MAX_SIZE || width < MIN_SIZE || height < MIN_SIZE) {
+                        if (width > height) {
+                            if (width > MAX_SIZE) {
+                                height = Math.round((height * MAX_SIZE) / width);
+                                width = MAX_SIZE;
+                            } else if (width < MIN_SIZE) {
+                                height = Math.round((height * MIN_SIZE) / width);
+                                width = MIN_SIZE;
+                            }
+                        } else {
+                            if (height > MAX_SIZE) {
+                                width = Math.round((width * MAX_SIZE) / height);
+                                height = MAX_SIZE;
+                            } else if (height < MIN_SIZE) {
+                                width = Math.round((width * MIN_SIZE) / height);
+                                height = MIN_SIZE;
+                            }
+                        }
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const imageData = ctx.getImageData(0, 0, width, height);
+                    const data = imageData.data;
+
+                    const shapeMask = new Array(width * height).fill(false);
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const idx = (y * width + x) * 4;
+                            const r = data[idx];
+                            const g = data[idx + 1];
+                            const b = data[idx + 2];
+                            const a = data[idx + 3];
+                            shapeMask[y * width + x] = !((r === 255 && g === 255 && b === 255 && a === 255) || a === 0);
+                        }
+                    }
+
+                    function inside(x, y) {
+                        if (x < 0 || x >= width || y < 0 || y >= height) return false;
+                        return shapeMask[y * width + x];
+                    }
+
+                    const boundaryMask = new Array(width * height).fill(false);
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const idx = y * width + x;
+                            if (!shapeMask[idx]) continue;
+                            
+                            let isBoundary = false;
+                            for (let ny = y - 1; ny <= y + 1 && !isBoundary; ny++) {
+                                for (let nx = x - 1; nx <= x + 1 && !isBoundary; nx++) {
+                                    if (!inside(nx, ny)) {
+                                        isBoundary = true;
+                                    }
+                                }
+                            }
+                            if (isBoundary) {
+                                boundaryMask[idx] = true;
+                            }
+                        }
+                    }
+
+                    const u = new Float32Array(width * height).fill(0);
+                    const newU = new Float32Array(width * height).fill(0);
+                    const C = 0.01;
+                    const ITERATIONS = 300;
+
+                    function getU(x, y, arr) {
+                        if (x < 0 || x >= width || y < 0 || y >= height) return 0;
+                        if (!shapeMask[y * width + x]) return 0;
+                        return arr[y * width + x];
+                    }
+
+                    for (let iter = 0; iter < ITERATIONS; iter++) {
+                        for (let y = 0; y < height; y++) {
+                            for (let x = 0; x < width; x++) {
+                                const idx = y * width + x;
+                                if (!shapeMask[idx] || boundaryMask[idx]) {
+                                    newU[idx] = 0;
+                                    continue;
+                                }
+                                const sumN = getU(x + 1, y, u) + getU(x - 1, y, u) + 
+                                            getU(x, y + 1, u) + getU(x, y - 1, u);
+                                newU[idx] = (C + sumN) / 4;
+                            }
+                        }
+                        u.set(newU);
+                    }
+
+                    let maxVal = 0;
+                    for (let i = 0; i < width * height; i++) {
+                        if (u[i] > maxVal) maxVal = u[i];
+                    }
+
+                    const alpha = 2.0;
+                    const outImg = ctx.createImageData(width, height);
+                    
+                    for (let y = 0; y < height; y++) {
+                        for (let x = 0; x < width; x++) {
+                            const idx = y * width + x;
+                            const px = idx * 4;
+                            
+                            if (!shapeMask[idx]) {
+                                outImg.data[px] = 255;
+                                outImg.data[px + 1] = 255;
+                                outImg.data[px + 2] = 255;
+                                outImg.data[px + 3] = 255;
+                            } else {
+                                const raw = u[idx] / maxVal;
+                                const remapped = Math.pow(raw, alpha);
+                                const gray = 255 * (1 - remapped);
+                                outImg.data[px] = gray;
+                                outImg.data[px + 1] = gray;
+                                outImg.data[px + 2] = gray;
+                                outImg.data[px + 3] = 255;
+                            }
+                        }
+                    }
+
+                    resolve(outImg);
+                };
+
+                img.onerror = () => reject(new Error('Failed to load image'));
+                img.src = imageSrc;
+            });
+        }
+
+        // Logo metálico con WebGL2
+        async function initMetallicLogo() {
+            const canvas = document.getElementById('metallic-logo-canvas');
+            const gl = canvas.getContext('webgl2', { antialias: true, alpha: true });
+            
+            if (!gl) {
+                console.error('WebGL2 no disponible');
+                return;
+            }
+
+            const params = {
+                edge: 0,
+                patternScale: 1.5,
+                patternBlur: 0.029,
+                refraction: 0.015,
+                liquid: 0.07,
+                speed: 0.3
+            };
+
+            const vertexShaderSource = `#version 300 es
+            precision mediump float;
+            in vec2 a_position;
+            out vec2 vUv;
+            void main() {
+                vUv = .5 * (a_position + 1.);
+                gl_Position = vec4(a_position, 0.0, 1.0);
+            }`;
+
+            const fragmentShaderSource = `#version 300 es
+            precision mediump float;
+            in vec2 vUv;
+            out vec4 fragColor;
+            uniform sampler2D u_image_texture;
+            uniform float u_time;
+            uniform float u_ratio;
+            uniform float u_img_ratio;
+            uniform float u_patternScale;
+            uniform float u_refraction;
+            uniform float u_edge;
+            uniform float u_patternBlur;
+            uniform float u_liquid;
+
+            #define PI 3.14159265358979323846
+
+            vec3 mod289(vec3 x) { return x - floor(x * (1. / 289.)) * 289.; }
+            vec2 mod289(vec2 x) { return x - floor(x * (1. / 289.)) * 289.; }
+            vec3 permute(vec3 x) { return mod289(((x*34.)+1.)*x); }
+            
+            float snoise(vec2 v) {
+                const vec4 C = vec4(0.211324865405187, 0.366025403784439, -0.577350269189626, 0.024390243902439);
+                vec2 i = floor(v + dot(v, C.yy));
+                vec2 x0 = v - i + dot(i, C.xx);
+                vec2 i1 = (x0.x > x0.y) ? vec2(1., 0.) : vec2(0., 1.);
+                vec4 x12 = x0.xyxy + C.xxzz;
+                x12.xy -= i1;
+                i = mod289(i);
+                vec3 p = permute(permute(i.y + vec3(0., i1.y, 1.)) + i.x + vec3(0., i1.x, 1.));
+                vec3 m = max(0.5 - vec3(dot(x0, x0), dot(x12.xy, x12.xy), dot(x12.zw, x12.zw)), 0.);
+                m = m*m; m = m*m;
+                vec3 x = 2. * fract(p * C.www) - 1.;
+                vec3 h = abs(x) - 0.5;
+                vec3 ox = floor(x + 0.5);
+                vec3 a0 = x - ox;
+                m *= 1.79284291400159 - 0.85373472095314 * (a0*a0 + h*h);
+                vec3 g;
+                g.x = a0.x * x0.x + h.x * x0.y;
+                g.yz = a0.yz * x12.xz + h.yz * x12.yw;
+                return 130. * dot(m, g);
+            }
+
+            vec2 rotate(vec2 uv, float th) {
+                return mat2(cos(th), sin(th), -sin(th), cos(th)) * uv;
+            }
+
+            void main() {
+                vec2 uv = vUv;
+                uv.y = 1. - uv.y;
+                uv.x *= u_ratio;
+                
+                vec2 img_uv = vUv;
+                img_uv.y = 1. - img_uv.y;
+                vec4 img = texture(u_image_texture, img_uv);
+                
+                float edge = img.r;
+                float opacity = 1. - smoothstep(.9 - .5 * u_edge, 1. - .5 * u_edge, edge);
+                
+                float diagonal = uv.x - uv.y;
+                float t = .001 * u_time;
+                
+                vec2 grad_uv = uv - 0.5;
+                float dist = length(grad_uv + vec2(0., .2 * diagonal));
+                grad_uv = rotate(grad_uv, (.25 - .2 * diagonal) * PI);
+                float bulge = pow(1.8 * dist, 1.2);
+                bulge = 1. - bulge;
+                bulge *= pow(uv.y, .3);
+                
+                float cycle_width = u_patternScale;
+                float noise = snoise(uv - t);
+                edge += (1. - edge) * u_liquid * noise;
+                
+                float dir = grad_uv.x + diagonal;
+                dir -= 2. * noise * diagonal * (smoothstep(0., 1., edge) * smoothstep(1., 0., edge));
+                bulge *= clamp(pow(uv.y, .1), .3, 1.);
+                dir *= (.1 + (1.1 - edge) * bulge);
+                dir *= smoothstep(1., .7, edge);
+                dir *= cycle_width;
+                dir -= t;
+                
+                float refr = (1. - bulge) * u_refraction;
+                float stripe = mod(dir + refr, 1.);
+                
+                vec3 color1 = vec3(.98);
+                vec3 color2 = vec3(.1);
+                vec3 color = mix(color2, color1, smoothstep(0., u_patternBlur, stripe));
+                
+                color *= opacity;
+                fragColor = vec4(color, opacity);
+            }`;
+
+            function createShader(type, source) {
+                const shader = gl.createShader(type);
+                gl.shaderSource(shader, source);
+                gl.compileShader(shader);
+                if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
+                    console.error(gl.getShaderInfoLog(shader));
+                    gl.deleteShader(shader);
+                    return null;
+                }
+                return shader;
+            }
+
+            const vertexShader = createShader(gl.VERTEX_SHADER, vertexShaderSource);
+            const fragmentShader = createShader(gl.FRAGMENT_SHADER, fragmentShaderSource);
+            const program = gl.createProgram();
+            gl.attachShader(program, vertexShader);
+            gl.attachShader(program, fragmentShader);
+            gl.linkProgram(program);
+
+            if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
+                console.error(gl.getProgramInfoLog(program));
+                return;
+            }
+
+            const uniforms = {};
+            const uniformCount = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
+            for (let i = 0; i < uniformCount; i++) {
+                const info = gl.getActiveUniform(program, i);
+                uniforms[info.name] = gl.getUniformLocation(program, info.name);
+            }
+
+            const vertices = new Float32Array([-1, -1, 1, -1, -1, 1, 1, 1]);
+            const vertexBuffer = gl.createBuffer();
+            gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+            gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+
+            gl.useProgram(program);
+            const positionLocation = gl.getAttribLocation(program, 'a_position');
+            gl.enableVertexAttribArray(positionLocation);
+            gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
+
+            try {
+                const processedImageData = await parseLogoImage('./assets/logo.png');
+                
+                const texture = gl.createTexture();
+                gl.activeTexture(gl.TEXTURE0);
+                gl.bindTexture(gl.TEXTURE_2D, texture);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, processedImageData);
+                gl.uniform1i(uniforms.u_image_texture, 0);
+
+                const size = 160 * devicePixelRatio;
+                canvas.width = size;
+                canvas.height = size;
+                gl.viewport(0, 0, size, size);
+                gl.uniform1f(uniforms.u_ratio, 1);
+                gl.uniform1f(uniforms.u_img_ratio, processedImageData.width / processedImageData.height);
+                gl.uniform1f(uniforms.u_edge, params.edge);
+                gl.uniform1f(uniforms.u_patternBlur, params.patternBlur);
+                gl.uniform1f(uniforms.u_patternScale, params.patternScale);
+                gl.uniform1f(uniforms.u_refraction, params.refraction);
+                gl.uniform1f(uniforms.u_liquid, params.liquid);
+
+                let totalTime = 0;
+                let lastTime = performance.now();
+                
+                function animate(currentTime) {
+                    const deltaTime = currentTime - lastTime;
+                    lastTime = currentTime;
+                    totalTime += deltaTime * params.speed;
+                    
+                    gl.uniform1f(uniforms.u_time, totalTime);
+                    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+                    requestAnimationFrame(animate);
+                }
+                
+                animate(performance.now());
+            } catch (error) {
+                console.error('Error loading/processing logo:', error);
+            }
+        }
+
+        window.addEventListener('load', () => {
+            initLiquidChrome();
+            initMetallicLogo();
         });
     </script>
 </body>
