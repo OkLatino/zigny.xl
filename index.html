@@ -76,9 +76,139 @@
                     drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
         }
 
+        .rotating-metallic {
+            background: linear-gradient(
+                90deg,
+                #fff 0%,
+                #e0e0e0 10%,
+                #f5f5f5 20%,
+                #fff 30%,
+                #f5f5f5 40%,
+                #e0e0e0 50%,
+                #fff 60%,
+                #d0d0d0 70%,
+                #c0c0c0 80%,
+                #b0b0b0 90%,
+                #fff 100%
+            );
+            background-size: 200% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: metallicShine 3s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 900;
+        }
+
+        .rotating-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            opacity: 0;
+            transform: translateY(100%);
+            animation: slideUp 0.6s ease forwards;
+            filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.8))
+                    drop-shadow(0 0 30px rgba(255, 255, 255, 0.4));
+        }
+
+        .rotating-logo.exit {
+            animation: slideDown 0.6s ease forwards;
+        }
+
         @keyframes metallicShine {
             0% { background-position: 0% 50%; }
             100% { background-position: 200% 50%; }
+        }
+
+        /* Rotating Text Styles */
+        .text-rotate {
+            display: inline-flex;
+            flex-wrap: wrap;
+            white-space: pre-wrap;
+            position: relative;
+            min-height: 3rem;
+        }
+
+        .text-rotate-word {
+            display: inline-flex;
+            position: relative;
+        }
+
+        .text-rotate-element {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(100%);
+            background: linear-gradient(
+                90deg,
+                #fff 0%,
+                #e0e0e0 10%,
+                #f5f5f5 20%,
+                #fff 30%,
+                #f5f5f5 40%,
+                #e0e0e0 50%,
+                #fff 60%,
+                #d0d0d0 70%,
+                #c0c0c0 80%,
+                #b0b0b0 90%,
+                #fff 100%
+            );
+            background-size: 200% 100%;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slideUp 0.6s ease forwards, metallicShine 3s linear infinite;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.6)) 
+                    drop-shadow(0 0 40px rgba(255, 255, 255, 0.3));
+        }
+
+        .text-rotate-element.exit {
+            animation: slideDown 0.6s ease forwards, metallicShine 3s linear infinite;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideDown {
+            to {
+                opacity: 0;
+                transform: translateY(-120%);
+            }
+        }
+
+        /* Shiny Text Effect */
+        .shiny-text {
+            color: #b5b5b5a4;
+            background: linear-gradient(
+                120deg,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, 0.8) 50%,
+                rgba(255, 255, 255, 0) 60%
+            );
+            background-size: 200% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            animation: shine 5s linear infinite;
+            font-weight: 900;
+            font-size: 3rem;
+        }
+
+        @media (min-width: 768px) {
+            .shiny-text {
+                font-size: 4rem;
+            }
+        }
+
+        @keyframes shine {
+            0% { background-position: 100%; }
+            100% { background-position: -100%; }
         }
 
         .social-icon {
@@ -145,13 +275,20 @@
 
             <!-- Perfil -->
             <div class="text-center mb-8">
-                <!-- Título en óvalo transparente -->
-                <div class="inline-block bg-gray-100/10 backdrop-blur-xl rounded-full px-16 py-6 border border-white/30 shadow-2xl shadow-white/20 mb-4">
-                    <h1 class="text-4xl md:text-5xl font-black metallic-text">ZIGNY.XL</h1>
+                <!-- Texto estático fuera del óvalo -->
+                <h2 class="text-2xl md:text-3xl font-normal text-gray-300 mb-4">
+                    CREADOR DE CONTENIDO DE
+                </h2>
+                
+                <!-- Texto rotativo dentro del óvalo transparente -->
+                <div class="inline-block bg-gray-100/10 backdrop-blur-xl rounded-full px-16 py-6 border border-white/30 shadow-2xl shadow-white/20 mb-6">
+                    <h1 class="text-4xl md:text-5xl font-black">
+                        <span id="rotating-text-container" class="text-rotate rotating-metallic"></span>
+                    </h1>
                 </div>
                 
-                <p class="text-gray-300 text-base md:text-lg mb-2">🎮 Creador de contenido de CoDM 🦾 24 años | 📍</p>
-                <p class="text-gray-300 text-base md:text-lg mb-4">Guerrero, México 🇲🇽 Contact: zignybussines@gmail.com</p>
+                <p class="text-gray-300 text-base md:text-lg mb-2">24 años | 📍 Guerrero, México 🇲🇽</p>
+                <p class="text-gray-300 text-base md:text-lg mb-4">Contact: zignybussines@gmail.com</p>
                 
                 <!-- Iconos Sociales Principales -->
                 <div class="flex justify-center space-x-6 mb-8">
@@ -733,7 +870,7 @@
             gl.vertexAttribPointer(positionLocation, 2, gl.FLOAT, false, 0, 0);
 
             try {
-                const processedImageData = await parseLogoImage('./assets/logo.png');
+                const processedImageData = await parseLogoImage('./assets/logo.webp');
                 
                 const texture = gl.createTexture();
                 gl.activeTexture(gl.TEXTURE0);
@@ -776,9 +913,75 @@
             }
         }
 
+        // Rotating Text Implementation
+        function initRotatingText() {
+            const container = document.getElementById('rotating-text-container');
+            if (!container) return;
+
+            const texts = ['CODM', 'DELTA FORCE'];
+            const logos = [
+                'https://i.ibb.co/5hg4r5fR/hd-call-of-duty-mobile-cod-m-game-official-logo-png-701751694787732iljpb4piny-1.png',
+                'https://i.ibb.co/39fjZJ0g/6e45d4801cd3f918dfcca8fd8f8e439b.png'
+            ];
+            let currentIndex = 0;
+            const rotationInterval = 4000;
+            const staggerDuration = 75;
+
+            function splitIntoCharacters(text) {
+                return Array.from(text);
+            }
+
+            function animateText(text, logoSrc, isExiting = false) {
+                container.innerHTML = '';
+                
+                // Crear el logo
+                const logoImg = document.createElement('img');
+                logoImg.src = logoSrc;
+                logoImg.className = 'rotating-logo';
+                logoImg.alt = text + ' Logo';
+                
+                if (isExiting) {
+                    logoImg.classList.add('exit');
+                }
+                
+                container.appendChild(logoImg);
+                
+                // Crear los caracteres del texto
+                const characters = splitIntoCharacters(text);
+                
+                characters.forEach((char, index) => {
+                    const span = document.createElement('span');
+                    span.className = 'text-rotate-element';
+                    span.textContent = char;
+                    span.style.animationDelay = `${index * staggerDuration}ms`;
+                    
+                    if (isExiting) {
+                        span.classList.add('exit');
+                    }
+                    
+                    container.appendChild(span);
+                });
+            }
+
+            function rotateText() {
+                const currentText = texts[currentIndex];
+                const currentLogo = logos[currentIndex];
+                animateText(currentText, currentLogo, true);
+
+                setTimeout(() => {
+                    currentIndex = (currentIndex + 1) % texts.length;
+                    animateText(texts[currentIndex], logos[currentIndex], false);
+                }, 600);
+            }
+
+            animateText(texts[currentIndex], logos[currentIndex], false);
+            setInterval(rotateText, rotationInterval);
+        }
+
         window.addEventListener('load', () => {
             initLiquidChrome();
             initMetallicLogo();
+            initRotatingText();
         });
     </script>
 </body>
