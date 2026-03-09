@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/webp" href="/assets/logoZ.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Zigny.xl - Content Creator</title>
+    <style>
+      #loader-screen {
+        position: fixed;
+        inset: 0;
+        background: #000000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        transition: opacity 0.6s ease, visibility 0.6s ease;
+      }
+      
+      #loader-screen.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      
+      .loader-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 32px;
+      }
+      
+      /* Wrapper del logo — tamaño fijo */
+      .logo-fill-wrapper {
+        position: relative;
+        width: 140px;
+        height: 140px;
+      }
+      
+      /* Capa base: logo oscuro (estado vacío) */
+      .logo-empty {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        /* Tint oscuro — se ve como el logo apagado */
+        filter: brightness(0) invert(1) opacity(0.12);
+      }
+      
+      /* Máscara que se expande de abajo hacia arriba */
+      .logo-fill-mask {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        /* Empieza en height: 0% desde abajo, anima hasta 100% */
+        height: 0%;
+        bottom: 0;
+        top: auto;
+        overflow: hidden;
+        animation: fill-up 2.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        /* La animación dura 2.4s — ajustar si la carga es más lenta */
+      }
+      
+      /* Logo rojo dentro de la máscara */
+      .logo-filled {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        /* Alto fijo igual al wrapper para que no se deforme */
+        height: 140px;
+        object-fit: contain;
+        object-position: bottom center;
+        /* Tint rojo: convierte el logo negro en rojo #CC0000 */
+        filter: brightness(0) saturate(100%) invert(10%) 
+                sepia(100%) saturate(700%) hue-rotate(340deg) 
+                brightness(0.85) contrast(120%);
+      }
+      
+      /* Animación del llenado — de 0% a 100% de abajo hacia arriba */
+      @keyframes fill-up {
+        0%   { height: 0%;   }
+        15%  { height: 8%;   }   /* pausa inicial */
+        30%  { height: 25%;  }
+        50%  { height: 50%;  }
+        70%  { height: 75%;  }
+        85%  { height: 90%;  }
+        100% { height: 100%; }
+      }
+      
+      /* Efecto de ondulación en el borde del líquido */
+      .logo-fill-mask::after {
+        content: '';
+        position: absolute;
+        top: -4px;
+        left: -10%;
+        width: 120%;
+        height: 8px;
+        background: rgba(204, 0, 0, 0.6);
+        border-radius: 50%;
+        animation: liquid-wave 0.8s ease-in-out infinite alternate;
+        filter: blur(2px);
+      }
+      
+      @keyframes liquid-wave {
+        0%   { transform: scaleY(1) translateX(0);    }
+        100% { transform: scaleY(1.4) translateX(4px); }
+      }
+      
+      /* Spinner debajo del logo */
+      .loader-spinner {
+        width: 28px;
+        height: 28px;
+        border: 2.5px solid rgba(255,255,255,0.1);
+        border-top-color: #CC0000;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      
+      @keyframes spin {
+        to { transform: rotate(360deg); }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-oF_09fCM.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Bwpicr2O.css">
+  </head>
+  <body>
+    <div id="loader-screen">
+      <div class="loader-container">
+        <div class="logo-fill-wrapper">
+          <img src="/assets/logoZ.webp" class="logo-empty" alt="">
+          <div class="logo-fill-mask">
+            <img src="/assets/logoZ.webp" class="logo-filled" alt="">
+          </div>
+        </div>
+        <div class="loader-spinner"></div>
+      </div>
+    </div>
+    <div id="root"></div>
+  </body>
+</html>
