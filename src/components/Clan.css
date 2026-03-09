@@ -1,0 +1,116 @@
+.clan-section {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  background: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.clan-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.clan-marquee-top,
+.clan-marquee-bottom {
+  position: absolute;
+  width: 100%;
+  height: 36px;
+  background: #F0F0F0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.clan-marquee-top {
+  top: 0;
+}
+
+.clan-marquee-bottom {
+  bottom: 0;
+}
+
+.clan-marquee-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  color: #999999;
+  letter-spacing: 3px;
+  white-space: nowrap;
+  display: inline-block;
+  animation: marqueeLeft 20s linear infinite;
+}
+
+@keyframes marqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.clan-subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(18px, 2.5vw, 32px);
+  color: #000000;
+  letter-spacing: 6px;
+  text-align: center;
+  margin-top: 60px;
+  z-index: 2;
+}
+
+.clan-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(120px, 18vw, 280px);
+  color: #CC0000;
+  line-height: 0.85;
+  text-align: center;
+  z-index: 2;
+}
+
+.clan-phone {
+  width: clamp(480px, 85vw, 1700px);
+  height: auto;
+  object-fit: contain;
+  z-index: 2;
+  margin: 0 auto;
+  margin-top: -270px;
+  margin-bottom: 0;
+  display: block;
+  cursor: pointer;
+}
+
+.clan-cta {
+  font-family: 'Bebas Neue', sans-serif;
+  color: #000000;
+  font-size: clamp(20px, 2.8vw, 42px);
+  letter-spacing: 3px;
+  text-align: center;
+  margin-top: -110px;
+  margin-bottom: 50px;
+  position: relative;
+  z-index: 2;
+}
+
+.clan-ig-link {
+  color: #000000;
+  text-decoration: none;
+  font-family: 'Bebas Neue', sans-serif;
+  font-weight: bold;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.clan-ig-link:hover {
+  color: #CC0000;
+}

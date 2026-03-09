@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --color-red: #CC0000;
+  --color-red-bright: #FF0000;
+  --color-black: #000000;
+  --color-black-transparent: rgba(0, 0, 0, 0.8);
+  --color-dark-gray: #111111;
+  --color-gray: #222222;
+  --color-white: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Bebas Neue', sans-serif;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  font-family: 'Rajdhani', sans-serif;
+}
+
+a, button {
+  cursor: none; /* Fallback to custom cursor */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: 'Rajdhani', sans-serif;
+  border: none;
+  outline: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-red);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-red-bright);
+}
+
+/* Custom Cursor Classes */
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-red-bright);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, background-color 0.2s;
+  box-shadow: 0 0 10px var(--color-red-bright);
+}
+
+.custom-cursor-halo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width 0.2s, height 0.2s, border-color 0.2s, transform 0.1s;
+}
+
+/* Utilities */
+.text-red {
+  color: var(--color-red-bright);
+}
+
+.bg-red {
+  background-color: var(--color-red-bright);
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+section {
+  position: relative;
+  width: 100%;
+}
+
+* {
+  font-display: swap; 
+}
+
+/* Global Marquee Utilities (Phase 5B) */
+.marquee-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: flex;
+  padding: 10px 0;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.marquee-content {
+  display: flex;
+  min-width: 200%;
+}
+
+.marquee-left {
+  animation: marquee-left 20s linear infinite;
+}
+
+.marquee-right {
+  animation: marquee-right 20s linear infinite;
+}
+
+.marquee-text {
+  padding: 0 1rem;
+}
+
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}

@@ -1,0 +1,285 @@
+.capslab-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  padding: 8rem 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: transparent;
+}
+
+/* Background Image Layer (z-index 0) */
+.capslab-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+}
+
+.capslab-container {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+}
+
+.capslab-content {
+  padding-left: 4%;
+  padding-right: 55%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 4px;
+  width: 100%;
+  max-width: none;
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+/* Text Identifiers */
+.capslab-label {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+}
+
+.capslab-title-big {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(5rem, 12vw, 10rem);
+  color: #CC0000;
+  line-height: 0.9;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-align: left;
+}
+
+.capslab-subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: clamp(0.9rem, 1.8vw, 1.3rem);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: #000000;
+  text-transform: uppercase;
+  margin: 0;
+  text-align: left;
+}
+
+.capslab-discount {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  color: #000000;
+  letter-spacing: 0.03em;
+  line-height: 1;
+  margin: 0;
+  margin-top: 16px;
+  text-align: left;
+  width: 100%;
+  padding-left: 5%;
+  align-self: flex-start;
+}
+
+/* Floating Ticket */
+.capslab-product-card {
+  display: inline-flex;
+  background: #f0f0f0;
+  /* Soft clear rect */
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+  max-width: 450px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  align-self: flex-start;
+  margin-left: 5%;
+}
+
+.capslab-product-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.ticket-icon {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background: white;
+  border-radius: 8px;
+  padding: 5px;
+}
+
+.ticket-data {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.ticket-item {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  color: #333333;
+  margin: 0;
+  font-weight: 600;
+}
+
+.ticket-prices {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.price-strike {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.8rem;
+  color: #888888;
+  text-decoration: line-through;
+}
+
+.price-active {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  color: #000000;
+  font-weight: 700;
+}
+
+.ticket-code {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.85rem;
+  color: #888888;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.capslab-free-shipping {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  color: #000000;
+  letter-spacing: 0.5em;
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 0;
+  align-self: flex-start;
+  margin-left: 5%;
+}
+
+/* Laptop Illustrator (z-index 2) */
+.capslab-laptop-wrapper {
+  position: absolute;
+  right: -30%;
+  bottom: -250px;
+  height: 185%;
+  width: 140%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.capslab-laptop {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: right bottom;
+  animation: float-laptop 4s ease-in-out infinite;
+  transition: filter 0.5s ease;
+}
+
+.capslab-laptop:hover {
+  filter: drop-shadow(0 0 20px rgba(204, 0, 0, 0.3));
+}
+
+@keyframes float-laptop {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-12px);
+  }
+}
+
+@media (max-width: 1024px) {
+  .capslab-laptop-wrapper {
+    width: 60%;
+    right: -10%;
+  }
+}
+
+@media (max-width: 768px) {
+  .capslab-section {
+    padding: 6rem 0 0 0;
+    min-height: auto;
+  }
+
+  .capslab-container {
+    flex-direction: column;
+    padding: 0 5%;
+  }
+
+  .capslab-content {
+    margin-top: 2rem;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ticket-promo {
+    width: 100%;
+  }
+
+  .capslab-laptop-wrapper {
+    position: relative;
+    width: 100%;
+    height: 400px;
+    right: 0;
+    margin-top: 2rem;
+    justify-content: center;
+  }
+
+  .capslab-laptop {
+    height: 100%;
+    object-position: bottom center;
+  }
+}
+
+/* Secondary CTA Button Restored */
+.btn-gorras {
+  display: inline-block;
+  margin-top: 16px;
+  background: #000000;
+  color: #FFFFFF;
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1rem;
+  letter-spacing: 0.15em;
+  padding: 14px 28px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  align-self: flex-start;
+  margin-left: 5%;
+}
+
+.btn-gorras:hover {
+  background: #CC0000;
+}

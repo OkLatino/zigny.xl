@@ -1,0 +1,147 @@
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
+  background-color: transparent;
+}
+
+.navbar-scrolled {
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.nav-logo-img:hover {
+  opacity: 0.8;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  position: relative;
+  font-family: 'Bebas Neue', cursive !important;
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  letter-spacing: 0.14em;
+  color: rgba(255,255,255,0.85);
+  font-weight: 400;
+  text-decoration: none;
+  transition: color 0.3s;
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+  color: var(--color-red-bright);
+}
+
+.nav-indicator {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-red-bright);
+}
+
+.btn-contact {
+  font-family: 'Bebas Neue', cursive;
+  font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+  letter-spacing: 0.14em;
+  color: #FFFFFF;
+  background: rgba(180, 0, 0, 0.55);
+  border: 1px solid rgba(220, 0, 0, 0.6);
+  border-radius: 4px;
+  padding: 9px 22px;
+  text-transform: uppercase;
+  position: relative;
+  
+  /* Efecto de brillo/luz roja */
+  box-shadow: 
+    0 0 12px rgba(204,0,0,0.5),
+    0 0 30px rgba(204,0,0,0.25),
+    inset 0 0 12px rgba(204,0,0,0.15);
+    
+  transition: all 0.3s ease;
+  animation: contact-glow 3s ease-in-out infinite;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-contact:hover {
+  background: rgba(204, 0, 0, 0.75);
+  box-shadow: 
+    0 0 20px rgba(204,0,0,0.7),
+    0 0 50px rgba(204,0,0,0.35),
+    inset 0 0 20px rgba(204,0,0,0.2);
+}
+
+/* Animación de pulso suave en el glow — siempre activo */
+@keyframes contact-glow {
+  0%, 100% { 
+    box-shadow: 0 0 12px rgba(204,0,0,0.5),
+                0 0 30px rgba(204,0,0,0.25); 
+  }
+  50% { 
+    box-shadow: 0 0 18px rgba(204,0,0,0.65),
+                0 0 45px rgba(204,0,0,0.3); 
+  }
+}
+
+.mobile-toggle {
+  display: none;
+  background: transparent;
+  color: var(--color-white);
+  font-size: 1.5rem;
+}
+
+.mobile-menu {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 80px;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+  }
+  .mobile-toggle {
+    display: block;
+  }
+}
