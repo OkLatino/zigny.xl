@@ -14,6 +14,7 @@
   height: 100%;
   z-index: 0;
 }
+
 .bg-image-base {
   width: 100%;
   height: 100%;
@@ -33,6 +34,7 @@
   pointer-events: none;
   display: block;
 }
+
 .bg-logo-deco {
   width: 100vw;
   height: 100vh;
@@ -53,46 +55,52 @@
   width: 500px;
   height: 500px;
   border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(204,0,0,0.65) 0%,
-    rgba(204,0,0,0.30) 35%,
-    rgba(204,0,0,0.08) 60%,
-    transparent 75%
-  );
+  background: radial-gradient(circle,
+      rgba(204, 0, 0, 0.65) 0%,
+      rgba(204, 0, 0, 0.30) 35%,
+      rgba(204, 0, 0, 0.08) 60%,
+      transparent 75%);
   filter: blur(50px);
   z-index: 2;
   pointer-events: none;
-  
+
   /* Pulso lento SIEMPRE activo */
   animation: hero-pulse 5s ease-in-out infinite;
 }
 
 @keyframes hero-pulse {
-  0%, 100% { opacity: 0.75; transform: translate(-50%, -50%) scale(0.96); }
-  50%       { opacity: 1;    transform: translate(-50%, -50%) scale(1.1);  }
+
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: translate(-50%, -50%) scale(0.96);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.1);
+  }
 }
 
 /* Cuando el mouse pasa sobre el avatar, el glow se intensifica */
-.hero-avatar:hover ~ .hero-glow,
-.hero-avatar:hover + .hero-glow,
-.layer-avatar:hover + .layer-glow,
+.hero-avatar:hover~.hero-glow,
+.hero-avatar:hover+.hero-glow,
+.layer-avatar:hover+.layer-glow,
 .hero-avatar-wrapper:hover .hero-glow {
   animation: none;
   opacity: 1;
   filter: blur(45px);
-  background: radial-gradient(
-    circle,
-    rgba(204,0,0,0.7) 0%,
-    rgba(204,0,0,0.25) 40%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(204, 0, 0, 0.7) 0%,
+      rgba(204, 0, 0, 0.25) 40%,
+      transparent 70%);
   transition: all 0.5s ease;
 }
 
 /* Hero Container */
 .layer-top {
-  position: absolute; /* Take out of flex flow */
+  position: absolute;
+  /* Take out of flex flow */
   inset: 0;
   width: 100%;
   height: 100%;
@@ -118,7 +126,8 @@
   width: auto;
   object-fit: contain;
   z-index: 3;
-  pointer-events: auto; /* Required for hover */
+  pointer-events: auto;
+  /* Required for hover */
   /* Completely bare as requested */
   border: none;
   background: transparent;
@@ -133,7 +142,7 @@
 
 .hero-avatar:hover {
   transform: translateX(-50%) scale(1.02);
-  filter: drop-shadow(0 0 20px rgba(204,0,0,0.35));
+  filter: drop-shadow(0 0 20px rgba(204, 0, 0, 0.35));
 }
 
 /* Layer 6: Content */
@@ -147,16 +156,22 @@
 
 .hero-text-block {
   position: absolute;
-  left: 2%;
-  bottom: 10%;
-  max-width: 320px;
+  left: -15%;
+  bottom: 6%;
+  max-width: 1000px;
   z-index: 4;
   pointer-events: auto;
 }
 
+.delta-hero-img {
+  width: 620px;
+  height: auto;
+  object-fit: contain;
+}
+
 .hero-line {
   font-family: 'Bebas Neue', cursive;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
   font-size: 1.1rem;
   display: block;
   margin-bottom: 4px;
@@ -164,7 +179,7 @@
 
 .hero-partner {
   font-family: 'Bebas Neue', cursive;
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
   color: #FFFFFF;
   letter-spacing: 0.1em;
   line-height: 1;
@@ -173,18 +188,18 @@
 
 .hero-delta {
   font-family: 'Bebas Neue', cursive;
-  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  font-size: clamp(4.5rem, 9vw, 8rem);
   color: #CC0000;
   letter-spacing: 0.05em;
   line-height: 1;
   margin: 0 0 10px 0;
-  text-shadow: 0 0 25px rgba(204,0,0,0.4);
+  text-shadow: 0 0 25px rgba(204, 0, 0, 0.4);
 }
 
 .hero-sub1 {
   font-family: 'Rajdhani', sans-serif;
   font-size: clamp(0.78rem, 1.1vw, 0.9rem);
-  color: rgba(255,255,255,0.9);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 400;
   letter-spacing: 0.01em;
   margin: 0 0 2px 0;
@@ -198,7 +213,7 @@
 .hero-sub2 {
   font-family: 'Rajdhani', sans-serif;
   font-size: clamp(0.78rem, 1.1vw, 0.9rem);
-  color: rgba(255,255,255,0.75);
+  color: rgba(255, 255, 255, 0.75);
   font-weight: 400;
   letter-spacing: 0.01em;
   margin: 0;
@@ -211,17 +226,17 @@
 
 .analytics-card {
   position: absolute;
-  right: 5%;
+  right: 0%;
   bottom: 18%;
   z-index: 4;
-  
+
   /* Recuadro exacto como en la imagen de referencia */
   background: rgba(15, 15, 15, 0.72);
   border-radius: 10px;
   padding: 22px 32px;
   text-align: center;
   min-width: 240px;
-  
+
   /* Sin border visible, sin glassmorphism */
   border: none;
   backdrop-filter: none;
@@ -236,7 +251,7 @@
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.25em;
-  color: rgba(255,255,255,0.55);
+  color: rgba(255, 255, 255, 0.55);
   text-transform: uppercase;
   display: block;
   margin-bottom: 4px;
@@ -256,33 +271,216 @@
   font-family: 'Rajdhani', sans-serif;
   font-size: 0.78rem;
   letter-spacing: 0.2em;
-  color: rgba(255,255,255,0.45);
+  color: rgba(255, 255, 255, 0.45);
   text-transform: uppercase;
   display: block;
   margin-top: 6px;
   white-space: nowrap;
 }
 
+.analytics-img {
+  max-width: 280px;
+  height: auto;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+  border-radius: 10px;
+}
+
+.analytics-img:hover {
+  transform: scale(1.05);
+}
+
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.character-img {
+  animation: slideUpFade 1s ease forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.hero-text-block {
+  animation: slideUpFade 1s ease forwards;
+  animation-delay: 0.6s;
+  opacity: 0;
+}
+
+.analytics-card {
+  animation: slideUpFade 1s ease forwards;
+  animation-delay: 0.9s;
+  opacity: 0;
+}
+
+.hero-glow {
+  animation: hero-pulse 5s ease-in-out infinite, slideUpFade 1.2s ease forwards;
+  animation-delay: 0s, 0.3s;
+  opacity: 0;
+}
+
+.hero-mobile-bottom {
+  display: none;
+}
+
+.analytics-card-mobile {
+  display: none;
+}
+
 @media (max-width: 1024px) {
-  .hero-text-block { left: 2rem; }
-  .analytics-card { right: 2rem; }
-  .layer-avatar { height: 75%; }
+  .hero-text-block {
+    left: 2rem;
+  }
+
+  .analytics-card {
+    right: 2rem;
+  }
+
+  .layer-avatar {
+    height: 75%;
+  }
 }
 
 @media (max-width: 768px) {
-  .hero-text-block { 
-    bottom: 5%; 
+  .hero-section {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .layer-base,
+  .layer-logo-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 65svh;
+  }
+
+  .bg-image-base {
+    height: 65svh;
+    object-position: center top;
+  }
+
+  .bg-logo-deco {
+    height: 65svh;
+  }
+
+  /* Personaje más abajo */
+  .layer-top {
+    position: relative;
+    width: 100%;
+    height: 72svh;
+    z-index: 3;
+    margin-top: 8svh;
+  }
+
+  .layer-top::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35%;
+    background: linear-gradient(to bottom, transparent 0%, #000000 100%);
+    z-index: 4;
+    pointer-events: none;
+  }
+
+  .hero-avatar-wrapper {
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+
+  .layer-avatar {
+    position: absolute;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
+    height: 100%;
+    width: auto;
+    z-index: 3;
+  }
+
+  .character-img {
+    height: 100%;
+    width: auto;
+    object-fit: contain;
+    object-position: center bottom;
+    position: relative;
+    left: auto;
+    transform: none;
+    bottom: auto;
+  }
+
+  .hero-glow {
+    width: 280px;
+    height: 280px;
+  }
+
+  .layer-content {
+    display: none;
+  }
+
+  /* Franja negra inferior pegada al personaje */
+  .hero-mobile-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    background: #000000;
+    padding: 14px 14px 20px;
+    z-index: 5;
+    position: relative;
+    width: 100%;
+    flex: 1;
+    margin-top: 0;
+  }
+
+  .hero-mobile-bottom .hero-text-block {
+    width: 100%;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    transform: none;
+  }
+
+  .hero-mobile-bottom .delta-hero-img {
     width: 90%;
+    height: auto;
+    object-fit: contain;
   }
-  .analytics-card { 
-    right: 50%; 
-    top: 15%; 
-    transform: translateX(50%) scale(0.85); 
+
+  /* Card en la barbilla — más abajo y a la derecha */
+  .analytics-card-mobile {
+    display: block;
+    position: absolute;
+    top: 55svh;
+    right: -1%;
+    width: 115px;
+    z-index: 20;
+    pointer-events: auto;
   }
-  .layer-avatar { 
-    height: 60%;
+
+  .analytics-card-mobile .analytics-img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+  /* Ocultar la card original en mobile */
+  .hero-mobile-bottom .analytics-card {
+    display: none;
   }
 }

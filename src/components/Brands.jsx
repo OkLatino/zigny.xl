@@ -13,7 +13,7 @@ const Brands = () => {
         viewport={{ once: true, amount: 0.3 }}
       >
         <img
-          src="/images/FONDO5.webp"
+          src="/images/FONDO7.webp"
           alt="Marcas con las que he trabajado"
           className="brands-img"
         />

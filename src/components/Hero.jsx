@@ -27,27 +27,26 @@ const Hero = () => {
         {/* CAPA 6: Overlay Content Estático (z-index: 4) */}
         <div className="layer-content hero-content">
           <div className="hero-text-block">
-            <span className="hero-line">—</span>
-
-            <p className="hero-partner">PARTHER DE</p>
-            <h1 className="hero-delta">DELTA FORCE</h1>
-
-            <p className="hero-sub1">
-              Creador de contenido oficial de <strong>Delta Force</strong>
-            </p>
-            <p className="hero-sub2">
-              <strong>Colaborador</strong> con <strong>CapsLab</strong>, 
-              Kings League, Infinix, Cubot y Wyze
-            </p>
+            <img src="/assets/PAGINA_WEB_inicio-10.webp" alt="Partner de Delta Force" className="delta-hero-img" />
           </div>
 
-          <div className="analytics-card">
-            <span className="a-label">MONTHLY ANALYTICS</span>
-            <span className="a-number">+500K</span>
-            <span className="a-date">JANUARY - FEBRUARY 2026</span>
+          <div className="analytics-card" style={{ background: 'transparent', border: 'none', padding: 0, boxShadow: 'none' }}>
+            <img src="/assets/PAGINA_WEB_inicio-09.webp" alt="Monthly Analytics" className="analytics-img" />
           </div>
         </div>
 
+      </div>
+
+      {/* Card móvil flotante — fuera del hero-mobile-bottom */}
+      <div className="analytics-card-mobile">
+        <img src="/assets/PAGINA_WEB_inicio-09.webp" alt="Monthly Analytics" className="analytics-img" />
+      </div>
+
+      {/* Franja negra inferior — solo texto */}
+      <div className="hero-mobile-bottom">
+        <div className="hero-text-block">
+          <img src="/assets/PAGINA_WEB_inicio-10.webp" alt="Partner de Delta Force" className="delta-hero-img" />
+        </div>
       </div>
     </section>
   );

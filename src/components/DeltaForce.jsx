@@ -34,15 +34,7 @@ const DeltaForce = () => {
             <img src="/assets/delta-logo.png" alt="Delta Force Logo" className="delta-logo-small" onError={(e) => { e.target.style.display='none' }} />
           </motion.div>
 
-          <motion.h2 
-             className="delta-title"
-             initial={{ opacity: 0, y: 30 }}
-             whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true }}
-             transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Crea contenido oficial para uno de los FPS más competitivos del momento
-          </motion.h2>
+          <img src="/assets/PAGINA_WEB_deltacoins.webp" alt="Recarga aquí tus Delta Coins" className="deltacoins-img" />
 
           <motion.a 
             href="https://pagostore.garena.com" 

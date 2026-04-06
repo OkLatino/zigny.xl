@@ -33,8 +33,7 @@ const CapsLab = () => {
               style={{display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'flex-start'}}
             >
               <p className="capslab-label">USA MI CÓDIGO:</p>
-              <h2 className="capslab-title-big">ZIGNY.XL</h2>
-              <p className="capslab-subtitle">EN CAPSLAB.COM.MX</p>
+              <img src="/assets/PAGINA_WEB_gorras-09.webp" alt="Zigny.xl en Capslab" className="capslab-code-img" />
 
               <h3 className="capslab-discount">15% DE DESCUENTO</h3>
               

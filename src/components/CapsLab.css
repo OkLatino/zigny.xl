@@ -46,6 +46,14 @@
   text-align: left;
 }
 
+.capslab-code-img {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
 /* Text Identifiers */
 .capslab-label {
   font-family: 'Rajdhani', sans-serif;
