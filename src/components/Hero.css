@@ -302,28 +302,8 @@
   }
 }
 
-.character-img {
-  animation: slideUpFade 1s ease forwards;
-  animation-delay: 0.2s;
-  opacity: 0;
-}
-
-.hero-text-block {
-  animation: slideUpFade 1s ease forwards;
-  animation-delay: 0.6s;
-  opacity: 0;
-}
-
-.analytics-card {
-  animation: slideUpFade 1s ease forwards;
-  animation-delay: 0.9s;
-  opacity: 0;
-}
-
 .hero-glow {
-  animation: hero-pulse 5s ease-in-out infinite, slideUpFade 1.2s ease forwards;
-  animation-delay: 0s, 0.3s;
-  opacity: 0;
+  animation: hero-pulse 5s ease-in-out infinite;
 }
 
 .hero-mobile-bottom {
