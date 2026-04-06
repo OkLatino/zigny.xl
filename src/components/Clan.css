@@ -114,3 +114,72 @@
 .clan-ig-link:hover {
   color: #CC0000;
 }
+
+@media (max-width: 768px) {
+
+  /* Sección en columna, fondo claro */
+  .clan-section {
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background: #f2f2f2;
+    padding: 48px 0 0;
+    min-height: auto;
+  }
+
+  /* Texto "ÚNETE AL CLAN" centrado */
+  .clan-subtitle {
+    font-size: clamp(14px, 4vw, 20px);
+    margin-top: 0;
+    letter-spacing: 4px;
+    text-align: center;
+    width: 100%;
+  }
+
+  /* "ZXL" centrado y grande */
+  .clan-title {
+    font-size: clamp(80px, 28vw, 160px);
+    line-height: 0.85;
+    text-align: center;
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  /* Celular a ancho completo, horizontal */
+  .clan-phone {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-top: -100px;
+    margin-bottom: -50px;
+    border-radius: 0;
+    pointer-events: none;
+  }
+
+  /* Texto DM centrado abajo */
+  .clan-cta {
+    font-size: clamp(16px, 4.5vw, 24px);
+    text-align: center;
+    padding: 20px 16px;
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 36px;
+    line-height: 1.4;
+  }
+
+  /* Mostrar @ZIGNY.XL en línea separada, más grande */
+  .clan-ig-link {
+    display: block;
+    font-size: 1.4em;
+  }
+
+  /* Marquees fijos en top y bottom */
+  .clan-marquee-top {
+    top: 0;
+  }
+
+  .clan-marquee-bottom {
+    bottom: 0;
+  }
+}

@@ -32,8 +32,9 @@ const CapsLab = () => {
               transition={{ duration: 0.6 }}
               style={{display: 'flex', flexDirection: 'column', width: '100%', alignItems: 'flex-start'}}
             >
-              <p className="capslab-label">USA MI CÓDIGO:</p>
+              <p className="capslab-label capslab-text-hide" style={{alignSelf: 'center'}}>USA MI CÓDIGO:</p>
               <img src="/assets/PAGINA_WEB_gorras-09.webp" alt="Zigny.xl en Capslab" className="capslab-code-img" />
+              <p className="capslab-sublabel capslab-text-hide" style={{fontFamily: "'Rajdhani', sans-serif", fontSize: '0.9rem', letterSpacing: '0.1em', fontWeight: '500', color: '#666', marginTop: '-4px', marginBottom: '24px', alignSelf: 'center'}}>EN CAPSLAB.COM.MX</p>
 
               <h3 className="capslab-discount">15% DE DESCUENTO</h3>
               
@@ -47,13 +48,13 @@ const CapsLab = () => {
                 <img 
                   src="/images/gorra.webp" 
                   alt="Gorra CAPSLAB Dragon Ball Z" 
-                  style={{width: '56px', height: '56px', objectFit: 'cover', borderRadius: '6px'}}
+                  className="ticket-icon"
                 />
                 <div className="ticket-data">
-                  <p className="ticket-item">Gorra CAPSLAB Dragon Ball Z Goku Ultra Instinto Infantil</p>
-                  <span className="ticket-code">🏷️ ZIGNY.XL (-$104.85)</span>
+                  <p className="ticket-item" style={{lineHeight: 1.2}}>Gorra CAPSLAB Dragon Ball Z Goku<br/><span style={{fontWeight: '400', color: '#444', fontSize: '0.9em'}}>Ultra Instinto Infantil</span></p>
+                  <span className="ticket-code"><span style={{color: '#f59e0b', fontSize: '1.2em', marginRight: '4px'}}>🏷️</span>ZIGNY.XL (-$104.85)</span>
                 </div>
-                <div className="ticket-prices">
+                <div className="ticket-prices" style={{textAlign: 'right'}}>
                   <span className="price-strike">$699.00</span>
                   <span className="price-active">$594.15</span>
                 </div>

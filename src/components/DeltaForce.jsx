@@ -21,24 +21,26 @@ const DeltaForce = () => {
       </div>
 
       <div className="container delta-container">
-        <div className="delta-content">
-          <motion.div 
-            className="delta-badge"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="badge-glow"></div>
-            <span>PARTNER OFICIAL</span>
-            <img src="/assets/delta-logo.png" alt="Delta Force Logo" className="delta-logo-small" onError={(e) => { e.target.style.display='none' }} />
-          </motion.div>
 
+        {/* Badge — hijo directo del container para que order funcione en mobile */}
+        <motion.div
+          className="delta-badge"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="badge-glow"></div>
+          <span>PARTNER OFICIAL</span>
+          <img src="/assets/delta-logo.png" alt="Delta Force Logo" className="delta-logo-small" onError={(e) => { e.target.style.display='none' }} />
+        </motion.div>
+
+        <div className="delta-content">
           <img src="/assets/PAGINA_WEB_deltacoins.webp" alt="Recarga aquí tus Delta Coins" className="deltacoins-img" />
 
-          <motion.a 
-            href="https://pagostore.garena.com" 
-            target="_blank" 
+          <motion.a
+            href="https://pagostore.garena.com"
+            target="_blank"
             rel="noopener noreferrer"
             className="btn-delta"
             initial={{ opacity: 0, y: 30 }}

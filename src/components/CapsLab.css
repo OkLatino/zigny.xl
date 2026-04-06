@@ -226,6 +226,10 @@
   }
 }
 
+.capslab-text-hide {
+  display: block;
+}
+
 @media (max-width: 1024px) {
   .capslab-laptop-wrapper {
     width: 60%;
@@ -235,38 +239,145 @@
 
 @media (max-width: 768px) {
   .capslab-section {
-    padding: 6rem 0 0 0;
+    padding: 1rem 0 0 0;
     min-height: auto;
   }
 
   .capslab-container {
     flex-direction: column;
-    padding: 0 5%;
-  }
-
-  .capslab-content {
-    margin-top: 2rem;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-  }
-
-  .ticket-promo {
-    width: 100%;
+    padding: 0;
   }
 
   .capslab-laptop-wrapper {
-    position: relative;
+    order: -1;
     width: 100%;
-    height: 400px;
-    right: 0;
-    margin-top: 2rem;
-    justify-content: center;
+    position: relative;
+    top: auto;
+    bottom: auto;
+    right: auto;
+    left: auto;
+    height: auto;
+  }
+
+  .capslab-laptop,
+  .capslab-laptop-wrapper,
+  [class*="laptop"] {
+    animation: none !important;
+    transform: none !important;
+  }
+
+  .capslab-text-hide {
+    display: none;
   }
 
   .capslab-laptop {
-    height: 100%;
-    object-position: bottom center;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+  }
+
+  /* Difuminado inferior sobre la imagen de la laptop */
+  .capslab-laptop-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: linear-gradient(to bottom,
+        transparent 0%,
+        #f5f5f5 100%);
+    pointer-events: none;
+  }
+
+  .capslab-content {
+    width: 100%;
+    text-align: center;
+    padding: 2px 2px 2px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    background: #f5f5f5;
+    position: relative;
+    z-index: 2;
+    gap: 8px;
+  }
+
+  .capslab-label {
+    text-align: center;
+    align-self: center;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 1.15rem;
+    color: #444;
+    letter-spacing: 0.08em;
+  }
+
+  .capslab-code-img {
+    width: 85%;
+    max-width: 380px;
+    margin: 4px auto 0;
+  }
+
+  .capslab-discount {
+    text-align: center;
+    align-self: center;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 2.6rem;
+    color: #000;
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-family: 'Bebas Neue', cursive;
+    letter-spacing: 0em;
+  }
+
+  /* Card de producto centrada */
+  .capslab-product-card {
+    width: 90%;
+    max-width: 390px;
+    margin: 0 auto 28px;
+    align-self: center;
+    background: #ececec;
+    border-radius: 14px;
+    padding: 14px 16px;
+    gap: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+  }
+
+  .ticket-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 8px;
+    background: #ffffff;
+    padding: 4px;
+    object-fit: contain;
+  }
+
+  .capslab-free-shipping {
+    text-align: center;
+    align-self: center;
+    padding-left: 0;
+    margin-left: 0;
+    font-size: 1.15rem;
+    letter-spacing: 0.35em;
+    color: #000;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+
+  /* Botón centrado */
+  .btn-gorras {
+    width: 90%;
+    max-width: 360px;
+    text-align: center;
+    margin: 0 auto;
+    align-self: center;
+    padding: 20px;
+    font-size: 1.15rem;
   }
 }
 

@@ -4,6 +4,18 @@ import { motion } from 'framer-motion';
 const CustomCursor = () => {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovering, setIsHovering] = useState(false);
+  const [isTouch, setIsTouch] = useState(
+    () => window.matchMedia('(pointer: coarse)').matches
+  );
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: coarse)');
+    const handler = (e) => setIsTouch(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  if (isTouch) return null;
 
   useEffect(() => {
     const updateMousePosition = (e) => {
