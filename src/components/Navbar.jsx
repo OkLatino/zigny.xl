@@ -60,6 +60,14 @@ const Navbar = () => {
               )}
             </a>
           ))}
+          <a
+            href="https://linktr.ee/zigny"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="nav-link"
+          >
+            MIS RECOMENDACIONES
+          </a>
           <a href="#contact" className="btn-contact">CONTÁCTAME</a>
         </nav>
 
@@ -101,6 +109,14 @@ const Navbar = () => {
                 <span>&#62;</span>
               </a>
             ))}
+            <a
+              href="https://linktr.ee/zigny"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mobile-menu-link"
+            >
+              MIS RECOMENDACIONES <span>›</span>
+            </a>
           </nav>
 
           <div className="mobile-menu-divider" />

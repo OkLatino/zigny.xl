@@ -28,3 +28,21 @@
   object-position: center;
   background-color: #FFFFFF;
 }
+
+/* Imagen móvil — oculta en desktop por defecto */
+.brands-mobile-img {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .brands-img-container {
+    display: none;
+  }
+
+  .brands-mobile-img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+}

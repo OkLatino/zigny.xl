@@ -18,6 +18,13 @@ const Brands = () => {
           className="brands-img"
         />
       </motion.div>
+
+      {/* Imagen exclusiva para móvil */}
+      <img
+        src="/images/FONDO7movil.webp"
+        alt="Marcas con las que he trabajado"
+        className="brands-mobile-img"
+      />
     </section>
   );
 };
